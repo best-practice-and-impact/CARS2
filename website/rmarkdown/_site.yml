@@ -1,0 +1,5 @@
+name: "personal-website"
+output_dir: "../docs"
+output:
+  html_document:
+    css: "style.css"

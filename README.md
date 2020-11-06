@@ -1,4 +1,4 @@
-# CARS wave 2 website template
+# Coding in Analysis and Research Survey
 
 The contents of the rmarkdown folder can be used to generate a template site to present results from the second wave of the Coding in Analysis and Research Survey (CARS). 
 

@@ -2,8 +2,7 @@ data-cleaning/.Rproj.user
 data-cleaning/.Rhistory
 data-cleaning/.RData
 data-cleaning/relabelled_data.Rdata
-website/.Rproj.user
-website/.Rhistory
-website/.RData
-website/relabelled_data.Rdata
 .Rproj.user
+.Rhistory
+.RData
+docs/

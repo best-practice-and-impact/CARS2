@@ -1,10 +1,9 @@
-# Set working directory before running this script
+# Run ingest.R before running this script
 
 # Rename headings
 # SmartSurvey data comes with question names spread over the first three rows and the full question names included
 # The code below relabels the columns with more useful labels (question numbers)
 
-data <- read.csv("latest_data.csv", na.strings = c("", ".", "NA", "-"))
 original_colnames <- colnames(data)
 
 get_qnames <- function(colname) {
@@ -22,8 +21,11 @@ get_qnames <- function(colname) {
 }
 
 q_numbers <- c(unname(sapply(colnames(data), get_qnames)))
+q_numbers[1] <- "userID"
 
-q_numbers <- zoo::na.locf(q_numbers)
+q_numbers <- zoo::na.locf(q_numbers) # carry question numbers forward to replace missing question numbers
+
+# Number duplicate column names
 q_freqs <- data.frame(table(q_numbers))
 q_freqs$q_numbers <-
   factor(q_freqs$q_numbers, levels = unique(q_numbers))
@@ -63,8 +65,6 @@ data <-  subset(data, select = -c(
   )
 )
 
-names(data)[names(data) == "ï..UserID"] <-  "unique.ID"
-
 # Correct strings
 
 data <- data.frame(
@@ -72,6 +72,3 @@ data <- data.frame(
     gsub("Don@SQ@t Know", "Don't Know", x)
   })
 )
-
-
-save(data, file = "relabelled_data.Rdata")

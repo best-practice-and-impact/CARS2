@@ -1,0 +1,82 @@
+---
+title: "Page 1"
+---
+
+## Example chart (second level heading)
+
+Chart:
+
+<a href="#show-chart" role="button" class="toggle-button" id="show-table" onclick="show_tables()">Show table</a>
+<a href="#show-table" role="button" class="toggle-button" id="show-chart" onclick="show_charts()">Show chart</a>
+
+<style>
+  #show-chart {
+    display: none;
+  }
+  table {
+    display: none;
+  }
+
+</style>
+
+<script>
+  function show_tables() {
+    $("#show-table").hide();
+    $("#show-chart").show();
+    $(".plotly").hide();
+    $("table").show();
+  }
+  function show_charts() {
+    $("#show-table").show();
+    $("#show-chart").hide();
+    $(".plotly").show();
+    $("table").hide();
+  }
+</script>
+
+```{r plot, echo = FALSE}
+library(plotly)
+library(magrittr)
+
+data <- data.frame(
+  Question = c("Q1", "Q2", "Q3"),
+  Strongly_disagree = c(.2, .25, .1),
+  Disagree = c(.3, .1, .4),
+  Neutral = c(.05, .1, .1),
+  Agree = c(.25, .3, .3),
+  Strongly_agree = c(.2, .25, .1)
+)
+
+bases = data.frame(
+  Strongly_disagree = -(data$Strongly_disagree + data$Disagree + data$Neutral / 2),
+  Disagree = -(data$Disagree + data$Neutral / 2),
+  Neutral = -(data$Neutral / 2),
+  Agree = (data$Neutral / 2),
+  Strongly_agree = (data$Agree + data$Neutral / 2)
+)
+
+fig <- plot_ly(
+  data, 
+  y = ~Question, 
+  x = ~Strongly_disagree,
+  type = "bar",
+  name = "Strongly disagree", 
+  orientation = "h", 
+  base = bases$Strongly_disagree,
+  marker = list(color = "#206095")
+)
+fig <- fig %>% add_trace(data, x = ~Disagree, type = "bar", name = "Disagree", base = bases$Disagree, marker = list(color = "#8FAFCA"))
+fig <- fig %>% add_trace(data, x = ~Neutral, type = "bar", name = "Neutral", base = bases$Neutral, marker = list(color = "#C8C8C8"))
+fig <- fig %>% add_trace(data, x = ~Agree, type = "bar", name = "Agree", base = bases$Agree, marker = list(color = "#F0DD90"))
+fig <- fig %>% add_trace(data, x = ~Strongly_agree, type = "bar", name = "Strongly agree", base = bases$Strongly_agree, marker = list(color = "#E2BC22"))
+fig <- fig %>% config(displayModeBar = F) %>% 
+  layout(xaxis = list(range = list(-1, 1), tickformat = "%", title = "Percent"), barmode = "relative", hovermode = FALSE, clickmode = "none")
+
+fig
+
+```
+
+```{r table, echo = FALSE}
+knitr::kable(data)
+
+```

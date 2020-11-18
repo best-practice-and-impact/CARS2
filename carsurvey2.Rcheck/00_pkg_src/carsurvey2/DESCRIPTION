@@ -1,0 +1,16 @@
+Package: carsurvey2
+Type: Package
+Title: Coding in Analysis and Research Survey (CARS) Wave 2 Analysis
+Version: 0.6.0
+Author: Daniel Shiloh
+Maintainer: <daniel.shiloh@ons.gov.uk>
+Description: Analysis for the Coding in Analysis and Research Survey (CARS) Wave 2. 
+License: MIT + file LICENSE
+Depends: R (>= 3.6.0)
+Imports: httr, digest, stringr, zoo, purrr, utils
+Suggests: testthat (>= 2.1.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+NeedsCompilation: no
+Packaged: 2020-11-18 12:14:19 UTC; shilod

@@ -12,4 +12,7 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
-BuildType: Website
+BuildType: Package
+PackageUseDevtools: Yes
+PackagePath: carsurvey2
+PackageInstallArgs: --no-multiarch --with-keep.source

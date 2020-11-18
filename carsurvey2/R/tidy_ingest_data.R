@@ -1,7 +1,8 @@
 #'@title Tidy the ingested data from the smartsurvey API
 #'
 #'@description Tidy column names and remove empty rows from the ingested data. 
-#' The question numbers returned are only nested to one level, e.g. Q1.1, Q1.2, etc.
+#' The question numbers returned are only nested to one level, e.g. Q1.1, Q1.2, etc. However, the function will work on any number of nester levels or none. 
+#' Use covert_raw() to convert the smartsurvey API response to a data.frame before using this function on the data.
 #'
 #'@param data the data returned by the ingest function (data.frame)
 #'
@@ -49,6 +50,8 @@ tidy_ingest_data <- function(data) {
     factor(q_freqs$q_numbers, levels = unique(q_numbers))
   q_freqs <- q_freqs[order(q_freqs$q_numbers),]
   
+  # Append number to names where responses to a survey item are spread over multiple columnn
+  # E.g. Returns Q1, Q1.1, Q1.2, Q1.3 if Q1 respobses appear in four different columns
   new_colnames = Map(
     function(name, freq) {
       if (freq == 1) {

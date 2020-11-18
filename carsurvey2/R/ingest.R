@@ -1,6 +1,6 @@
 #'@title Download smartsurvey export via the API
 #'
-#'@description Download the exported data from smartsurvey using the API and convert binary csv file to a data frame.
+#'@description Download the exported data from smartsurvey using the API. Use convert_raw() to convert the API response to a data.frame.
 #'
 #'@param survey the survey ID (character string/numeric). Defaults to "790800".
 #'@param export the export ID (character string/numeric). Defaults to "1438876".

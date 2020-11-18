@@ -1,3 +1,0 @@
-convert_raw             Convert raw smartsurvey data to data.frame
-ingest                  Download smartsurvey export via the API
-tidy_ingest_data        Tidy the ingested data from the smartsurvey API

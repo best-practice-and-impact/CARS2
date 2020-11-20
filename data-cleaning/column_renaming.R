@@ -124,7 +124,3 @@ data <- dplyr::rename(data,
                       comments_survey = Q27,
                       comments_other = Q28
                       )
-
-
-
-new_colnames <- colnames(data)

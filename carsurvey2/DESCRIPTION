@@ -1,7 +1,7 @@
 Package: carsurvey2
 Type: Package
 Title: Coding in Analysis and Research Survey (CARS) Wave 2 Analysis
-Version: 0.1.0
+Version: 0.2.0
 Author: Daniel Shiloh
 Maintainer: <daniel.shiloh@ons.gov.uk>
 Description: Analysis for the Coding in Analysis and Research Survey (CARS) Wave 2. 

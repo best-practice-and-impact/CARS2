@@ -27,5 +27,5 @@ ingest(
 the exported data as a dataframe
 }
 \description{
-Download the exported data from smartsurvey using the API and convert binary csv file to a data frame.
+Download the exported data from smartsurvey using the API. Use convert_raw() to convert the API response to a data.frame.
 }

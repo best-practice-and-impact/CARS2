@@ -6,10 +6,9 @@ library(magrittr)
 
 data <- carsurvey2::ingest() %>% 
   carsurvey2::convert_raw() %>%
-    carsurvey2::tidy_ingest_data()
-
-source("data-cleaning/column_renaming.R")
+    carsurvey2::tidy_ingest_data() %>%
+      carsurvey2::rename_cols()
 
 # Derive new variables
 
-source("data-cleaning/derive_rap_scores.R")
+data <- carsurvey2::derive_rap_scores(data)

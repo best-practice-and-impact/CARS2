@@ -14,5 +14,6 @@ the tidied data (data.frame)
 }
 \description{
 Tidy column names and remove empty rows from the ingested data. 
-The question numbers returned are only nested to one level, e.g. Q1.1, Q1.2, etc.
+The question numbers returned are only nested to one level, e.g. Q1.1, Q1.2, etc. However, the function will work on any number of nester levels or none. 
+Use covert_raw() to convert the smartsurvey API response to a data.frame before using this function on the data.
 }

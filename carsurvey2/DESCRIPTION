@@ -14,7 +14,8 @@ Imports:
 	stringr,
 	zoo,
 	purrr,
-	utils
+	utils,
+	dplyr
 Suggests: 
 	testthat (>= 2.1.0)
 Encoding: UTF-8

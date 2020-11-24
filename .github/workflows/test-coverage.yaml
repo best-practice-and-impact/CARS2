@@ -25,6 +25,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Query dependencies
+        working-directory: carsurvey2
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
@@ -32,6 +33,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Cache R packages
+        working-directory: carsurvey2
         uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
@@ -39,6 +41,7 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install dependencies
+        working-directory: carsurvey2
         run: |
           install.packages(c("remotes"))
           remotes::install_deps(dependencies = TRUE)
@@ -46,5 +49,6 @@ jobs:
         shell: Rscript {0}
 
       - name: Test coverage
+        working-directory: carsurvey2
         run: covr::codecov()
         shell: Rscript {0}

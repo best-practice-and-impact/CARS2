@@ -16,7 +16,7 @@ convert_raw <- function(r) {
     stop("Unsuccessful API request - no data.")
   }
   
-  content <- httr::content(r, as = "text")
+  content <- rawToChar(r$content)
   
   data <- utils::read.table(
     text = content, 

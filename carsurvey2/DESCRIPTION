@@ -2,8 +2,9 @@ Package: carsurvey2
 Type: Package
 Title: Coding in Analysis and Research Survey (CARS) Wave 2 Analysis
 Version: 0.2.0
-Author: Daniel Shiloh
-Maintainer: <daniel.shiloh@ons.gov.uk>
+Authors@R: c(person(given = "Daniel", family = "Shiloh", email = "daniel.shiloh@ons.gov.uk",
+                role = c("aut","cre"))
+            )
 Description: Analysis for the Coding in Analysis and Research Survey (CARS) Wave 2. 
 License: MIT + file LICENSE
 Depends: 

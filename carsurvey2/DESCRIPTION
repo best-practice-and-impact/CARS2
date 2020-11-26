@@ -18,7 +18,8 @@ Imports:
 	utils,
 	dplyr,
 	yaml,
-	knitr
+	knitr,
+	rmarkdown
 Suggests: 
 	testthat (>= 2.1.0)
 Encoding: UTF-8

@@ -57,7 +57,7 @@ get_2colour_gradients <- function(n, colour1 = c(32, 96, 149), colour2 = c(226, 
   
   # Calculate brightness for neutral middle
   if (neutral_mid) {
-    c1_last <- tail(c1_gradient, n = 1)
+    c1_last <- utils::tail(c1_gradient, n = 1)
     c1_brightness <- (max(c1_last[[1]]) + min (c1_last[[1]])) / 2
     
     c2_first <- c2_gradient[1]

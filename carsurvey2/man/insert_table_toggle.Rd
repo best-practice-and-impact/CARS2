@@ -2,7 +2,7 @@
 % Please edit documentation in R/insert_table_toggle.R
 \name{insert_table_toggle}
 \alias{insert_table_toggle}
-\title{Add table toggle buttons to rmarkdown document}
+\title{Add table toggle buttons to down document}
 \usage{
 insert_table_toggle(output_name)
 }

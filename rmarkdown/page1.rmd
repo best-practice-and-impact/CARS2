@@ -6,35 +6,16 @@ title: "Page 1"
 
 Chart:
 
-<a href="#show-chart" role="button" class="toggle-button" id="show-table" onclick="show_tables()">Show table</a>
-<a href="#show-table" role="button" class="toggle-button" id="show-chart" onclick="show_charts()">Show chart</a>
+```{r test, echo=FALSE}
+carsurvey2::setup_table_toggle()
+```
 
-<style>
-  #show-chart {
-    display: none;
-  }
-  table {
-    display: none;
-  }
+```{r echo=FALSE}
+carsurvey2::insert_table_toggle("test")
+```
 
-</style>
-
-<script>
-  function show_tables() {
-    $("#show-table").hide();
-    $("#show-chart").show();
-    $(".plotly").hide();
-    $("table").show();
-  }
-  function show_charts() {
-    $("#show-table").show();
-    $("#show-chart").hide();
-    $(".plotly").show();
-    $("table").hide();
-  }
-</script>
-
-```{r plot, echo = FALSE}
+<div id="test-chart">
+```{r plot, echo=FALSE}
 library(plotly)
 library(magrittr)
 
@@ -74,9 +55,13 @@ fig <- fig %>% config(displayModeBar = F) %>%
 
 fig
 
-```
 
-```{r table, echo = FALSE}
+```
+</div>
+
+<div id="test-table">
+```{r table, echo = FALSE, wrap="test-table"}
 knitr::kable(data)
 
 ```
+</div>

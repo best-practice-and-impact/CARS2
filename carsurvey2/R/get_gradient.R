@@ -18,21 +18,21 @@ get_gradient <- function(n, colour = c(32, 96, 149)) {
   }  
   
   if (n == 1){
-      return(list(colour))
-    } else {
-      # Calculate lighter shade of original colour
-      c2 <- colour + (255 - colour) * 0.5
-      
-      step <- (c2 - colour) / (n - 1)
-      
-      colours <- unname(
-        lapply(c(1:(n - 1)),
-               function(x){
-                 step * x + colour
-               })
-      )
-      
-      colours <- append(list(colour), colours)
-      return(colours)
-    }
+    return(list(colour))
+  } else {
+    # Calculate lighter shade of original colour
+    c2 <- colour + (255 - colour) * 0.5
+    
+    step <- (c2 - colour) / (n - 1)
+    
+    colours <- unname(
+      lapply(c(1:(n - 1)),
+             function(x){
+               step * x + colour
+             })
+    )
+    
+    colours <- append(list(colour), colours)
+    return(colours)
+  }
 }

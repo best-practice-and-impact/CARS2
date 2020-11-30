@@ -16,9 +16,9 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
   
   # Set default bar colours
   c <- (get_2colour_scale(length(unique(table[[2]]))))
-  colours <- unlist(lapply(c, function(x) rgb(x[1], x[2], x[3], maxColorValue = 255))) 
+  colours <- unlist(lapply(c, function(x) grDevices::rgb(x[1], x[2], x[3], maxColorValue = 255))) 
   colours <- unlist(colours)
-  colours <- rep(colours, c(unlist(table(data[[2]]))))
+  colours <- rep(colours, c(unlist(table(table[[2]]))))
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -36,7 +36,7 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
   
   # Validate font size
   if (!is.numeric(font_size)) {
-    Stop("Unexpected input - font_size is not numeric.")
+    stop("Unexpected input - font_size is not numeric.")
   }
   
   # Validate orientation

@@ -18,11 +18,11 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
   # Set default bar colour
   if (missing(bar_colour)) {
     c <- unlist(get_gradient(1))
-    bar_colour <- rgb(c[1], c[2], c[3], max = 255)
+    bar_colour <- grDevices::rgb(c[1], c[2], c[3], max = 255)
   } else if (!is.character(bar_colour) | length(bar_colour) != 1) {
     stop("Unexpected input - bar_colour should be a single colour name.")
   }
-
+  
   # Validate table
   if (!is.data.frame(table)) {
     stop("Unexpected input - table is not a data.frame.")
@@ -39,7 +39,7 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
   
   # Validate font size
   if (!is.numeric(font_size)) {
-    Stop("Unexpected input - font_size is not numeric.")
+    stop("Unexpected input - font_size is not numeric.")
   }
   
   # Validate orientation

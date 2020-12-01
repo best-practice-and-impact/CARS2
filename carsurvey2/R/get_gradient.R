@@ -1,6 +1,6 @@
 #' Create single colour gradient
 #'
-#' Creates a list of colours for plotting. The vector contains shades of the original colour, increasing in brightness.
+#' Creates a list of colours for plotting. The list contains n shades of the original colour, increasing in brightness.
 #'
 #' @param n the number of colours needed
 #' @param colour the first colour of the gradient - numeric vector with three values representing red, blue and green (max 255)

@@ -1,7 +1,7 @@
 Package: carsurvey2
 Type: Package
 Title: Coding in Analysis and Research Survey (CARS) Wave 2 Analysis
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(person(given = "Daniel", family = "Shiloh", email = "daniel.shiloh@ons.gov.uk",
                 role = c("aut","cre"))
             )
@@ -19,7 +19,9 @@ Imports:
 	dplyr,
 	yaml,
 	knitr,
-	rmarkdown
+	rmarkdown,
+	plotly,
+	reshape2
 Suggests: 
 	testthat (>= 2.1.0)
 Encoding: UTF-8

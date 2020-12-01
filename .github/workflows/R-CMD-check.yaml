@@ -2,17 +2,7 @@
 # https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
 on:
   push:
-    branches:
-      - main
-      - master
-      - github-actions
-      - website-functions
   pull_request:
-    branches:
-      - main
-      - master
-      - github-actions
-      - website-functions
 
 name: R-CMD-check
 

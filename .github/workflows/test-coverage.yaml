@@ -1,18 +1,6 @@
 on:
-  push:
-    branches:
-      - main
-      - master
-      - github-actions
-      - website-functions
-      - plotting-functions
-  pull_request:
-    branches:
-      - main
-      - master
-      - github-actions
-      - website-functions
-      - plotting-functions
+  push
+  pull_request
 
 name: test-coverage
 

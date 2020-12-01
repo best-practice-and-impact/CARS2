@@ -21,7 +21,7 @@ get_2colour_gradients <- function(n, colour1 = c(32, 96, 149), colour2 = c(226, 
   
   if (!is.numeric(n) | length(n) > 1) {
     stop("n is not a numeric value")
-  } else if (n < 2) {
+  } else if (!n >= 2) {
     stop("Unexpected input - n should be >=2")
   }
   

@@ -1,6 +1,6 @@
-#'@title Add table toggle buttons to down document 
+#'@title Add table toggle buttons to rmarkdowndown site 
 #'
-#'@description Add "show table" and "show chart" buttons to rmarkdown document (html). Expects table contaners to be named "name-table" and chart containers to be named "name-chart"
+#'@description Add "show table" and "show chart" buttons to rmarkdown site (html). Expects table contaners to be named "name-table" and chart containers to be named "name-chart"
 #'
 #'@param output_name the name of assigned to the output. Used to name buttons and reference tables and chart. 
 #'

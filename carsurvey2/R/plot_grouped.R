@@ -15,7 +15,8 @@
 plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
   
   # Set default bar colours
-  c <- (get_2colour_scale(length(unique(table[[2]]))))
+  n <- length(unique(table[[2]]))
+  c <- get_2colour_scale(n)
   colours <- unlist(lapply(c, function(x) grDevices::rgb(x[1], x[2], x[3], maxColorValue = 255))) 
   colours <- unlist(colours)
   colours <- rep(colours, c(unlist(table(table[[2]]))))

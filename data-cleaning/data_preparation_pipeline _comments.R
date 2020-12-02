@@ -37,3 +37,12 @@ dep_counts <- data.frame(table(filtered_data$dept))
 small_counts <- dep_counts[dep_counts$Freq < 5, ]
 
 filtered_data$dept <- sapply(filtered_data$dept, function(x) ifelse(x %in% small_counts[[1]], "Other", x))
+rownames(filtered_data) <- NULL
+
+# Remove disclosive cells
+filtered_data[223, 4] <- "REDACTED"
+filtered_data[645, 2] <- "REDACTED"
+filtered_data[645, 4] <- "REDACTED"
+filtered_data[188, 6] <- "REDACTED"
+filtered_data[281, 4] <- "REDACTED"
+

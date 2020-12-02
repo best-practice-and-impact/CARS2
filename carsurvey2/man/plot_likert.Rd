@@ -7,7 +7,7 @@
 plot_likert(table, mid, xlab, ylab, font_size = 12)
 }
 \arguments{
-\item{table}{Frequency table for likert quesitons (data frame). 2+ columns - question names in column 1 with answer options in subsequent columns. Frequencies should proportions, between 0 and 1.}
+\item{table}{Frequency table for likert quesitons (data frame). 4+ columns - question names in column 1 with answer options in subsequent columns. Frequencies should proportions, between 0 and 1.}
 
 \item{mid}{the mid-point of the scale. should be higher than 2 and lower than the number of answers.}
 
@@ -21,5 +21,5 @@ plot_likert(table, mid, xlab, ylab, font_size = 12)
 bar chart
 }
 \description{
-Produce likert stacked bar chart (plotly).
+Produce likert stacked bar chart (plotly). At least 2 questions per plot.
 }

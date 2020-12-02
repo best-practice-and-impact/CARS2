@@ -1,12 +1,12 @@
-name: "personal-website"
+name: "cars-findings"
 output_dir: "../docs"
 output:
   html_document:
     css: "style.css"
 navbar:
-  title: "My Website"
+  title: "Coding in Analysis and Research Survey (CARS)"
   left:
     - text: "Home"
       href: index.html
-    - text: "Page 1"
+    - text: "Coding frequency and tools"
       href: page1.html

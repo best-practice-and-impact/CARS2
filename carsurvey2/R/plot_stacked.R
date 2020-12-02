@@ -1,9 +1,9 @@
-#'@title Plot likert graph
+#'@title Plot stacked bar graph
 #'
-#'@description Produce likert stacked bar chart (plotly). At least 2 questions per plot.
+#'@description Produce stacked bar chart (plotly). 
 #'
-#'@param table Frequency table for likert quesitons (data frame). 4+ columns - question names in column 1 with answer options in subsequent columns. Frequencies should proportions, between 0 and 1. 
-#'@param mid the mid-point of the scale. should be higher than 2 and lower than the number of answers.
+#'@param table Frequency table for stacked bar chart (data frame). 4+ columns - sub-question names in column 1 with answer options in subsequent columns.. 
+#'@param colour_scale type of colour scale ("gradient", "scale" or "2gradients"). See get_gradient(), get_2colour_scale() and get_2colour_gradients(). 
 #'@param xlab X axis title
 #'@param ylab Y axis title
 #'@param font_size minimum font size for the plot (numeric).
@@ -12,13 +12,13 @@
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
+plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_size = 12) {
   
   # Validate table
   if (!is.data.frame(table)) {
     stop("Unexpected input - table is not a data.frame.")
-  } else if (ncol(table) < 4 | nrow(table) < 2) {
-    stop("Unexpected input - table should have at least four columns and two rows.")
+  } else if (ncol(table) < 4) {
+    stop("Unexpected input - table should have at least four columns")
   }
   
   # Validate labels
@@ -31,21 +31,17 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
     stop("Unexpected input - font_size is not numeric.")
   }
   
-  # Validate mid
-  if (!is.numeric(mid)) {
+  # Validate colour_scale
+  if (!is.character(colour_scale)) {
     stop("Unexpected input - mid is not numeric.")  
-  } else if (mid < 2) {
-    stop("Unexpected inout - mid is smaller than 2.")
-  } else if (mid > ncol(table)-2) {
-    stop("Unexpected input - mid >= the number of answers.")
+  } else if (length(colour_scale) > 1 | !colour_scale %in% c("gradient", "scale", "2gradients")) {
+    stop("Unexpected input - colour_scale should be set to 'gradient', 'scale' or '2gradients'.")
   }
-  
+    
   x <- list(
     title = xlab,
     tickfont = list(size = font_size),
-    titlefont = list(size = font_size * 1.2),
-    range = list(-1, 1), 
-    tickformat = "%", title = "Percent"
+    titlefont = list(size = font_size * 1.2)
   )
   
   y <- list(
@@ -57,19 +53,17 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
   # Reshape data
   longdata <- reshape2::melt(table)
   
-  # Calculate bases for bars
-  bases <- apply(table[2:ncol(table)], 1, cumsum)
-  bases <- as.vector(apply(bases, 1, function(x) return(unname(unlist(x)))))
-  bases <- utils::head(bases, -2)
-  bases <- c(rep(0, nrow(table)), bases)
-  
-  negative_bases <- rowSums(table[c(2:mid)]) + table[mid + 1]/2
-  negative_bases <- unname(unlist(negative_bases))
-  
-  bases <- bases - negative_bases
-  
   # Get bar colours
-  colours <- get_2colour_gradients(ncol(table)-1, mid = mid)
+  ncolours <- ncol(table) - 1
+  if (colour_scale == "gradient") {
+    colours <- get_gradient(ncolours)
+  } else if (colour_scale == "scale") {
+    colours <- get_2colour_scale(ncolours)
+  } else if (colour_scale == "2gradients") {
+    mid <- ceiling(ncolours/2)
+    colours <- get_2colour_gradients(ncol(table)-1, mid = mid)
+  }
+  
   colours <- lapply(colours, function(x) grDevices::rgb(x[1], x[2], x[3], max = 255))
   colours <- lapply(colours, function(x) rep(x, nrow(table)))
   colours <- unlist(colours)
@@ -79,7 +73,6 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
                          type="bar", 
                          color = longdata[[2]], 
                          orientation = "h", 
-                         base = bases,
                          hoverinfo = "text",
                          text = longdata[[3]],
                          marker = list(color = colours))

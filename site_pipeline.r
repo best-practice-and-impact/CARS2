@@ -22,11 +22,13 @@ save_navbar <- function(code, path) {
   write(code, filename)
 }
 
+# Create navigation bar
 navbar_info <- carsurvey2::read_site_yml("rmarkdown/_site.yml")
 navbar_page <- carsurvey2::build_navbar(navbar_info)
 save_navbar(navbar_page, "rmarkdown")
 
-knitr::opts_chunk$set(message = FALSE)
+# Remove old side and knit
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 rmarkdown::clean_site("rmarkdown")
 rmarkdown::render_site("rmarkdown")
 

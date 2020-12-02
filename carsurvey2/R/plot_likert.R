@@ -60,12 +60,11 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
   # Calculate bases for bars
   bases <- apply(table[2:ncol(table)], 1, cumsum)
   bases <- as.vector(apply(bases, 1, function(x) return(unname(unlist(x)))))
-  bases <- utils::head(bases, -2)
+  bases <- utils::head(bases, -nrow(table))
   bases <- c(rep(0, nrow(table)), bases)
   
   negative_bases <- rowSums(table[c(2:mid)]) + table[mid + 1]/2
   negative_bases <- unname(unlist(negative_bases))
-  
   bases <- bases - negative_bases
   
   # Get bar colours
@@ -87,13 +86,12 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
   fig <- plotly::config(fig, displayModeBar = F)
   
   
-  fig <- plotly::layout(fig, 
+  fig <- plotly::layout(fig,  
                         barmode = "stack", 
                         clickmode = "none",
                         legend = list(orientation = "h",   # show entries horizontally
                                       xanchor = "center",  # use center of legend as anchor
                                       x = 0.5,
-                                      y = 1.02,
                                       traceorder = "normal",
                                       font = list(size = font_size)), 
                         xaxis = x, 

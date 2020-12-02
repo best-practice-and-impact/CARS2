@@ -1,0 +1,56 @@
+---
+title: "Coding practices"
+---
+
+```{r echo=FALSE}
+carsurvey2::setup_table_toggle()
+```
+
+
+## Coding practices
+
+We asked respondents to report how often they make use of each of the coding practices presented below. Please note that while there are many different coding practices listed below, we understand that not all are proportionate for every coding project. 
+
+### General coding practices:
+
+```{r echo=FALSE}
+carsurvey2::insert_table_toggle("code-prac")
+```
+
+<div id="code-prac-chart">
+```{r echo=FALSE}
+
+carsurvey2::plot_likert(code_prac_chart, 4, "Frequency", "Question", font_size = 14)
+
+
+```
+</div>
+
+<div id="code-prac-table">
+```{r echo = FALSE}
+
+knitr::kable(code_prac, row.names = FALSE)
+
+```
+
+### Documentation
+
+```{r echo=FALSE}
+carsurvey2::insert_table_toggle("doc")
+```
+
+<div id="doc-chart">
+```{r echo=FALSE}
+
+carsurvey2::plot_likert(doc_chart, 4, "Frequency", "Question", font_size = 14)
+
+
+```
+</div>
+
+<div id="doc-table">
+```{r echo = FALSE}
+
+knitr::kable(doc, row.names = FALSE)
+
+```

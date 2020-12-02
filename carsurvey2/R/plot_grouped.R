@@ -66,7 +66,7 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig, 
+    fig <- plotly::layout(fig,  
                           xaxis = x, 
                           yaxis = y, 
                           hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
@@ -80,7 +80,7 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig, 
+    fig <- plotly::layout(fig,  
                           orientation = "h",
                           xaxis = y, 
                           yaxis = x, 

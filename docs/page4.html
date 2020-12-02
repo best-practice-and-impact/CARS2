@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Coding practices</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+  <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="nav-primary" aria-label="Display main menu">
+          Main menu
+        </button>
+        <a class="navbar-brand" href="index.html">Coding in Analysis and Research Survey (CARS)     </a>
+          </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                      <li>
+                    <a href="index.html">Home  </a>
+                  </li>
+                  <li>
+                    <a href="page1.html">Coding frequency and tools  </a>
+                  </li>
+                  <li>
+                    <a href="page2.html">RAP knowledge and opinions  </a>
+                  </li>
+                  <li>
+                    <a href="page3.html">RAP scores  </a>
+                  </li>
+                  <li>
+                    <a href="page4.html">Coding practices  </a>
+                  </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container -->
+        </div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Coding practices</h1>
+
+</div>
+
+
+
+  <script>
+    function show_table(output_name) {
+      $("#show-table-" + output_name).hide();
+      $("#show-chart-" + output_name).show();
+      $("#" + output_name + "-chart").hide();
+      $("#" + output_name + "-table").show();
+    }
+  
+  function show_chart(output_name) {
+    $("#show-table-" + output_name).show();
+    $("#show-chart-" + output_name).hide();
+    $("#" + output_name + "-chart").show();
+    $("#" + output_name + "-table").hide();
+  }
+  </script>
+
+<div id="coding-practices" class="section level2">
+<h2>Coding practices</h2>
+<p>We asked respondents to report how often they make use of each of the coding practices presented below. Please note that while there are many different coding practices listed below, we understand that not all are proportionate for every coding project.</p>
+<div id="general-coding-practices" class="section level3">
+<h3>General coding practices:</h3>
+<a href="#show-table-code-prac" role="button" class="toggle-button" id="show-chart-code-prac" onclick="show_chart('code-prac')"> Show chart </a>
+<a href="#show-chart-code-prac" role="button" class="toggle-button" id="show-table-code-prac" onclick="show_table('code-prac')"> Show table </a>
+<style> #show-chart-code-prac {display: none;} #code-prac-table {display: none;} </style>
+<div id="code-prac-chart">
+<div id="htmlwidget-a43818e926f039bc79be" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a43818e926f039bc79be">{"x":{"visdat":{"11c07ff691a":["function () ","plotlyVisDat"]},"cur_data":"11c07ff691a","attrs":{"11c07ff691a":{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code","I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code","I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code","I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code","I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code","I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.07,0.258888888888889,0.0388888888888889,0.106666666666667,0.0177777777777778,0.0444444444444444,0.111111111111111,0.29,0.0411111111111111,0.161111111111111,0.155555555555556,0.0644444444444444,0.0733333333333333,0.373333333333333,0.0788888888888889,0.0977777777777778,0.4,0.244444444444444,0.264444444444444,0.485555555555556,0.1,0.0944444444444444,0.104444444444444,0.138888888888889,0.137777777777778,0.0944444444444444,0.167777777777778,0.128888888888889,0.176666666666667,0.131111111111111,0.238888888888889,0.267777777777778,0.36,0.121111111111111,0.277777777777778,0.301111111111111,0.113333333333333,0.124444444444444,0.152222222222222,0.0611111111111111,0.17,0.196666666666667,0.272222222222222,0.124444444444444,0.278888888888889,0.228888888888889,0.153333333333333,0.137777777777778,0.296666666666667,0.135555555555556,0.265555555555556,0.117777777777778,0.151111111111111,0.135555555555556,0.208888888888889,0.233333333333333,0.0544444444444444,0.0744444444444444,0.0688888888888889,0.0255555555555556],"orientation":"h","base":[-0.445,-0.551666666666667,-0.396666666666667,-0.679444444444445,-0.373333333333333,-0.387222222222222,-0.735555555555556,-0.725555555555556,-0.558333333333333,-0.808333333333333,-0.375,-0.292777777777778,-0.357777777777778,-0.572777777777778,-0.355555555555556,-0.342777777777778,-0.624444444444444,-0.435555555555556,-0.517222222222222,-0.647222222222222,-0.219444444444444,-0.228333333333333,-0.284444444444444,-0.199444444444444,-0.276666666666667,-0.245,-0.224444444444444,-0.191111111111111,-0.252777777777778,-0.161666666666667,-0.119444444444444,-0.133888888888889,-0.18,-0.0605555555555556,-0.138888888888889,-0.150555555555556,-0.0566666666666666,-0.0622222222222222,-0.0761111111111111,-0.0305555555555556,0.119444444444444,0.133888888888889,0.18,0.0605555555555555,0.138888888888889,0.150555555555556,0.0566666666666668,0.0622222222222222,0.0761111111111111,0.0305555555555556,0.289444444444444,0.330555555555555,0.452222222222222,0.185,0.417777777777778,0.379444444444444,0.21,0.2,0.372777777777778,0.166111111111111],"hoverinfo":"text","text":[0.07,0.258888888888889,0.0388888888888889,0.106666666666667,0.0177777777777778,0.0444444444444444,0.111111111111111,0.29,0.0411111111111111,0.161111111111111,0.155555555555556,0.0644444444444444,0.0733333333333333,0.373333333333333,0.0788888888888889,0.0977777777777778,0.4,0.244444444444444,0.264444444444444,0.485555555555556,0.1,0.0944444444444444,0.104444444444444,0.138888888888889,0.137777777777778,0.0944444444444444,0.167777777777778,0.128888888888889,0.176666666666667,0.131111111111111,0.238888888888889,0.267777777777778,0.36,0.121111111111111,0.277777777777778,0.301111111111111,0.113333333333333,0.124444444444444,0.152222222222222,0.0611111111111111,0.17,0.196666666666667,0.272222222222222,0.124444444444444,0.278888888888889,0.228888888888889,0.153333333333333,0.137777777777778,0.296666666666667,0.135555555555556,0.265555555555556,0.117777777777778,0.151111111111111,0.135555555555556,0.208888888888889,0.233333333333333,0.0544444444444444,0.0744444444444444,0.0688888888888889,0.0255555555555556],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","Never","Never","Never","Never","Never","Never","Never","Never","Never","Never","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","All the time","All the time","All the time","All the time","All the time","All the time","All the time","All the time","All the time","All the time"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":1.02,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Frequency","tickfont":{"size":14},"titlefont":{"size":16.8},"range":[-1,1],"tickformat":"%"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Question","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Code my team writes is <br>reviewed by a colleague","I collect my code and supporting <br>material into packages","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I unit test my code","I use a source code version <br>control system e.g. Git","I use open source software <br>when programming","I write code to automatically <br>quality assure data","I write repetitive elements <br>in my code as functions","My team open sources its <br>code"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.07,0.258888888888889,0.0388888888888889,0.106666666666667,0.0177777777777778,0.0444444444444444,0.111111111111111,0.29,0.0411111111111111,0.161111111111111],"orientation":"h","base":[-0.445,-0.551666666666667,-0.396666666666667,-0.679444444444445,-0.373333333333333,-0.387222222222222,-0.735555555555556,-0.725555555555556,-0.558333333333333,-0.808333333333333],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[0.07,0.258888888888889,0.0388888888888889,0.106666666666667,0.0177777777777778,0.0444444444444444,0.111111111111111,0.29,0.0411111111111111,0.161111111111111],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"I don't understand this question","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.155555555555556,0.0644444444444444,0.0733333333333333,0.373333333333333,0.0788888888888889,0.0977777777777778,0.4,0.244444444444444,0.264444444444444,0.485555555555556],"orientation":"h","base":[-0.375,-0.292777777777778,-0.357777777777778,-0.572777777777778,-0.355555555555556,-0.342777777777778,-0.624444444444444,-0.435555555555556,-0.517222222222222,-0.647222222222222],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[0.155555555555556,0.0644444444444444,0.0733333333333333,0.373333333333333,0.0788888888888889,0.0977777777777778,0.4,0.244444444444444,0.264444444444444,0.485555555555556],"marker":{"color":["#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Never","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.1,0.0944444444444444,0.104444444444444,0.138888888888889,0.137777777777778,0.0944444444444444,0.167777777777778,0.128888888888889,0.176666666666667,0.131111111111111],"orientation":"h","base":[-0.219444444444444,-0.228333333333333,-0.284444444444444,-0.199444444444444,-0.276666666666667,-0.245,-0.224444444444444,-0.191111111111111,-0.252777777777778,-0.161666666666667],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[0.1,0.0944444444444444,0.104444444444444,0.138888888888889,0.137777777777778,0.0944444444444444,0.167777777777778,0.128888888888889,0.176666666666667,0.131111111111111],"marker":{"color":["#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Rarely","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.238888888888889,0.267777777777778,0.36,0.121111111111111,0.277777777777778,0.301111111111111,0.113333333333333,0.124444444444444,0.152222222222222,0.0611111111111111],"orientation":"h","base":[-0.119444444444444,-0.133888888888889,-0.18,-0.0605555555555556,-0.138888888888889,-0.150555555555556,-0.0566666666666666,-0.0622222222222222,-0.0761111111111111,-0.0305555555555556],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[0.238888888888889,0.267777777777778,0.36,0.121111111111111,0.277777777777778,0.301111111111111,0.113333333333333,0.124444444444444,0.152222222222222,0.0611111111111111],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(231,138,195,1)"}},"type":"bar","name":"Regularly","textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.17,0.196666666666667,0.272222222222222,0.124444444444444,0.278888888888889,0.228888888888889,0.153333333333333,0.137777777777778,0.296666666666667,0.135555555555556],"orientation":"h","base":[0.119444444444444,0.133888888888889,0.18,0.0605555555555555,0.138888888888889,0.150555555555556,0.0566666666666668,0.0622222222222222,0.0761111111111111,0.0305555555555556],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[0.17,0.196666666666667,0.272222222222222,0.124444444444444,0.278888888888889,0.228888888888889,0.153333333333333,0.137777777777778,0.296666666666667,0.135555555555556],"marker":{"color":["#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90"],"line":{"color":"rgba(166,216,84,1)"}},"type":"bar","name":"Sometimes","textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I use open source software <br>when programming","I follow a standard directory <br>structure when programming","I follow coding guidelines or <br>style guides when programming","I use a source code version <br>control system e.g. Git","Code my team writes is <br>reviewed by a colleague","I write repetitive elements <br>in my code as functions","I collect my code and supporting <br>material into packages","I unit test my code","I write code to automatically <br>quality assure data","My team open sources its <br>code"],"x":[0.265555555555556,0.117777777777778,0.151111111111111,0.135555555555556,0.208888888888889,0.233333333333333,0.0544444444444444,0.0744444444444444,0.0688888888888889,0.0255555555555556],"orientation":"h","base":[0.289444444444444,0.330555555555555,0.452222222222222,0.185,0.417777777777778,0.379444444444444,0.21,0.2,0.372777777777778,0.166111111111111],"hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[0.265555555555556,0.117777777777778,0.151111111111111,0.135555555555556,0.208888888888889,0.233333333333333,0.0544444444444444,0.0744444444444444,0.0688888888888889,0.0255555555555556],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(255,217,47,1)"}},"type":"bar","name":"All the time","textfont":{"color":"rgba(255,217,47,1)"},"error_y":{"color":"rgba(255,217,47,1)"},"error_x":{"color":"rgba(255,217,47,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="code-prac-table">
+
+<table>
+<colgroup>
+<col width="41%" />
+<col width="22%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Question</th>
+<th align="right">I don’t understand this question</th>
+<th align="right">Never</th>
+<th align="right">Rarely</th>
+<th align="right">Regularly</th>
+<th align="right">Sometimes</th>
+<th align="right">All the time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">I use open source software when programming</td>
+<td align="right">0.0700000</td>
+<td align="right">0.1555556</td>
+<td align="right">0.1000000</td>
+<td align="right">0.2388889</td>
+<td align="right">0.1700000</td>
+<td align="right">0.2655556</td>
+</tr>
+<tr class="even">
+<td align="left">I follow a standard directory structure when programming</td>
+<td align="right">0.2588889</td>
+<td align="right">0.0644444</td>
+<td align="right">0.0944444</td>
+<td align="right">0.2677778</td>
+<td align="right">0.1966667</td>
+<td align="right">0.1177778</td>
+</tr>
+<tr class="odd">
+<td align="left">I follow coding guidelines or style guides when programming</td>
+<td align="right">0.0388889</td>
+<td align="right">0.0733333</td>
+<td align="right">0.1044444</td>
+<td align="right">0.3600000</td>
+<td align="right">0.2722222</td>
+<td align="right">0.1511111</td>
+</tr>
+<tr class="even">
+<td align="left">I use a source code version control system e.g. Git</td>
+<td align="right">0.1066667</td>
+<td align="right">0.3733333</td>
+<td align="right">0.1388889</td>
+<td align="right">0.1211111</td>
+<td align="right">0.1244444</td>
+<td align="right">0.1355556</td>
+</tr>
+<tr class="odd">
+<td align="left">Code my team writes is reviewed by a colleague</td>
+<td align="right">0.0177778</td>
+<td align="right">0.0788889</td>
+<td align="right">0.1377778</td>
+<td align="right">0.2777778</td>
+<td align="right">0.2788889</td>
+<td align="right">0.2088889</td>
+</tr>
+<tr class="even">
+<td align="left">I write repetitive elements in my code as functions</td>
+<td align="right">0.0444444</td>
+<td align="right">0.0977778</td>
+<td align="right">0.0944444</td>
+<td align="right">0.3011111</td>
+<td align="right">0.2288889</td>
+<td align="right">0.2333333</td>
+</tr>
+<tr class="odd">
+<td align="left">I collect my code and supporting material into packages</td>
+<td align="right">0.1111111</td>
+<td align="right">0.4000000</td>
+<td align="right">0.1677778</td>
+<td align="right">0.1133333</td>
+<td align="right">0.1533333</td>
+<td align="right">0.0544444</td>
+</tr>
+<tr class="even">
+<td align="left">I unit test my code</td>
+<td align="right">0.2900000</td>
+<td align="right">0.2444444</td>
+<td align="right">0.1288889</td>
+<td align="right">0.1244444</td>
+<td align="right">0.1377778</td>
+<td align="right">0.0744444</td>
+</tr>
+<tr class="odd">
+<td align="left">I write code to automatically quality assure data</td>
+<td align="right">0.0411111</td>
+<td align="right">0.2644444</td>
+<td align="right">0.1766667</td>
+<td align="right">0.1522222</td>
+<td align="right">0.2966667</td>
+<td align="right">0.0688889</td>
+</tr>
+<tr class="even">
+<td align="left">My team open sources its code</td>
+<td align="right">0.1611111</td>
+<td align="right">0.4855556</td>
+<td align="right">0.1311111</td>
+<td align="right">0.0611111</td>
+<td align="right">0.1355556</td>
+<td align="right">0.0255556</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="documentation" class="section level3">
+<h3>Documentation</h3>
+<a href="#show-table-doc" role="button" class="toggle-button" id="show-chart-doc" onclick="show_chart('doc')"> Show chart </a>
+<a href="#show-chart-doc" role="button" class="toggle-button" id="show-table-doc" onclick="show_table('doc')"> Show table </a>
+<style> #show-chart-doc {display: none;} #doc-table {display: none;} </style>
+<div id="doc-chart">
+<div id="htmlwidget-b991251e039001128c07" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b991251e039001128c07">{"x":{"visdat":{"11c059451e1":["function () ","plotlyVisDat"]},"cur_data":"11c059451e1","attrs":{"11c059451e1":{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes","Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes","Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes","Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes","Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes","Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.194444444444444,0.214444444444444,0.114444444444444,0.0222222222222222,0.05,0.0744444444444444,0.155555555555556,0.395555555555556,0.323333333333333,0.238888888888889,0.0466666666666667,0.348888888888889,0.248888888888889,0.206666666666667,0.14,0.134444444444444,0.145555555555556,0.0277777777777778,0.227777777777778,0.143333333333333,0.112222222222222,0.0933333333333333,0.116666666666667,0.194444444444444,0.297777777777778,0.0911111111111111,0.167777777777778,0.231111111111111,0.112222222222222,0.157777777777778,0.208888888888889,0.06,0.263333333333333,0.257777777777778,0.212222222222222,0.0644444444444444,0.0533333333333333,0.0977777777777778,0.545555555555556,0.0188888888888889,0.107777777777778,0.0822222222222222],"orientation":"h","base":[-0.776666666666667,-0.730555555555556,-0.596111111111111,-0.245555555555556,-0.672222222222222,-0.550555555555556,-0.59,-0.582222222222222,-0.516111111111111,-0.481666666666667,-0.223333333333333,-0.622222222222222,-0.476111111111111,-0.434444444444444,-0.186666666666667,-0.192777777777778,-0.242777777777778,-0.176666666666667,-0.273333333333333,-0.227222222222222,-0.227777777777778,-0.0466666666666666,-0.0583333333333333,-0.0972222222222223,-0.148888888888889,-0.0455555555555556,-0.0838888888888889,-0.115555555555556,0.0466666666666667,0.0583333333333333,0.0972222222222222,0.148888888888889,0.0455555555555556,0.0838888888888889,0.115555555555556,0.158888888888889,0.216111111111111,0.306111111111111,0.208888888888889,0.308888888888889,0.341666666666667,0.327777777777778],"hoverinfo":"text","text":[0.194444444444444,0.214444444444444,0.114444444444444,0.0222222222222222,0.05,0.0744444444444444,0.155555555555556,0.395555555555556,0.323333333333333,0.238888888888889,0.0466666666666667,0.348888888888889,0.248888888888889,0.206666666666667,0.14,0.134444444444444,0.145555555555556,0.0277777777777778,0.227777777777778,0.143333333333333,0.112222222222222,0.0933333333333333,0.116666666666667,0.194444444444444,0.297777777777778,0.0911111111111111,0.167777777777778,0.231111111111111,0.112222222222222,0.157777777777778,0.208888888888889,0.06,0.263333333333333,0.257777777777778,0.212222222222222,0.0644444444444444,0.0533333333333333,0.0977777777777778,0.545555555555556,0.0188888888888889,0.107777777777778,0.0822222222222222],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","I don't understand this question","Never","Never","Never","Never","Never","Never","Never","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Rarely","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Regularly","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","Sometimes","All the time","All the time","All the time","All the time","All the time","All the time","All the time"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":1.02,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Frequency","tickfont":{"size":14},"titlefont":{"size":16.8},"range":[-1,1],"tickformat":"%"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Question","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Analytical Quality <br>Assurance (AQA) logs","Code comments","Data or assumptions <br>registers","Desk notes","Documentation for each <br>function or class","Flow charts","README files"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.194444444444444,0.214444444444444,0.114444444444444,0.0222222222222222,0.05,0.0744444444444444,0.155555555555556],"orientation":"h","base":[-0.776666666666667,-0.730555555555556,-0.596111111111111,-0.245555555555556,-0.672222222222222,-0.550555555555556,-0.59],"hoverinfo":["text","text","text","text","text","text","text"],"text":[0.194444444444444,0.214444444444444,0.114444444444444,0.0222222222222222,0.05,0.0744444444444444,0.155555555555556],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"I don't understand this question","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.395555555555556,0.323333333333333,0.238888888888889,0.0466666666666667,0.348888888888889,0.248888888888889,0.206666666666667],"orientation":"h","base":[-0.582222222222222,-0.516111111111111,-0.481666666666667,-0.223333333333333,-0.622222222222222,-0.476111111111111,-0.434444444444444],"hoverinfo":["text","text","text","text","text","text","text"],"text":[0.395555555555556,0.323333333333333,0.238888888888889,0.0466666666666667,0.348888888888889,0.248888888888889,0.206666666666667],"marker":{"color":["#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF","#5787AF"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Never","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.14,0.134444444444444,0.145555555555556,0.0277777777777778,0.227777777777778,0.143333333333333,0.112222222222222],"orientation":"h","base":[-0.186666666666667,-0.192777777777778,-0.242777777777778,-0.176666666666667,-0.273333333333333,-0.227222222222222,-0.227777777777778],"hoverinfo":["text","text","text","text","text","text","text"],"text":[0.14,0.134444444444444,0.145555555555556,0.0277777777777778,0.227777777777778,0.143333333333333,0.112222222222222],"marker":{"color":["#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Rarely","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.0933333333333333,0.116666666666667,0.194444444444444,0.297777777777778,0.0911111111111111,0.167777777777778,0.231111111111111],"orientation":"h","base":[-0.0466666666666666,-0.0583333333333333,-0.0972222222222223,-0.148888888888889,-0.0455555555555556,-0.0838888888888889,-0.115555555555556],"hoverinfo":["text","text","text","text","text","text","text"],"text":[0.0933333333333333,0.116666666666667,0.194444444444444,0.297777777777778,0.0911111111111111,0.167777777777778,0.231111111111111],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(231,138,195,1)"}},"type":"bar","name":"Regularly","textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.112222222222222,0.157777777777778,0.208888888888889,0.06,0.263333333333333,0.257777777777778,0.212222222222222],"orientation":"h","base":[0.0466666666666667,0.0583333333333333,0.0972222222222222,0.148888888888889,0.0455555555555556,0.0838888888888889,0.115555555555556],"hoverinfo":["text","text","text","text","text","text","text"],"text":[0.112222222222222,0.157777777777778,0.208888888888889,0.06,0.263333333333333,0.257777777777778,0.212222222222222],"marker":{"color":["#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90"],"line":{"color":"rgba(166,216,84,1)"}},"type":"bar","name":"Sometimes","textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["Analytical Quality <br>Assurance (AQA) logs","Data or assumptions <br>registers","Documentation for each <br>function or class","Code comments","Flow charts","README files","Desk notes"],"x":[0.0644444444444444,0.0533333333333333,0.0977777777777778,0.545555555555556,0.0188888888888889,0.107777777777778,0.0822222222222222],"orientation":"h","base":[0.158888888888889,0.216111111111111,0.306111111111111,0.208888888888889,0.308888888888889,0.341666666666667,0.327777777777778],"hoverinfo":["text","text","text","text","text","text","text"],"text":[0.0644444444444444,0.0533333333333333,0.0977777777777778,0.545555555555556,0.0188888888888889,0.107777777777778,0.0822222222222222],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(255,217,47,1)"}},"type":"bar","name":"All the time","textfont":{"color":"rgba(255,217,47,1)"},"error_y":{"color":"rgba(255,217,47,1)"},"error_x":{"color":"rgba(255,217,47,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="doc-table">
+
+<table style="width:100%;">
+<colgroup>
+<col width="32%" />
+<col width="25%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="7%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Question</th>
+<th align="right">I don’t understand this question</th>
+<th align="right">Never</th>
+<th align="right">Rarely</th>
+<th align="right">Regularly</th>
+<th align="right">Sometimes</th>
+<th align="right">All the time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Analytical Quality Assurance (AQA) logs</td>
+<td align="right">0.1944444</td>
+<td align="right">0.3955556</td>
+<td align="right">0.1400000</td>
+<td align="right">0.0933333</td>
+<td align="right">0.1122222</td>
+<td align="right">0.0644444</td>
+</tr>
+<tr class="even">
+<td align="left">Data or assumptions registers</td>
+<td align="right">0.2144444</td>
+<td align="right">0.3233333</td>
+<td align="right">0.1344444</td>
+<td align="right">0.1166667</td>
+<td align="right">0.1577778</td>
+<td align="right">0.0533333</td>
+</tr>
+<tr class="odd">
+<td align="left">Documentation for each function or class</td>
+<td align="right">0.1144444</td>
+<td align="right">0.2388889</td>
+<td align="right">0.1455556</td>
+<td align="right">0.1944444</td>
+<td align="right">0.2088889</td>
+<td align="right">0.0977778</td>
+</tr>
+<tr class="even">
+<td align="left">Code comments</td>
+<td align="right">0.0222222</td>
+<td align="right">0.0466667</td>
+<td align="right">0.0277778</td>
+<td align="right">0.2977778</td>
+<td align="right">0.0600000</td>
+<td align="right">0.5455556</td>
+</tr>
+<tr class="odd">
+<td align="left">Flow charts</td>
+<td align="right">0.0500000</td>
+<td align="right">0.3488889</td>
+<td align="right">0.2277778</td>
+<td align="right">0.0911111</td>
+<td align="right">0.2633333</td>
+<td align="right">0.0188889</td>
+</tr>
+<tr class="even">
+<td align="left">README files</td>
+<td align="right">0.0744444</td>
+<td align="right">0.2488889</td>
+<td align="right">0.1433333</td>
+<td align="right">0.1677778</td>
+<td align="right">0.2577778</td>
+<td align="right">0.1077778</td>
+</tr>
+<tr class="odd">
+<td align="left">Desk notes</td>
+<td align="right">0.1555556</td>
+<td align="right">0.2066667</td>
+<td align="right">0.1122222</td>
+<td align="right">0.2311111</td>
+<td align="right">0.2122222</td>
+<td align="right">0.0822222</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

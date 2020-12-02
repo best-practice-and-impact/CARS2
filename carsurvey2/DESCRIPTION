@@ -1,7 +1,7 @@
 Package: carsurvey2
 Type: Package
 Title: Coding in Analysis and Research Survey (CARS) Wave 2 Analysis
-Version: 0.5.3
+Version: 0.5.8
 Authors@R: c(person(given = "Daniel", family = "Shiloh", email = "daniel.shiloh@ons.gov.uk",
                 role = c("aut","cre"))
             )

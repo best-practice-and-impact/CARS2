@@ -1,5 +1,5 @@
 ---
-title: "Coding frequency"
+title: "Coding frequency and tools"
 ---
 
 ## Coding frequency
@@ -14,7 +14,7 @@ carsurvey2::setup_table_toggle()
 carsurvey2::insert_table_toggle("coding-freq")
 ```
 
-<div id="coding-freq-chart">
+<div id="coding-freq-chart" style="width: 100vw">
 ```{r echo=FALSE}
 
 carsurvey2::plot_freqs(freq_table, "Coding frequency", "Count", font_size = 14)
@@ -34,6 +34,7 @@ knitr::kable(freq_table)
 ## Programming languages - access and knowledge
 
 For each of the most popular programming languages from last year's CARS data, we asked respondents to answer "yes", "no" or "I don't know" for the following statements: 
+
 * I know how to program with this tool to a level suitable for my work
 * This tool is available to use for my work
 
@@ -54,7 +55,7 @@ carsurvey2::plot_stacked(knowledge, xlab = "Count", ylab = "Programming tool", f
 <div id="tools-knowledge-table">
 ```{r echo = FALSE}
 
-knitr::kable(knowledge)
+knitr::kable(knowledge, row.names = FALSE)
 
 ```
 </div>
@@ -77,7 +78,7 @@ carsurvey2::plot_stacked(access, xlab = "Count", ylab = "Programming tool", font
 <div id="tools-access-table">
 ```{r echo = FALSE}
 
-knitr::kable(access)
+knitr::kable(access, row.names = FALSE)
 
 ```
 </div>
@@ -104,7 +105,7 @@ carsurvey2::plot_stacked(code_tool_status, colour_scale = "scale",xlab = "Count"
 <div id="tools-status-table">
 ```{r echo = FALSE}
 
-knitr::kable(code_tool_status)
+knitr::kable(code_tool_status, row.names = FALSE)
 
 ```
 </div>

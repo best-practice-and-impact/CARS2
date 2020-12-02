@@ -1,0 +1,81 @@
+---
+title: "RAP scores"
+---
+
+```{r echo=FALSE}
+carsurvey2::setup_table_toggle()
+```
+
+
+## RAP components
+
+The frequencies for each RAP component below are derived from a series of questions on coding practices (see the coding practices page). These were used to calculate scores for each component (0/1) where respondents answered "regularly" or "all the time" to the relevant questions. The list of RAP components used here is based on the [RAP minimum viable product](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md) guidance agreed by the RAP champions network.
+
+```{r echo=FALSE}
+carsurvey2::insert_table_toggle("rap-comps")
+```
+
+<div id="rap-comps-chart">
+```{r echo=FALSE}
+
+carsurvey2::plot_grouped(components, "RAP component", "Count", orientation = "h")
+
+
+```
+</div>
+
+<div id="rap-comps-table">
+```{r echo = FALSE}
+
+knitr::kable(components, row.names = FALSE)
+
+```
+</div>
+
+### RAP scores
+
+Below are the distributions of total basic and advanced RAP scores. These are the sum of the scores for each RAP component.
+
+#### Basic RAP scores:
+
+```{r echo=FALSE}
+carsurvey2::insert_table_toggle("basic_score")
+```
+
+<div id="basic_score-chart">
+```{r echo=FALSE}
+
+bar_colour <- carsurvey2::get_2colour_scale(2)[2][[1]]
+bar_colour <- rgb(bar_colour[1],bar_colour[2],bar_colour[3], maxColorValue = 255)
+carsurvey2::plot_freqs(basic_freqs, "Basic RAP score", "Count", bar_colour = bar_colour, font_size = 14)
+
+```
+</div>
+
+<div id="basic_score-table">
+```{r echo = FALSE}
+
+knitr::kable(basic_freqs, row.names = FALSE)
+
+```
+
+#### Advanced RAP scores:
+
+```{r echo=FALSE}
+carsurvey2::insert_table_toggle("advanced_score")
+```
+
+<div id="advanced_score-chart">
+```{r echo=FALSE}
+
+carsurvey2::plot_freqs(advanced_freqs, "Advanced RAP score", "Count", font_size = 14)
+
+```
+</div>
+
+<div id="advanced_score-table">
+```{r echo = FALSE}
+
+knitr::kable(advanced_freqs, row.names = FALSE)
+
+```

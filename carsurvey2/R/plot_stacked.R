@@ -80,13 +80,12 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_si
   fig <- plotly::config(fig, displayModeBar = F)
   
   
-  fig <- plotly::layout(fig, 
+  fig <- plotly::layout(fig,  
                         barmode = "stack", 
                         clickmode = "none",
                         legend = list(orientation = "h",   # show entries horizontally
                                       xanchor = "center",  # use center of legend as anchor
                                       x = 0.5,
-                                      y = 1.02,
                                       traceorder = "normal",
                                       font = list(size = font_size)), 
                         xaxis = x, 

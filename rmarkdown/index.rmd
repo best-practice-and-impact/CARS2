@@ -10,11 +10,18 @@ CARS was developed to better understand how coding is used in government analysi
 
 The survey was distributed to government analysts and researchers in the Autumn of 2020. The results presented here summarise the key findings from 1,060 responses from over 60 government organisations. 
 
-We would like to know what you think of the survey and the outputs. Please contact us if you have feedback on any of the following:
+### How to use this dashboard
 
-* Outputs/analyses you would like to see added to this dashboard
-* Information you would like to see collected in the next iteration of CARS
-* Any other comments
+Do:
+
+* Explore the data to gain insights about current coding practices in government analysis and research
+* Re-use the outputs if you wish
+
+Avoid:
+
+* Attempting to estimate absolute frequencies - we did not use random sampling
+* Inferring differences between groups - these outputs are only intended to be descriptive and inferential tests were not carried out
+* Comparing results from different departments
 
 ### More information on reproducible analytical pipelines
 
@@ -23,6 +30,13 @@ We would like to know what you think of the survey and the outputs. Please conta
 [RAP champions network](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/)
 
 ### Contact details
+
+We would like to know what you think of the survey and the outputs. Please contact us if you have feedback on any of the following:
+
+* Outputs/analyses you would like to see added to this dashboard
+* Information you would like to see collected in the next iteration of CARS
+* Any other comments
+
 If you are interested in this survey or any of the questions asked please contact goodpracticeteam@statistics.gov.uk
 
 If you have any queries or feedback related specifically to this site, then please contact daniel.shiloh@ons.gov.uk

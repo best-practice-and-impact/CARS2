@@ -68,7 +68,7 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig, 
+    fig <- plotly::layout(fig,  
                           xaxis = x, 
                           yaxis = y, 
                           hoverlabel = list(bgcolor = "white", font = list(size = font_size)))

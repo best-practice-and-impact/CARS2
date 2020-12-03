@@ -4,6 +4,8 @@ title: "Home"
 
 ## DRAFT::: How do analysts use programming and software engineering in the UK Public Sector?
 
+*Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
+
 ### The Coding in Analysis and Research survey (CARS) was collected in October 2020
 
 CARS was developed to better understand how programming and software engineering is used in government analysis and research. Most questions focused on whether analysts use software engineering practices when coding as part of their work. These coding practices are components of Reproducible Analytical Pipelines (RAP). You can find links to further information on RAP at the bottom of this page.

@@ -2,15 +2,22 @@
 title: "Home"
 ---
 
-## Coding in Analysis and Research Survey (CARS) - Wave 2
+## How do analysts use programming and software engineering in the UK Public Sector?
 
-### Background to CARS
+### The Coding in Analysis and Research survey (CARS) was collected in October 2020
 
-CARS was developed to better understand how coding is used in government analysis and research. Most questions focused on whether analysts use software engineering practices when coding as part of their work. These coding practices are components of Reproducible Analytical Pipelines (RAP). You can find links to further information on RAP at the bottom of this page.
+CARS was developed to better understand how programming and software engineering is used in government analysis and research. Most questions focused on whether analysts use software engineering practices when coding as part of their work. These coding practices are components of Reproducible Analytical Pipelines (RAP). You can find links to further information on RAP at the bottom of this page.
 
-The survey was distributed to government analysts and researchers in the Autumn of 2020. The results presented here summarise the key findings from 1,060 responses from over 60 government organisations. 
+The survey was distributed to government analysts and researchers in the Autumn of 2020. The results presented here summarise the key findings from 1,060 responses from over 60 public sector organisations. 
 
-### How to use this dashboard
+### Who is this research for?
+
+This research was made with senior analysts and leaders in mind.
+It will be useful for the development of strategies for public sector analysis and research.
+It will also be useful for analysts and researchers in the public sector who are interested in understanding more about how their professions use programming in their work.
+Finally, it will be useful to people outside the public sector who are interested in understanding the tools that are used in the public sector for analysis and research.
+
+### How to use this research
 
 Do:
 
@@ -25,7 +32,9 @@ Avoid:
 
 ### More information on reproducible analytical pipelines
 
-[Guide to implementing RAP](https://ukgovdatascience.github.io/rap_companion/)
+[Quality assurance for coding in analysis and research](https://best-practice-and-impact.github.io/qa-of-code-guidance/)
+
+[Reproducible Analytical Pipelines (RAP) MVP](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md)
 
 [RAP champions network](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/)
 
@@ -33,7 +42,7 @@ Avoid:
 
 We would like to know what you think of the survey and the outputs. Please contact us if you have feedback on any of the following:
 
-* Outputs/analyses you would like to see added to this dashboard
+* Outputs/analyses you would like to see added to this research
 * Information you would like to see collected in the next iteration of CARS
 * Any other comments
 

@@ -8,12 +8,13 @@
 #'@param bar_colour Colour name. Defaults to blue (see get_gradient())
 #'@param font_size minimum font size for the plot (numeric).
 #'@param orientation plot orientation ("h" = horizontal, "v" = verical). Vertical by default
+#'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientation = "v") {
+plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientation = "v", ...) {
   
   # Set default bar colour
   if (missing(bar_colour)) {
@@ -64,7 +65,8 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
       x = table[[1]],
       y = table[[2]],
       marker = list(color = bar_colour),
-      type = "bar"
+      type = "bar",
+      ...
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
@@ -77,7 +79,8 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
       x = table[[2]],
       y = table[[1]],
       marker = list(color = bar_colour),
-      type = "bar"
+      type = "bar",
+      ...
     )
     
     fig <- plotly::config(fig, displayModeBar = F)

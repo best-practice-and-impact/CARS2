@@ -4,7 +4,7 @@
 \alias{plot_grouped}
 \title{Plot grouped frequency graph}
 \usage{
-plot_grouped(table, xlab, ylab, font_size = 12, orientation = "v")
+plot_grouped(table, xlab, ylab, font_size = 12, orientation = "v", ...)
 }
 \arguments{
 \item{table}{Frequency table (data frame). 3 columns - cateogry names, groups and frequencies.}
@@ -16,6 +16,8 @@ plot_grouped(table, xlab, ylab, font_size = 12, orientation = "v")
 \item{font_size}{minimum font size for the plot (numeric).}
 
 \item{orientation}{plot orientation ("h" = horizontal, "v" = verical). Vertical by default.}
+
+\item{...}{additional plotly_ly arguments}
 }
 \value{
 bar chart

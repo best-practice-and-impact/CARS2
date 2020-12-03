@@ -29,6 +29,8 @@
 <script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -282,7 +284,7 @@ $(document).ready(function () {
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="nav-primary" aria-label="Display main menu">
           Main menu
         </button>
-        <a class="navbar-brand" href="index.html">Coding in Analysis and Research Survey (CARS)     </a>
+        <a class="navbar-brand" href="index.html">Coding in Analysis and Research Survey</a>
           </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -335,41 +337,65 @@ $(document).ready(function () {
   }
   </script>
 
-<a href="#show-table-coding-freq" role="button" class="toggle-button" id="show-chart-coding-freq" onclick="show_chart('coding-freq')"> Show chart </a>
-<a href="#show-chart-coding-freq" role="button" class="toggle-button" id="show-table-coding-freq" onclick="show_table('coding-freq')"> Show table </a>
+<a role="button" class="toggle-button" id="show-chart-coding-freq" onclick="show_chart('coding-freq')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-coding-freq" onclick="show_table('coding-freq')"> Show table </a>
 <style> #show-chart-coding-freq {display: none;} #coding-freq-table {display: none;} </style>
 <div id="coding-freq-chart" style="width: 100vw">
-<div id="htmlwidget-bc239119c4d7e47b5cae" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bc239119c4d7e47b5cae">{"x":{"visdat":{"11c033e04ec3":["function () ","plotlyVisDat"]},"cur_data":"11c033e04ec3","attrs":{"11c033e04ec3":{"x":["Never","Rarely","Sometimes","Regularly","All the time"],"y":[160,137,216,315,232],"marker":{"color":"#206095"},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"xaxis":{"domain":[0,1],"automargin":true,"title":"Coding frequency","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Never","Rarely","Sometimes","Regularly","All the time"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"x":["Never","Rarely","Sometimes","Regularly","All the time"],"y":[160,137,216,315,232],"marker":{"color":"#206095","line":{"color":"rgba(31,119,180,1)"}},"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-21cb01f0497363d24032" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-21cb01f0497363d24032">{"x":{"visdat":{"100ccb37a21":["function () ","plotlyVisDat"]},"cur_data":"100ccb37a21","attrs":{"100ccb37a21":{"x":["Never","Rarely","Sometimes","Regularly","All the time"],"y":[160,137,216,315,232],"marker":{"color":"#206095"},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Coding frequency","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Never","Rarely","Sometimes","Regularly","All the time"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"x":["Never","Rarely","Sometimes","Regularly","All the time"],"y":[160,137,216,315,232],"marker":{"color":"#206095","line":{"color":"rgba(31,119,180,1)"}},"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="coding-freq-table">
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Coding frequency</th>
-<th align="right">Count</th>
+<tr>
+<th style="text-align:left;">
+Coding frequency
+</th>
+<th style="text-align:right;">
+Count
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Never</td>
-<td align="right">160</td>
+<tr>
+<td style="text-align:left;">
+Never
+</td>
+<td style="text-align:right;">
+160
+</td>
 </tr>
-<tr class="even">
-<td align="left">Rarely</td>
-<td align="right">137</td>
+<tr>
+<td style="text-align:left;">
+Rarely
+</td>
+<td style="text-align:right;">
+137
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Sometimes</td>
-<td align="right">216</td>
+<tr>
+<td style="text-align:left;">
+Sometimes
+</td>
+<td style="text-align:right;">
+216
+</td>
 </tr>
-<tr class="even">
-<td align="left">Regularly</td>
-<td align="right">315</td>
+<tr>
+<td style="text-align:left;">
+Regularly
+</td>
+<td style="text-align:right;">
+315
+</td>
 </tr>
-<tr class="odd">
-<td align="left">All the time</td>
-<td align="right">232</td>
+<tr>
+<td style="text-align:left;">
+All the time
+</td>
+<td style="text-align:right;">
+232
+</td>
 </tr>
 </tbody>
 </table>
@@ -384,83 +410,171 @@ $(document).ready(function () {
 </ul>
 <div id="knowledge-of-programming-tools" class="section level3">
 <h3>Knowledge of programming tools</h3>
-<a href="#show-table-tools-knowledge" role="button" class="toggle-button" id="show-chart-tools-knowledge" onclick="show_chart('tools-knowledge')"> Show chart </a>
-<a href="#show-chart-tools-knowledge" role="button" class="toggle-button" id="show-table-tools-knowledge" onclick="show_table('tools-knowledge')"> Show table </a>
+<a role="button" class="toggle-button" id="show-chart-tools-knowledge" onclick="show_chart('tools-knowledge')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-tools-knowledge" onclick="show_table('tools-knowledge')"> Show table </a>
 <style> #show-chart-tools-knowledge {display: none;} #tools-knowledge-table {display: none;} </style>
 <div id="tools-knowledge-chart">
-<div id="htmlwidget-a7557e54b976876c5f90" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a7557e54b976876c5f90">{"x":{"visdat":{"11c06c5f4508":["function () ","plotlyVisDat"]},"cur_data":"11c06c5f4508","attrs":{"11c06c5f4508":{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[620,567,336,317,390,410,163,100,75,97,29,42,47,52,36,49,58,59,56,56,411,451,677,691,634,601,839,901,929,907],"orientation":"h","hoverinfo":"text","text":[620,567,336,317,390,410,163,100,75,97,29,42,47,52,36,49,58,59,56,56,411,451,677,691,634,601,839,901,929,907],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","No","No","No","No","No","No","No","No","No","No"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":1.02,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Programming tool","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["C","java","JS","python","R","SAS","SPSS","SQL","stata","VBA"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[620,567,336,317,390,410,163,100,75,97],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[620,567,336,317,390,410,163,100,75,97],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Yes","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[29,42,47,52,36,49,58,59,56,56],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[29,42,47,52,36,49,58,59,56,56],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Don't know","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[411,451,677,691,634,601,839,901,929,907],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[411,451,677,691,634,601,839,901,929,907],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"No","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-34c5645089f597d90a86" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-34c5645089f597d90a86">{"x":{"visdat":{"100c632b7c6e":["function () ","plotlyVisDat"]},"cur_data":"100c632b7c6e","attrs":{"100c632b7c6e":{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[620,567,336,317,390,410,163,100,75,97,29,42,47,52,36,49,58,59,56,56,411,451,677,691,634,601,839,901,929,907],"orientation":"h","hoverinfo":"text","text":[620,567,336,317,390,410,163,100,75,97,29,42,47,52,36,49,58,59,56,56,411,451,677,691,634,601,839,901,929,907],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","No","No","No","No","No","No","No","No","No","No"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":-0.15,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Programming tool","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["C","java","JS","python","R","SAS","SPSS","SQL","stata","VBA"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[620,567,336,317,390,410,163,100,75,97],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[620,567,336,317,390,410,163,100,75,97],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Yes","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[29,42,47,52,36,49,58,59,56,56],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[29,42,47,52,36,49,58,59,56,56],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Don't know","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[411,451,677,691,634,601,839,901,929,907],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[411,451,677,691,634,601,839,901,929,907],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"No","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="tools-knowledge-table">
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Programming language</th>
-<th align="right">Yes</th>
-<th align="right">Don’t know</th>
-<th align="right">No</th>
+<tr>
+<th style="text-align:left;">
+Programming language
+</th>
+<th style="text-align:right;">
+Yes
+</th>
+<th style="text-align:right;">
+Don’t know
+</th>
+<th style="text-align:right;">
+No
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">R</td>
-<td align="right">620</td>
-<td align="right">29</td>
-<td align="right">411</td>
+<tr>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:right;">
+620
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+411
+</td>
 </tr>
-<tr class="even">
-<td align="left">SQL</td>
-<td align="right">567</td>
-<td align="right">42</td>
-<td align="right">451</td>
+<tr>
+<td style="text-align:left;">
+SQL
+</td>
+<td style="text-align:right;">
+567
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+451
+</td>
 </tr>
-<tr class="odd">
-<td align="left">SAS</td>
-<td align="right">336</td>
-<td align="right">47</td>
-<td align="right">677</td>
+<tr>
+<td style="text-align:left;">
+SAS
+</td>
+<td style="text-align:right;">
+336
+</td>
+<td style="text-align:right;">
+47
+</td>
+<td style="text-align:right;">
+677
+</td>
 </tr>
-<tr class="even">
-<td align="left">VBA</td>
-<td align="right">317</td>
-<td align="right">52</td>
-<td align="right">691</td>
+<tr>
+<td style="text-align:left;">
+VBA
+</td>
+<td style="text-align:right;">
+317
+</td>
+<td style="text-align:right;">
+52
+</td>
+<td style="text-align:right;">
+691
+</td>
 </tr>
-<tr class="odd">
-<td align="left">python</td>
-<td align="right">390</td>
-<td align="right">36</td>
-<td align="right">634</td>
+<tr>
+<td style="text-align:left;">
+python
+</td>
+<td style="text-align:right;">
+390
+</td>
+<td style="text-align:right;">
+36
+</td>
+<td style="text-align:right;">
+634
+</td>
 </tr>
-<tr class="even">
-<td align="left">SPSS</td>
-<td align="right">410</td>
-<td align="right">49</td>
-<td align="right">601</td>
+<tr>
+<td style="text-align:left;">
+SPSS
+</td>
+<td style="text-align:right;">
+410
+</td>
+<td style="text-align:right;">
+49
+</td>
+<td style="text-align:right;">
+601
+</td>
 </tr>
-<tr class="odd">
-<td align="left">stata</td>
-<td align="right">163</td>
-<td align="right">58</td>
-<td align="right">839</td>
+<tr>
+<td style="text-align:left;">
+stata
+</td>
+<td style="text-align:right;">
+163
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+839
+</td>
 </tr>
-<tr class="even">
-<td align="left">JS</td>
-<td align="right">100</td>
-<td align="right">59</td>
-<td align="right">901</td>
+<tr>
+<td style="text-align:left;">
+JS
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+901
+</td>
 </tr>
-<tr class="odd">
-<td align="left">java</td>
-<td align="right">75</td>
-<td align="right">56</td>
-<td align="right">929</td>
+<tr>
+<td style="text-align:left;">
+java
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+929
+</td>
 </tr>
-<tr class="even">
-<td align="left">C</td>
-<td align="right">97</td>
-<td align="right">56</td>
-<td align="right">907</td>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+97
+</td>
+<td style="text-align:right;">
+56
+</td>
+<td style="text-align:right;">
+907
+</td>
 </tr>
 </tbody>
 </table>
@@ -468,83 +582,171 @@ $(document).ready(function () {
 </div>
 <div id="access-to-programming-tools" class="section level3">
 <h3>Access to programming tools</h3>
-<a href="#show-table-tools-access" role="button" class="toggle-button" id="show-chart-tools-access" onclick="show_chart('tools-access')"> Show chart </a>
-<a href="#show-chart-tools-access" role="button" class="toggle-button" id="show-table-tools-access" onclick="show_table('tools-access')"> Show table </a>
+<a role="button" class="toggle-button" id="show-chart-tools-access" onclick="show_chart('tools-access')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-tools-access" onclick="show_table('tools-access')"> Show table </a>
 <style> #show-chart-tools-access {display: none;} #tools-access-table {display: none;} </style>
 <div id="tools-access-chart">
-<div id="htmlwidget-a1ddef884ab8f37c96ee" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a1ddef884ab8f37c96ee">{"x":{"visdat":{"11c0702e242e":["function () ","plotlyVisDat"]},"cur_data":"11c0702e242e","attrs":{"11c0702e242e":{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[863,662,447,572,662,439,276,150,116,102,107,285,353,350,227,349,493,592,601,580,90,113,260,138,171,272,291,318,343,378],"orientation":"h","hoverinfo":"text","text":[863,662,447,572,662,439,276,150,116,102,107,285,353,350,227,349,493,592,601,580,90,113,260,138,171,272,291,318,343,378],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","No","No","No","No","No","No","No","No","No","No"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":1.02,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Programming tool","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["C","java","JS","python","R","SAS","SPSS","SQL","stata","VBA"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[863,662,447,572,662,439,276,150,116,102],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[863,662,447,572,662,439,276,150,116,102],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Yes","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[107,285,353,350,227,349,493,592,601,580],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[107,285,353,350,227,349,493,592,601,580],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Don't know","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[90,113,260,138,171,272,291,318,343,378],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[90,113,260,138,171,272,291,318,343,378],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"No","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b639319481b0cb74c8eb" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b639319481b0cb74c8eb">{"x":{"visdat":{"100c70835aab":["function () ","plotlyVisDat"]},"cur_data":"100c70835aab","attrs":{"100c70835aab":{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[863,662,447,572,662,439,276,150,116,102,107,285,353,350,227,349,493,592,601,580,90,113,260,138,171,272,291,318,343,378],"orientation":"h","hoverinfo":"text","text":[863,662,447,572,662,439,276,150,116,102,107,285,353,350,227,349,493,592,601,580,90,113,260,138,171,272,291,318,343,378],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","Don't know","No","No","No","No","No","No","No","No","No","No"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":-0.15,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Programming tool","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["C","java","JS","python","R","SAS","SPSS","SQL","stata","VBA"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[863,662,447,572,662,439,276,150,116,102],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[863,662,447,572,662,439,276,150,116,102],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Yes","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[107,285,353,350,227,349,493,592,601,580],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[107,285,353,350,227,349,493,592,601,580],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Don't know","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[90,113,260,138,171,272,291,318,343,378],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[90,113,260,138,171,272,291,318,343,378],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"No","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="tools-access-table">
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Programming language</th>
-<th align="right">Yes</th>
-<th align="right">Don’t know</th>
-<th align="right">No</th>
+<tr>
+<th style="text-align:left;">
+Programming language
+</th>
+<th style="text-align:right;">
+Yes
+</th>
+<th style="text-align:right;">
+Don’t know
+</th>
+<th style="text-align:right;">
+No
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">R</td>
-<td align="right">863</td>
-<td align="right">107</td>
-<td align="right">90</td>
+<tr>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:right;">
+863
+</td>
+<td style="text-align:right;">
+107
+</td>
+<td style="text-align:right;">
+90
+</td>
 </tr>
-<tr class="even">
-<td align="left">SQL</td>
-<td align="right">662</td>
-<td align="right">285</td>
-<td align="right">113</td>
+<tr>
+<td style="text-align:left;">
+SQL
+</td>
+<td style="text-align:right;">
+662
+</td>
+<td style="text-align:right;">
+285
+</td>
+<td style="text-align:right;">
+113
+</td>
 </tr>
-<tr class="odd">
-<td align="left">SAS</td>
-<td align="right">447</td>
-<td align="right">353</td>
-<td align="right">260</td>
+<tr>
+<td style="text-align:left;">
+SAS
+</td>
+<td style="text-align:right;">
+447
+</td>
+<td style="text-align:right;">
+353
+</td>
+<td style="text-align:right;">
+260
+</td>
 </tr>
-<tr class="even">
-<td align="left">VBA</td>
-<td align="right">572</td>
-<td align="right">350</td>
-<td align="right">138</td>
+<tr>
+<td style="text-align:left;">
+VBA
+</td>
+<td style="text-align:right;">
+572
+</td>
+<td style="text-align:right;">
+350
+</td>
+<td style="text-align:right;">
+138
+</td>
 </tr>
-<tr class="odd">
-<td align="left">python</td>
-<td align="right">662</td>
-<td align="right">227</td>
-<td align="right">171</td>
+<tr>
+<td style="text-align:left;">
+python
+</td>
+<td style="text-align:right;">
+662
+</td>
+<td style="text-align:right;">
+227
+</td>
+<td style="text-align:right;">
+171
+</td>
 </tr>
-<tr class="even">
-<td align="left">SPSS</td>
-<td align="right">439</td>
-<td align="right">349</td>
-<td align="right">272</td>
+<tr>
+<td style="text-align:left;">
+SPSS
+</td>
+<td style="text-align:right;">
+439
+</td>
+<td style="text-align:right;">
+349
+</td>
+<td style="text-align:right;">
+272
+</td>
 </tr>
-<tr class="odd">
-<td align="left">stata</td>
-<td align="right">276</td>
-<td align="right">493</td>
-<td align="right">291</td>
+<tr>
+<td style="text-align:left;">
+stata
+</td>
+<td style="text-align:right;">
+276
+</td>
+<td style="text-align:right;">
+493
+</td>
+<td style="text-align:right;">
+291
+</td>
 </tr>
-<tr class="even">
-<td align="left">JS</td>
-<td align="right">150</td>
-<td align="right">592</td>
-<td align="right">318</td>
+<tr>
+<td style="text-align:left;">
+JS
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+592
+</td>
+<td style="text-align:right;">
+318
+</td>
 </tr>
-<tr class="odd">
-<td align="left">java</td>
-<td align="right">116</td>
-<td align="right">601</td>
-<td align="right">343</td>
+<tr>
+<td style="text-align:left;">
+java
+</td>
+<td style="text-align:right;">
+116
+</td>
+<td style="text-align:right;">
+601
+</td>
+<td style="text-align:right;">
+343
+</td>
 </tr>
-<tr class="even">
-<td align="left">C</td>
-<td align="right">102</td>
-<td align="right">580</td>
-<td align="right">378</td>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+102
+</td>
+<td style="text-align:right;">
+580
+</td>
+<td style="text-align:right;">
+378
+</td>
 </tr>
 </tbody>
 </table>
@@ -553,83 +755,171 @@ $(document).ready(function () {
 <div id="access-and-knowledge-gaps" class="section level3">
 <h3>Access and knowledge gaps</h3>
 <p>We used the above data to calculate the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. The results can be seen below.</p>
-<a href="#show-table-tools-status" role="button" class="toggle-button" id="show-chart-tools-status" onclick="show_chart('tools-status')"> Show chart </a>
-<a href="#show-chart-tools-status" role="button" class="toggle-button" id="show-table-tools-status" onclick="show_table('tools-status')"> Show table </a>
+<a role="button" class="toggle-button" id="show-chart-tools-status" onclick="show_chart('tools-status')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-tools-status" onclick="show_table('tools-status')"> Show table </a>
 <style> #show-chart-tools-status {display: none;} #tools-status-table {display: none;} </style>
 <div id="tools-status-chart">
-<div id="htmlwidget-0c7dee61ebff3b9df7db" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0c7dee61ebff3b9df7db">{"x":{"visdat":{"11c01444540e":["function () ","plotlyVisDat"]},"cur_data":"11c01444540e","attrs":{"11c01444540e":{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[298,176,183,282,342,183,183,90,87,67,565,486,264,290,320,256,93,60,29,35,55,81,72,27,70,154,70,40,46,62],"orientation":"h","hoverinfo":"text","text":[298,176,183,282,342,183,183,90,87,67,565,486,264,290,320,256,93,60,29,35,55,81,72,27,70,154,70,40,46,62],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":1.02,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Programming tool","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["C","java","JS","python","R","SAS","SPSS","SQL","stata","VBA"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[298,176,183,282,342,183,183,90,87,67],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[298,176,183,282,342,183,183,90,87,67],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Access only","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[565,486,264,290,320,256,93,60,29,35],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[565,486,264,290,320,256,93,60,29,35],"marker":{"color":["#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Access and knowledge","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[55,81,72,27,70,154,70,40,46,62],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[55,81,72,27,70,154,70,40,46,62],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Knowledge only","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ffb2f516ca01d810bcb4" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ffb2f516ca01d810bcb4">{"x":{"visdat":{"100c2554b66":["function () ","plotlyVisDat"]},"cur_data":"100c2554b66","attrs":{"100c2554b66":{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C","R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[298,176,183,282,342,183,183,90,87,67,565,486,264,290,320,256,93,60,29,35,55,81,72,27,70,154,70,40,46,62],"orientation":"h","hoverinfo":"text","text":[298,176,183,282,342,183,183,90,87,67,565,486,264,290,320,256,93,60,29,35,55,81,72,27,70,154,70,40,46,62],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":-0.15,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Programming tool","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["C","java","JS","python","R","SAS","SPSS","SQL","stata","VBA"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[298,176,183,282,342,183,183,90,87,67],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[298,176,183,282,342,183,183,90,87,67],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Access only","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[565,486,264,290,320,256,93,60,29,35],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[565,486,264,290,320,256,93,60,29,35],"marker":{"color":["#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B","#818E5B"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Access and knowledge","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["R","SQL","SAS","VBA","python","SPSS","stata","JS","java","C"],"x":[55,81,72,27,70,154,70,40,46,62],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text"],"text":[55,81,72,27,70,154,70,40,46,62],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Knowledge only","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="tools-status-table">
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Programming language</th>
-<th align="right">Access only</th>
-<th align="right">Access and knowledge</th>
-<th align="right">Knowledge only</th>
+<tr>
+<th style="text-align:left;">
+Programming language
+</th>
+<th style="text-align:right;">
+Access only
+</th>
+<th style="text-align:right;">
+Access and knowledge
+</th>
+<th style="text-align:right;">
+Knowledge only
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">R</td>
-<td align="right">298</td>
-<td align="right">565</td>
-<td align="right">55</td>
+<tr>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:right;">
+298
+</td>
+<td style="text-align:right;">
+565
+</td>
+<td style="text-align:right;">
+55
+</td>
 </tr>
-<tr class="even">
-<td align="left">SQL</td>
-<td align="right">176</td>
-<td align="right">486</td>
-<td align="right">81</td>
+<tr>
+<td style="text-align:left;">
+SQL
+</td>
+<td style="text-align:right;">
+176
+</td>
+<td style="text-align:right;">
+486
+</td>
+<td style="text-align:right;">
+81
+</td>
 </tr>
-<tr class="odd">
-<td align="left">SAS</td>
-<td align="right">183</td>
-<td align="right">264</td>
-<td align="right">72</td>
+<tr>
+<td style="text-align:left;">
+SAS
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:right;">
+72
+</td>
 </tr>
-<tr class="even">
-<td align="left">VBA</td>
-<td align="right">282</td>
-<td align="right">290</td>
-<td align="right">27</td>
+<tr>
+<td style="text-align:left;">
+VBA
+</td>
+<td style="text-align:right;">
+282
+</td>
+<td style="text-align:right;">
+290
+</td>
+<td style="text-align:right;">
+27
+</td>
 </tr>
-<tr class="odd">
-<td align="left">python</td>
-<td align="right">342</td>
-<td align="right">320</td>
-<td align="right">70</td>
+<tr>
+<td style="text-align:left;">
+python
+</td>
+<td style="text-align:right;">
+342
+</td>
+<td style="text-align:right;">
+320
+</td>
+<td style="text-align:right;">
+70
+</td>
 </tr>
-<tr class="even">
-<td align="left">SPSS</td>
-<td align="right">183</td>
-<td align="right">256</td>
-<td align="right">154</td>
+<tr>
+<td style="text-align:left;">
+SPSS
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+256
+</td>
+<td style="text-align:right;">
+154
+</td>
 </tr>
-<tr class="odd">
-<td align="left">stata</td>
-<td align="right">183</td>
-<td align="right">93</td>
-<td align="right">70</td>
+<tr>
+<td style="text-align:left;">
+stata
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+93
+</td>
+<td style="text-align:right;">
+70
+</td>
 </tr>
-<tr class="even">
-<td align="left">JS</td>
-<td align="right">90</td>
-<td align="right">60</td>
-<td align="right">40</td>
+<tr>
+<td style="text-align:left;">
+JS
+</td>
+<td style="text-align:right;">
+90
+</td>
+<td style="text-align:right;">
+60
+</td>
+<td style="text-align:right;">
+40
+</td>
 </tr>
-<tr class="odd">
-<td align="left">java</td>
-<td align="right">87</td>
-<td align="right">29</td>
-<td align="right">46</td>
+<tr>
+<td style="text-align:left;">
+java
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+29
+</td>
+<td style="text-align:right;">
+46
+</td>
 </tr>
-<tr class="even">
-<td align="left">C</td>
-<td align="right">67</td>
-<td align="right">35</td>
-<td align="right">62</td>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+62
+</td>
 </tr>
 </tbody>
 </table>

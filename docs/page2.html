@@ -29,6 +29,8 @@
 <script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -282,7 +284,7 @@ $(document).ready(function () {
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="nav-primary" aria-label="Display main menu">
           Main menu
         </button>
-        <a class="navbar-brand" href="index.html">Coding in Analysis and Research Survey (CARS)     </a>
+        <a class="navbar-brand" href="index.html">Coding in Analysis and Research Survey</a>
           </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -335,41 +337,65 @@ $(document).ready(function () {
 <div id="knowledge-of-rap-and-rap-champions" class="section level2">
 <h2>Knowledge of RAP and RAP champions</h2>
 <p>We asked our respondents whether they had heard of RAP and what their knowlegde is of their own department RAP champion. The combined responses are presented below.</p>
-<a href="#show-table-rap-knowledge" role="button" class="toggle-button" id="show-chart-rap-knowledge" onclick="show_chart('rap-knowledge')"> Show chart </a>
-<a href="#show-chart-rap-knowledge" role="button" class="toggle-button" id="show-table-rap-knowledge" onclick="show_table('rap-knowledge')"> Show table </a>
+<a role="button" class="toggle-button" id="show-chart-rap-knowledge" onclick="show_chart('rap-knowledge')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-rap-knowledge" onclick="show_table('rap-knowledge')"> Show table </a>
 <style> #show-chart-rap-knowledge {display: none;} #rap-knowledge-table {display: none;} </style>
 <div id="rap-knowledge-chart">
-<div id="htmlwidget-088a4a9efa68d2367ab2" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-088a4a9efa68d2367ab2">{"x":{"visdat":{"11c049b548b":["function () ","plotlyVisDat"]},"cur_data":"11c049b548b","attrs":{"11c049b548b":{"x":[397,170,240,24,179],"y":["Have not heard of RAP","Heard of RAP, have not <br>heard of RAP champions","Heard of RAP champions, <br>no champion in department","Heard of RAP, does not <br>know department champion","Knows department RAP <br>champion"],"marker":{"color":"#206095"},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"orientation":"h","xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Knowledge of RAP champions","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Have not heard of RAP","Heard of RAP champions, <br>no champion in department","Heard of RAP, does not <br>know department champion","Heard of RAP, have not <br>heard of RAP champions","Knows department RAP <br>champion"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"x":[397,170,240,24,179],"y":["Have not heard of RAP","Heard of RAP, have not <br>heard of RAP champions","Heard of RAP champions, <br>no champion in department","Heard of RAP, does not <br>know department champion","Knows department RAP <br>champion"],"marker":{"color":"#206095","line":{"color":"rgba(31,119,180,1)"}},"type":"bar","orientation":"h","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9ec0c100657bf916f947" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9ec0c100657bf916f947">{"x":{"visdat":{"100c5e41153c":["function () ","plotlyVisDat"]},"cur_data":"100c5e41153c","attrs":{"100c5e41153c":{"x":[397,170,240,24,179],"y":["Have not heard of RAP","Heard of RAP, have not <br>heard of RAP champions","Heard of RAP champions, <br>no champion in department","Heard of RAP, does not <br>know department champion","Knows department RAP <br>champion"],"marker":{"color":"#206095"},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"orientation":"h","xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Knowledge of RAP champions","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Have not heard of RAP","Heard of RAP champions, <br>no champion in department","Heard of RAP, does not <br>know department champion","Heard of RAP, have not <br>heard of RAP champions","Knows department RAP <br>champion"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"x":[397,170,240,24,179],"y":["Have not heard of RAP","Heard of RAP, have not <br>heard of RAP champions","Heard of RAP champions, <br>no champion in department","Heard of RAP, does not <br>know department champion","Knows department RAP <br>champion"],"marker":{"color":"#206095","line":{"color":"rgba(31,119,180,1)"}},"type":"bar","orientation":"h","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="rap-knowledge-table">
-<table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">RAP knowledge</th>
-<th align="right">Count</th>
+<tr>
+<th style="text-align:left;">
+RAP knowledge
+</th>
+<th style="text-align:right;">
+Count
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Have not heard of RAP</td>
-<td align="right">397</td>
+<tr>
+<td style="text-align:left;">
+Have not heard of RAP
+</td>
+<td style="text-align:right;">
+397
+</td>
 </tr>
-<tr class="even">
-<td align="left">Heard of RAP, have not heard of RAP champions</td>
-<td align="right">170</td>
+<tr>
+<td style="text-align:left;">
+Heard of RAP, have not heard of RAP champions
+</td>
+<td style="text-align:right;">
+170
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Heard of RAP champions, no champion in department</td>
-<td align="right">240</td>
+<tr>
+<td style="text-align:left;">
+Heard of RAP champions, no champion in department
+</td>
+<td style="text-align:right;">
+240
+</td>
 </tr>
-<tr class="even">
-<td align="left">Heard of RAP, does not know department champion</td>
-<td align="right">24</td>
+<tr>
+<td style="text-align:left;">
+Heard of RAP, does not know department champion
+</td>
+<td style="text-align:right;">
+24
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Knows department RAP champion</td>
-<td align="right">179</td>
+<tr>
+<td style="text-align:left;">
+Knows department RAP champion
+</td>
+<td style="text-align:right;">
+179
+</td>
 </tr>
 </tbody>
 </table>
@@ -387,81 +413,166 @@ $(document).ready(function () {
 <li>“I and/or my team are currently implementing RAP”</li>
 </ul>
 <p>The results can be seen below. The figure and table show the percentage of respondents who picked each response option. Percentages are out of a sample of respondents who said they had heard of RAP.</p>
-<a href="#show-table-rap-opinions" role="button" class="toggle-button" id="show-chart-rap-opinions" onclick="show_chart('rap-opinions')"> Show chart </a>
-<a href="#show-chart-rap-opinions" role="button" class="toggle-button" id="show-table-rap-opinions" onclick="show_table('rap-opinions')"> Show table </a>
+<a role="button" class="toggle-button" id="show-chart-rap-opinions" onclick="show_chart('rap-opinions')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-rap-opinions" onclick="show_table('rap-opinions')"> Show table </a>
 <style> #show-chart-rap-opinions {display: none;} #rap-opinions-table {display: none;} </style>
 <div id="rap-opinions-chart">
-<div id="htmlwidget-25ce5ed58ef54976d527" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-25ce5ed58ef54976d527">{"x":{"visdat":{"11c02aad60c8":["function () ","plotlyVisDat"]},"cur_data":"11c02aad60c8","attrs":{"11c02aad60c8":{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925,0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486,0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517,0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116,0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"orientation":"h","base":[-0.300904977375566,-0.494720965309201,-0.202865761689291,-0.439668174962293,-0.487179487179487,-0.521870286576169,-0.240573152337858,-0.357466063348416,-0.172699849170437,-0.33710407239819,-0.374057315233786,-0.361990950226244,-0.0641025641025641,-0.105580693815988,-0.100301659125189,-0.171191553544495,-0.111613876319759,-0.111613876319759,0.064102564102564,0.105580693815988,0.100301659125189,0.171191553544495,0.111613876319759,0.111613876319759,0.519607843137255,0.381598793363499,0.492458521870287,0.436651583710407,0.398190045248869,0.345399698340875],"hoverinfo":"text","text":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925,0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486,0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517,0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116,0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Strongly disagree","Strongly disagree","Strongly disagree","Strongly disagree","Strongly disagree","Strongly disagree","Disagree","Disagree","Disagree","Disagree","Disagree","Disagree","Neutral","Neutral","Neutral","Neutral","Neutral","Neutral","Agree","Agree","Agree","Agree","Agree","Agree","Strongly agree","Strongly agree","Strongly agree","Strongly agree","Strongly agree","Strongly agree"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":false,"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":1.02,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Question","tickfont":{"size":14},"titlefont":{"size":16.8},"range":[-1,1],"tickformat":"%"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Response","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["I and/or my team are currently <br>implementing RAP","I feel confident implementing RAP in <br>my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I think it is important to implement <br>RAP in my work","I understand what the key components <br>of the RAP methodology are"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false,"responsive":true},"data":[{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925],"orientation":"h","base":[-0.300904977375566,-0.494720965309201,-0.202865761689291,-0.439668174962293,-0.487179487179487,-0.521870286576169],"hoverinfo":["text","text","text","text","text","text"],"text":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Strongly disagree","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486],"orientation":"h","base":[-0.240573152337858,-0.357466063348416,-0.172699849170437,-0.33710407239819,-0.374057315233786,-0.361990950226244],"hoverinfo":["text","text","text","text","text","text"],"text":[0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486],"marker":{"color":["#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Disagree","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517],"orientation":"h","base":[-0.0641025641025641,-0.105580693815988,-0.100301659125189,-0.171191553544495,-0.111613876319759,-0.111613876319759],"hoverinfo":["text","text","text","text","text","text"],"text":[0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Neutral","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116],"orientation":"h","base":[0.064102564102564,0.105580693815988,0.100301659125189,0.171191553544495,0.111613876319759,0.111613876319759],"hoverinfo":["text","text","text","text","text","text"],"text":[0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116],"marker":{"color":["#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90"],"line":{"color":"rgba(231,138,195,1)"}},"type":"bar","name":"Agree","textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"orientation":"h","base":[0.519607843137255,0.381598793363499,0.492458521870287,0.436651583710407,0.398190045248869,0.345399698340875],"hoverinfo":["text","text","text","text","text","text"],"text":[0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(166,216,84,1)"}},"type":"bar","name":"Strongly agree","textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-9cac35bb81e2ee727708" style="width:672px;height:700px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9cac35bb81e2ee727708">{"x":{"visdat":{"100c5ccedb1":["function () ","plotlyVisDat"]},"cur_data":"100c5ccedb1","attrs":{"100c5ccedb1":{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP","I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925,0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486,0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517,0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116,0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"orientation":"h","base":[-0.300904977375566,-0.494720965309201,-0.202865761689291,-0.439668174962293,-0.487179487179487,-0.521870286576169,-0.240573152337858,-0.357466063348416,-0.172699849170437,-0.33710407239819,-0.374057315233786,-0.361990950226244,-0.0641025641025641,-0.105580693815988,-0.100301659125189,-0.171191553544495,-0.111613876319759,-0.111613876319759,0.064102564102564,0.105580693815988,0.100301659125189,0.171191553544495,0.111613876319759,0.111613876319759,0.519607843137255,0.381598793363499,0.492458521870287,0.436651583710407,0.398190045248869,0.345399698340875],"hoverinfo":"text","text":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925,0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486,0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517,0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116,0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"]},"color":["Strongly disagree","Strongly disagree","Strongly disagree","Strongly disagree","Strongly disagree","Strongly disagree","Disagree","Disagree","Disagree","Disagree","Disagree","Disagree","Neutral","Neutral","Neutral","Neutral","Neutral","Neutral","Agree","Agree","Agree","Agree","Agree","Agree","Strongly agree","Strongly agree","Strongly agree","Strongly agree","Strongly agree","Strongly agree"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"height":700,"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","x":0.5,"y":-0.15,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Frequency","tickfont":{"size":14},"titlefont":{"size":16.8},"range":[-1,1],"tickformat":"%"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Question","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["I and/or my team are currently <br>implementing RAP","I feel confident implementing RAP in <br>my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I think it is important to implement <br>RAP in my work","I understand what the key components <br>of the RAP methodology are"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925],"orientation":"h","base":[-0.300904977375566,-0.494720965309201,-0.202865761689291,-0.439668174962293,-0.487179487179487,-0.521870286576169],"hoverinfo":["text","text","text","text","text","text"],"text":[0.0603318250377074,0.137254901960784,0.0301659125188537,0.102564102564103,0.113122171945701,0.159879336349925],"marker":{"color":["#206095","#206095","#206095","#206095","#206095","#206095"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Strongly disagree","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486],"orientation":"h","base":[-0.240573152337858,-0.357466063348416,-0.172699849170437,-0.33710407239819,-0.374057315233786,-0.361990950226244],"hoverinfo":["text","text","text","text","text","text"],"text":[0.176470588235294,0.251885369532428,0.0723981900452489,0.165912518853695,0.262443438914027,0.250377073906486],"marker":{"color":["#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA","#8FAFCA"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Disagree","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517],"orientation":"h","base":[-0.0641025641025641,-0.105580693815988,-0.100301659125189,-0.171191553544495,-0.111613876319759,-0.111613876319759],"hoverinfo":["text","text","text","text","text","text"],"text":[0.128205128205128,0.211161387631976,0.200603318250377,0.342383107088989,0.223227752639517,0.223227752639517],"marker":{"color":["#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8","#C8C8C8"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Neutral","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116],"orientation":"h","base":[0.064102564102564,0.105580693815988,0.100301659125189,0.171191553544495,0.111613876319759,0.111613876319759],"hoverinfo":["text","text","text","text","text","text"],"text":[0.455505279034691,0.276018099547511,0.392156862745098,0.265460030165913,0.28657616892911,0.233785822021116],"marker":{"color":["#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90","#F0DD90"],"line":{"color":"rgba(231,138,195,1)"}},"type":"bar","name":"Agree","textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["I understand what the key components <br>of the RAP methodology are","I feel confident implementing RAP in <br>my work","I think it is important to implement <br>RAP in my work","I feel supported to implement RAP in <br>my work","I know where to find resources to help<br> me implement RAP","I and/or my team are currently <br>implementing RAP"],"x":[0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"orientation":"h","base":[0.519607843137255,0.381598793363499,0.492458521870287,0.436651583710407,0.398190045248869,0.345399698340875],"hoverinfo":["text","text","text","text","text","text"],"text":[0.179487179487179,0.1236802413273,0.304675716440422,0.1236802413273,0.114630467571644,0.132730015082956],"marker":{"color":["#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22","#E2BC22"],"line":{"color":"rgba(166,216,84,1)"}},"type":"bar","name":"Strongly agree","textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="rap-opinions-table">
-<table style="width:100%;">
-<colgroup>
-<col width="50%" />
-<col width="14%" />
-<col width="7%" />
-<col width="7%" />
-<col width="7%" />
-<col width="11%" />
-</colgroup>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
-<tr class="header">
-<th align="left">Question</th>
-<th align="right">Strongly disagree</th>
-<th align="right">Disagree</th>
-<th align="right">Neutral</th>
-<th align="right">Agree</th>
-<th align="right">Strongly agree</th>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="5">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Percent
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Question
+</th>
+<th style="text-align:right;">
+Strongly disagree
+</th>
+<th style="text-align:right;">
+Disagree
+</th>
+<th style="text-align:right;">
+Neutral
+</th>
+<th style="text-align:right;">
+Agree
+</th>
+<th style="text-align:right;">
+Strongly agree
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">I understand what the key components of the RAP methodology are</td>
-<td align="right">0.0603318</td>
-<td align="right">0.1764706</td>
-<td align="right">0.1282051</td>
-<td align="right">0.4555053</td>
-<td align="right">0.1794872</td>
+<tr>
+<td style="text-align:left;">
+I understand what the key components of the RAP methodology are
+</td>
+<td style="text-align:right;">
+6.0
+</td>
+<td style="text-align:right;">
+17.6
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+45.6
+</td>
+<td style="text-align:right;">
+17.9
+</td>
 </tr>
-<tr class="even">
-<td align="left">I feel confident implementing RAP in my work</td>
-<td align="right">0.1372549</td>
-<td align="right">0.2518854</td>
-<td align="right">0.2111614</td>
-<td align="right">0.2760181</td>
-<td align="right">0.1236802</td>
+<tr>
+<td style="text-align:left;">
+I feel confident implementing RAP in my work
+</td>
+<td style="text-align:right;">
+13.7
+</td>
+<td style="text-align:right;">
+25.2
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+<td style="text-align:right;">
+27.6
+</td>
+<td style="text-align:right;">
+12.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">I think it is important to implement RAP in my work</td>
-<td align="right">0.0301659</td>
-<td align="right">0.0723982</td>
-<td align="right">0.2006033</td>
-<td align="right">0.3921569</td>
-<td align="right">0.3046757</td>
+<tr>
+<td style="text-align:left;">
+I think it is important to implement RAP in my work
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+7.2
+</td>
+<td style="text-align:right;">
+20.1
+</td>
+<td style="text-align:right;">
+39.2
+</td>
+<td style="text-align:right;">
+30.5
+</td>
 </tr>
-<tr class="even">
-<td align="left">I feel supported to implement RAP in my work</td>
-<td align="right">0.1025641</td>
-<td align="right">0.1659125</td>
-<td align="right">0.3423831</td>
-<td align="right">0.2654600</td>
-<td align="right">0.1236802</td>
+<tr>
+<td style="text-align:left;">
+I feel supported to implement RAP in my work
+</td>
+<td style="text-align:right;">
+10.3
+</td>
+<td style="text-align:right;">
+16.6
+</td>
+<td style="text-align:right;">
+34.2
+</td>
+<td style="text-align:right;">
+26.5
+</td>
+<td style="text-align:right;">
+12.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">I know where to find resources to help me implement RAP</td>
-<td align="right">0.1131222</td>
-<td align="right">0.2624434</td>
-<td align="right">0.2232278</td>
-<td align="right">0.2865762</td>
-<td align="right">0.1146305</td>
+<tr>
+<td style="text-align:left;">
+I know where to find resources to help me implement RAP
+</td>
+<td style="text-align:right;">
+11.3
+</td>
+<td style="text-align:right;">
+26.2
+</td>
+<td style="text-align:right;">
+22.3
+</td>
+<td style="text-align:right;">
+28.7
+</td>
+<td style="text-align:right;">
+11.5
+</td>
 </tr>
-<tr class="even">
-<td align="left">I and/or my team are currently implementing RAP</td>
-<td align="right">0.1598793</td>
-<td align="right">0.2503771</td>
-<td align="right">0.2232278</td>
-<td align="right">0.2337858</td>
-<td align="right">0.1327300</td>
+<tr>
+<td style="text-align:left;">
+I and/or my team are currently implementing RAP
+</td>
+<td style="text-align:right;">
+16.0
+</td>
+<td style="text-align:right;">
+25.0
+</td>
+<td style="text-align:right;">
+22.3
+</td>
+<td style="text-align:right;">
+23.4
+</td>
+<td style="text-align:right;">
+13.3
+</td>
 </tr>
 </tbody>
 </table>

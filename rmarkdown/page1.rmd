@@ -25,7 +25,7 @@ carsurvey2::plot_freqs(freq_table, "Coding frequency", "Count", font_size = 14)
 <div id="coding-freq-table">
 ```{r echo = FALSE}
 
-knitr::kable(freq_table)
+kableExtra::kable_styling(knitr::kable(freq_table))
 
 ```
 </div>
@@ -55,7 +55,7 @@ carsurvey2::plot_stacked(knowledge, xlab = "Count", ylab = "Programming tool", f
 <div id="tools-knowledge-table">
 ```{r echo = FALSE}
 
-knitr::kable(knowledge, row.names = FALSE)
+kableExtra::kable_styling(knitr::kable(knowledge, row.names = FALSE))
 
 ```
 </div>
@@ -78,7 +78,7 @@ carsurvey2::plot_stacked(access, xlab = "Count", ylab = "Programming tool", font
 <div id="tools-access-table">
 ```{r echo = FALSE}
 
-knitr::kable(access, row.names = FALSE)
+kableExtra::kable_styling(knitr::kable(access, row.names = FALSE))
 
 ```
 </div>
@@ -105,7 +105,7 @@ carsurvey2::plot_stacked(code_tool_status, colour_scale = "scale",xlab = "Count"
 <div id="tools-status-table">
 ```{r echo = FALSE}
 
-knitr::kable(code_tool_status, row.names = FALSE)
+kableExtra::kable_styling(knitr::kable(code_tool_status, row.names = FALSE))
 
 ```
 </div>

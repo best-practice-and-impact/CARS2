@@ -7,12 +7,13 @@
 #'@param xlab X axis title
 #'@param ylab Y axis title
 #'@param font_size minimum font size for the plot (numeric).
+#'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_size = 12) {
+plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_size = 12, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -75,7 +76,8 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_si
                          orientation = "h", 
                          hoverinfo = "text",
                          text = longdata[[3]],
-                         marker = list(color = colours))
+                         marker = list(color = colours),
+                         ...)
   
   fig <- plotly::config(fig, displayModeBar = F)
   
@@ -86,6 +88,7 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_si
                         legend = list(orientation = "h",   # show entries horizontally
                                       xanchor = "center",  # use center of legend as anchor
                                       x = 0.5,
+                                      y = -0.15,
                                       traceorder = "normal",
                                       font = list(size = font_size)), 
                         xaxis = x, 

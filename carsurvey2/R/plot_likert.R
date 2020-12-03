@@ -7,12 +7,13 @@
 #'@param xlab X axis title
 #'@param ylab Y axis title
 #'@param font_size minimum font size for the plot (numeric).
+#'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
+plot_likert <- function(table, mid, xlab, ylab, font_size = 12, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -81,10 +82,10 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
                          base = bases,
                          hoverinfo = "text",
                          text = longdata[[3]],
-                         marker = list(color = colours))
+                         marker = list(color = colours),
+                         ...)
   
   fig <- plotly::config(fig, displayModeBar = F)
-  
   
   fig <- plotly::layout(fig,  
                         barmode = "stack", 
@@ -92,6 +93,7 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12) {
                         legend = list(orientation = "h",   # show entries horizontally
                                       xanchor = "center",  # use center of legend as anchor
                                       x = 0.5,
+                                      y = -0.15,
                                       traceorder = "normal",
                                       font = list(size = font_size)), 
                         xaxis = x, 

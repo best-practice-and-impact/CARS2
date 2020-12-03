@@ -18,7 +18,7 @@ carsurvey2::insert_table_toggle("rap-comps")
 <div id="rap-comps-chart">
 ```{r echo=FALSE}
 
-carsurvey2::plot_grouped(components, "RAP component", "Count", orientation = "h")
+carsurvey2::plot_grouped(components, "RAP component", "Count", orientation = "h", font_size = 14)
 
 
 ```
@@ -27,7 +27,7 @@ carsurvey2::plot_grouped(components, "RAP component", "Count", orientation = "h"
 <div id="rap-comps-table">
 ```{r echo = FALSE}
 
-knitr::kable(components, row.names = FALSE)
+kableExtra::kable_styling(knitr::kable(components, row.names = FALSE))
 
 ```
 </div>
@@ -55,7 +55,7 @@ carsurvey2::plot_freqs(basic_freqs, "Basic RAP score", "Count", bar_colour = bar
 <div id="basic_score-table">
 ```{r echo = FALSE}
 
-knitr::kable(basic_freqs, row.names = FALSE)
+kableExtra::kable_styling(knitr::kable(basic_freqs, row.names = FALSE))
 
 ```
 
@@ -76,6 +76,6 @@ carsurvey2::plot_freqs(advanced_freqs, "Advanced RAP score", "Count", font_size 
 <div id="advanced_score-table">
 ```{r echo = FALSE}
 
-knitr::kable(advanced_freqs, row.names = FALSE)
+kableExtra::kable_styling(knitr::kable(advanced_freqs, row.names = FALSE))
 
 ```

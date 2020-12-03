@@ -20,7 +20,7 @@ carsurvey2::insert_table_toggle("code-prac")
 <div id="code-prac-chart">
 ```{r echo=FALSE}
 
-carsurvey2::plot_likert(code_prac_chart, 4, "Frequency", "Question", font_size = 14)
+carsurvey2::plot_likert(code_prac_chart, 4, "Frequency", "Question", font_size = 14, height = 700)
 
 
 ```
@@ -28,8 +28,7 @@ carsurvey2::plot_likert(code_prac_chart, 4, "Frequency", "Question", font_size =
 
 <div id="code-prac-table">
 ```{r echo = FALSE}
-
-knitr::kable(code_prac, row.names = FALSE)
+kableExtra::kable_styling(carsurvey2::output_likert_table(code_prac))
 
 ```
 
@@ -42,7 +41,7 @@ carsurvey2::insert_table_toggle("doc")
 <div id="doc-chart">
 ```{r echo=FALSE}
 
-carsurvey2::plot_likert(doc_chart, 4, "Frequency", "Question", font_size = 14)
+carsurvey2::plot_likert(doc_chart, 4, "Frequency", "Question", font_size = 14, height = 700)
 
 
 ```
@@ -51,6 +50,6 @@ carsurvey2::plot_likert(doc_chart, 4, "Frequency", "Question", font_size = 14)
 <div id="doc-table">
 ```{r echo = FALSE}
 
-knitr::kable(doc, row.names = FALSE)
+kableExtra::kable_styling(carsurvey2::output_likert_table(doc))
 
 ```

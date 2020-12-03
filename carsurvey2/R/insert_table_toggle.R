@@ -26,17 +26,13 @@ insert_table_toggle <- function(output_name) {
   table_name <- paste0(output_name, "-table")
   
   toggle_chart_button <- paste0(
-    '<a href="#', 
-    table_button_name, 
-    '" role="button" class="toggle-button" id="', 
+    '<a role="button" class="toggle-button" id="', 
     chart_button_name, 
     '" onclick="show_chart(\'', output_name,'\')"> Show chart </a>'
   )
   
   toggle_table_button <- paste0(
-    '<a href="#', 
-    chart_button_name, 
-    '" role="button" class="toggle-button" id="', 
+    '<a role="button" class="toggle-button" id="', 
     table_button_name, 
     '" onclick="show_table(\'', output_name,'\')"> Show table </a>'
   )

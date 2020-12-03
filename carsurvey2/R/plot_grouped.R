@@ -7,12 +7,13 @@
 #'@param ylab Y axis title
 #'@param font_size minimum font size for the plot (numeric).
 #'@param orientation plot orientation ("h" = horizontal, "v" = verical). Vertical by default.
+#'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
+plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v", ...) {
   
   # Set default bar colours
   c <- (get_2colour_scale(length(unique(table[[2]]))))
@@ -62,7 +63,8 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
       y = table[[3]],
       color = table[[2]],
       marker = list(color = colours),
-      type = "bar"
+      type = "bar",
+      ...
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
@@ -76,7 +78,8 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
       y = table[[1]],
       color = table[[2]],
       marker = list(color = colours),
-      type = "bar"
+      type = "bar",
+      ...
     )
     
     fig <- plotly::config(fig, displayModeBar = F)

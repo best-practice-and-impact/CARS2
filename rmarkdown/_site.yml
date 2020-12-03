@@ -4,7 +4,7 @@ output:
   html_document:
     css: "style.css"
 navbar:
-  title: "Coding in Analysis and Research Survey (CARS)"
+  title: "Coding in Analysis and Research Survey"
   left:
     - text: "Home"
       href: index.html

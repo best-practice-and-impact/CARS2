@@ -13,6 +13,7 @@ data_2question_6answer <- data.frame(questions = c("Q1", "Q2"),
                                      strongy_agree = c(.3, .1),
                                      not_applicable = c(.2, .1))
 
-test_that("function returns plotly html widget", {
-  expect_identical(class(output_likert_table(data_2question_3answer,)), c("kableExtra", "knitr_kable"))
+test_that("function returns plotly kableExtra table", {
+  expect_identical(class(output_likert_table(data_2question_3answer)), c("kableExtra", "knitr_kable"))
+  expect_identical(class(output_likert_table(data_2question_6answer)), c("kableExtra", "knitr_kable"))
 })

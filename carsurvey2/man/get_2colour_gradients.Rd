@@ -6,8 +6,8 @@
 \usage{
 get_2colour_gradients(
   n,
-  colour1 = c(32, 96, 149),
-  colour2 = c(226, 188, 34),
+  colour1 = c(0, 69, 86),
+  colour2 = c(255, 105, 0),
   mid,
   neutral_mid = TRUE
 )
@@ -30,6 +30,6 @@ RGB colours
 \description{
 Creates a list of  colour names (RGB). Generates a palate using two colour gradients and an optional grey neutral colour.
 Each half of the palette contains different shades of the colour submitted to the function. These are useful where two colour
-scales in the same palette are needed, e.g. likert type plots. By default, the main colours are shades of blue and yellow
-used in ONS outputs.
+scales in the same palette are needed, e.g. likert type plots. By default, the main colours are shades of blue and orange
+used in the analysis function colour scheme.
 }

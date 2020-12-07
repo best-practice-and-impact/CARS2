@@ -7,13 +7,14 @@
 #'@param xlab X axis title
 #'@param ylab Y axis title
 #'@param font_size minimum font size for the plot (numeric).
-#'@param ... additional plotly_ly arguments
+#'@param neutral_mid whether the middle of the scale should be a neutral category (logical). TRUE by default
+#'@param ... additional plot_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, font_size = 12, ...) {
+plot_likert <- function(table, mid, xlab, ylab, font_size = 12, neutral_mid = TRUE, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -37,8 +38,15 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12, ...) {
     stop("Unexpected input - mid is not numeric.")  
   } else if (mid < 2) {
     stop("Unexpected inout - mid is smaller than 2.")
-  } else if (mid > ncol(table)-2) {
+  } else if (neutral_mid & mid > ncol(table)-2) {
     stop("Unexpected input - mid >= the number of answers.")
+  } else if (neutral_mid & mid > ncol(table)-1) {
+    stop("Unexpected input - mid >= the number of answers.")
+  }
+  
+  # Validate neutral mid
+  if (!is.logical(neutral_mid)) {
+    stop("Unexpected input - mid is not logical (TRUE/FALSE)")
   }
   
   x <- list(
@@ -64,15 +72,30 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12, ...) {
   bases <- utils::head(bases, -nrow(table))
   bases <- c(rep(0, nrow(table)), bases)
   
-  negative_bases <- rowSums(table[c(2:mid)]) + table[mid + 1]/2
+  if (neutral_mid) {
+    negative_bases <- rowSums(table[c(2:mid)]) + table[mid + 1]/2  
+  } else {
+    negative_bases <- rowSums(table[c(2:mid)])
+  }
+  
   negative_bases <- unname(unlist(negative_bases))
   bases <- bases - negative_bases
   
   # Get bar colours
-  colours <- get_2colour_gradients(ncol(table)-1, mid = mid)
+  if (neutral_mid) {
+    colours <- get_2colour_gradients(ncol(table)-1, mid = mid, neutral_mid = neutral_mid)
+  } else {
+    colours <- get_2colour_gradients(ncol(table)-1, mid = mid-1, neutral_mid = neutral_mid)
+  }
+  
   colours <- lapply(colours, function(x) grDevices::rgb(x[1], x[2], x[3], max = 255))
   colours <- lapply(colours, function(x) rep(x, nrow(table)))
   colours <- unlist(colours)
+  
+  hovertext <- paste0(
+    paste0(longdata[[2]], "<br>"), 
+    paste0(round(abs(longdata[[3]]) * 100, 1), "%")
+  )
   
   fig <- plotly::plot_ly(y = longdata[[1]], 
                          x=longdata[[3]], 
@@ -81,7 +104,7 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12, ...) {
                          orientation = "h", 
                          base = bases,
                          hoverinfo = "text",
-                         text = longdata[[3]],
+                         text = hovertext,
                          marker = list(color = colours),
                          ...)
   
@@ -100,6 +123,15 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12, ...) {
                         yaxis = y, 
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
   
+  # Disable interactive legend
+  
+  id <- paste0("plot", stringi::stri_rand_strings(1, 10))
+  javascript <- paste0(id, ".on('plotly_legenddoubleclick', function(d, i) {return false});",
+                      id, ".on('plotly_legendclick', function(d, i) {return false});")
+  
+  fig$elementId <- id
+  fig <- htmlwidgets::prependContent(fig, htmlwidgets::onStaticRenderComplete(javascript), data=list(''))
+
   return(fig)
   
 }

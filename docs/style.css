@@ -66,6 +66,7 @@ p > a:focus {
   color: black !important;
 }
 
+/* Use to compensate for navigation bar overpill
 
 body {
   padding-top: 45px !important;
@@ -85,3 +86,5 @@ body {
     padding-top: 0px !important;
   }
 }
+
+*/

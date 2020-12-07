@@ -8,11 +8,5 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Coding frequency and tools"
+    - text: "Summary statistics"
       href: page1.html
-    - text: "RAP knowledge and opinions"
-      href: page2.html
-    - text: "RAP scores"
-      href: page3.html
-    - text: "Coding practices"
-      href: page4.html

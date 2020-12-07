@@ -41,16 +41,16 @@ colnames(rap_knowledge) <- c("RAP knowledge", "Count")
 rap_knowledge_chart <- rap_knowledge
 rap_knowledge[1] <- c("Have not heard of RAP",
                       "Heard of RAP, have not heard of RAP champions",
-                      "Heard of RAP champions, no champion in department",
                       "Heard of RAP, does not know department champion",
+                      "Heard of RAP champions, no champion in department",
                       "Knows department RAP champion")
 
 rap_knowledge_chart[1] <- c("Have not heard of RAP",
                             "Heard of RAP, have not <br>heard of RAP champions",
-                            "Heard of RAP champions, <br>no champion in department",
                             "Heard of RAP, does not <br>know department champion",
+                            "Heard of RAP champions, <br>no champion in department",
                             "Knows department RAP <br>champion")
-rap_knowledge_chart$`RAP knowledge` <- as.factor(rap_knowledge_chart$`RAP knowledge`)
+rap_knowledge_chart$`RAP knowledge` <- factor(rap_knowledge_chart$`RAP knowledge`, levels = rap_knowledge_chart$`RAP knowledge`)
 
 know_rap_data <- data[data$RAP_heard_of == "Yes", ]
 know_rap_data <- dplyr::select(know_rap_data, RAP_understand:RAP_using)
@@ -122,7 +122,6 @@ colnames(basic_freqs) <- c("Basic RAP score", "Count")
 
 advanced_freqs <- data.frame(table(data$advanced_rap_score))
 colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
-carsurvey2::plot_freqs(advanced_freqs, "Basic RAP score", "Count", font_size = 14)
 
 
 # Coding practices
@@ -165,7 +164,6 @@ code_prac_chart$Question <- dplyr::recode(code_prac$Question,
                                           "I unit test my code" = "I unit test my code",
                                           "I write code to automatically quality assure data" = "I write code to automatically <br>quality assure data",
                                           "My team open sources its code" = "My team open sources its <br>code")
-
 # Doc
 
 doc_data <- data[grepl("doc_", colnames(data))]
@@ -197,4 +195,3 @@ doc_chart$Question <- dplyr::recode(doc_chart$Question,
                                     "Analytical Quality Assurance (AQA) logs" = "Analytical Quality <br>Assurance (AQA) logs",
                                     "Data or assumptions registers" = "Data or assumptions <br>registers",
                                     "Documentation for each function or class" ="Documentation for each <br>function or class")
-carsurvey2::plot_likert(doc_chart, 4, "Frequency", "Question", font_size = 14)

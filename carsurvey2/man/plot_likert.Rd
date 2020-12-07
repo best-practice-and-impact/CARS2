@@ -4,7 +4,7 @@
 \alias{plot_likert}
 \title{Plot likert graph}
 \usage{
-plot_likert(table, mid, xlab, ylab, font_size = 12, neutral_mid = TRUE, ...)
+plot_likert(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, ...)
 }
 \arguments{
 \item{table}{Frequency table for likert quesitons (data frame). 4+ columns - question names in column 1 with answer options in subsequent columns. Frequencies should proportions, between 0 and 1.}
@@ -14,6 +14,8 @@ plot_likert(table, mid, xlab, ylab, font_size = 12, neutral_mid = TRUE, ...)
 \item{xlab}{X axis title}
 
 \item{ylab}{Y axis title}
+
+\item{n}{sample size}
 
 \item{font_size}{minimum font size for the plot (numeric).}
 

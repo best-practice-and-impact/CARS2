@@ -63,12 +63,7 @@ get_2colour_gradients <- function(n, colour1 = c(0, 69, 86), colour2 = c(255, 10
     c2_first <- c2_gradient[1]
     c2_brightness <- (max(c2_first[[1]]) + min (c2_first[[1]])) / 2
     
-    # Ensure sufficient contrast between the neutral colour and colours 1 and 2
-    if (abs(c1_brightness - c2_brightness) >= 60) {
-      mid_brightness <- mean(c(c1_brightness, c2_brightness))
-    } else {
-      mid_brightness <- 200
-    }
+    mid_brightness <- 200
     
     mid_colour <- c(mid_brightness, mid_brightness, mid_brightness)
     colours <- c(c1_gradient, list(mid_colour), c2_gradient)

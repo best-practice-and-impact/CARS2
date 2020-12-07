@@ -9,6 +9,7 @@ plot_freqs(
   xlab,
   ylab,
   bar_colour,
+  n,
   font_size = 12,
   orientation = "v",
   ...
@@ -22,6 +23,8 @@ plot_freqs(
 \item{ylab}{Y axis title}
 
 \item{bar_colour}{Colour name. Defaults to blue (see get_gradient())}
+
+\item{n}{sample size}
 
 \item{font_size}{minimum font size for the plot (numeric).}
 

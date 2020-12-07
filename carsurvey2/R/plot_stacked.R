@@ -6,6 +6,7 @@
 #'@param colour_scale type of colour scale ("gradient", "scale" or "2gradients"). See get_gradient(), get_2colour_scale() and get_2colour_gradients(). 
 #'@param xlab X axis title
 #'@param ylab Y axis title
+#'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
 #'@param ... additional plotly_ly arguments
 #'
@@ -13,7 +14,7 @@
 #'
 #'@export
 
-plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_size = 12, ...) {
+plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font_size = 12, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -27,15 +28,20 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_si
     stop("Unexpected input - labels should be single character strings.")
   }
   
+  # Validate n
+  if (missing(n)) {
+    n <- sum(table[[3]])
+  } else if ((!is.numeric(n) & !is.character(n)) | length(n) > 1) {
+    stop("Unexpected input - n is not a single number or string")
+  }
+  
   # Validate font size
   if (!is.numeric(font_size)) {
     stop("Unexpected input - font_size is not numeric.")
   }
   
   # Validate colour_scale
-  if (!is.character(colour_scale)) {
-    stop("Unexpected input - mid is not numeric.")  
-  } else if (length(colour_scale) > 1 | !colour_scale %in% c("gradient", "scale", "2gradients")) {
+  if (length(colour_scale) > 1 | !colour_scale %in% c("gradient", "scale", "2gradients")) {
     stop("Unexpected input - colour_scale should be set to 'gradient', 'scale' or '2gradients'.")
   }
     
@@ -87,13 +93,19 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, font_si
                         clickmode = "none",
                         legend = list(orientation = "h",   # show entries horizontally
                                       xanchor = "center",  # use center of legend as anchor
+                                      yanchor = "bottom",
                                       x = 0.5,
-                                      y = -0.15,
+                                      y = 1,
                                       traceorder = "normal",
-                                      font = list(size = font_size)), 
+                                      font = list(size = font_size)),
                         xaxis = x, 
                         yaxis = y, 
-                        hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
+                        hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
+                        annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                           showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                           xref='paper', yref='paper', font=list(size = font_size)
+                                           )
+  )
   
   return(fig)
   

@@ -6,6 +6,7 @@
 #'@param xlab X axis title
 #'@param ylab Y axis title
 #'@param bar_colour Colour name. Defaults to blue (see get_gradient())
+#'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
 #'@param orientation plot orientation ("h" = horizontal, "v" = verical). Vertical by default
 #'@param ... additional plotly_ly arguments
@@ -14,7 +15,7 @@
 #'
 #'@export
 
-plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientation = "v", ...) {
+plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orientation = "v", ...) {
   
   # Set default bar colour
   if (missing(bar_colour)) {
@@ -36,6 +37,11 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
   # Validate labels
   if (!is.character(xlab) | !is.character(ylab) | length(xlab) > 1 | length(ylab) > 1) {
     stop("Unexpected input - labels should be single character strings.")
+  }
+  
+  # Validate n
+  if ((!is.numeric(n) & !is.character(n)) | length(n) > 1) {
+    stop("Unexpected input - n is not a single number or string")
   }
   
   # Validate font size
@@ -73,7 +79,12 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
     fig <- plotly::layout(fig,  
                           xaxis = x, 
                           yaxis = y, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
+                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
+                          margin = list(b = 100),
+                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                             xref='paper', yref='paper', font=list(size = font_size))
+    )
   } else if (orientation == "h") {
     fig <- plotly::plot_ly(
       x = table[[2]],
@@ -88,7 +99,12 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, font_size = 12, orientatio
                           orientation = "h",
                           xaxis = y, 
                           yaxis = x, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
+                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
+                          margin = list(b = 100),
+                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                             xref='paper', yref='paper', font=list(size = font_size))
+    )
   } 
 
   

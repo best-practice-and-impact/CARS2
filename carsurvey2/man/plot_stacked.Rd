@@ -9,6 +9,7 @@ plot_stacked(
   colour_scale = "2gradients",
   xlab,
   ylab,
+  n,
   font_size = 12,
   ...
 )
@@ -21,6 +22,8 @@ plot_stacked(
 \item{xlab}{X axis title}
 
 \item{ylab}{Y axis title}
+
+\item{n}{sample size}
 
 \item{font_size}{minimum font size for the plot (numeric).}
 

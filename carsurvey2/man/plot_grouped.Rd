@@ -4,7 +4,7 @@
 \alias{plot_grouped}
 \title{Plot grouped frequency graph}
 \usage{
-plot_grouped(table, xlab, ylab, font_size = 12, orientation = "v", ...)
+plot_grouped(table, xlab, ylab, n, font_size = 12, orientation = "v", ...)
 }
 \arguments{
 \item{table}{Frequency table (data frame). 3 columns - cateogry names, groups and frequencies.}
@@ -12,6 +12,8 @@ plot_grouped(table, xlab, ylab, font_size = 12, orientation = "v", ...)
 \item{xlab}{X axis title}
 
 \item{ylab}{Y axis title}
+
+\item{n}{sample size}
 
 \item{font_size}{minimum font size for the plot (numeric).}
 

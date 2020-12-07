@@ -6,6 +6,7 @@
 #'@param mid the mid-point of the scale. should be higher than 2 and lower than the number of answers.
 #'@param xlab X axis title
 #'@param ylab Y axis title
+#'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
 #'@param neutral_mid whether the middle of the scale should be a neutral category (logical). TRUE by default
 #'@param ... additional plot_ly arguments
@@ -14,7 +15,7 @@
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, font_size = 12, neutral_mid = TRUE, ...) {
+plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -26,6 +27,11 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12, neutral_mid = TR
   # Validate labels
   if (!is.character(xlab) | !is.character(ylab) | length(xlab) > 1 | length(ylab) > 1) {
     stop("Unexpected input - labels should be single character strings.")
+  }
+  
+  # Validate n
+  if ((!is.numeric(n) & !is.character(n)) | length(n) > 1) {
+    stop("Unexpected input - n is not a single number or string")
   }
   
   # Validate font size
@@ -115,10 +121,15 @@ plot_likert <- function(table, mid, xlab, ylab, font_size = 12, neutral_mid = TR
                         clickmode = "none",
                         legend = list(orientation = "h",   # show entries horizontally
                                       xanchor = "center",  # use center of legend as anchor
+                                      yanchor = "bottom",
                                       x = 0.5,
-                                      y = -0.15,
+                                      y = 1,
                                       traceorder = "normal",
-                                      font = list(size = font_size)), 
+                                      font = list(size = font_size)),
+                        margin = list(b = 100),
+                        annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                          showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                          xref='paper', yref='paper', font=list(size = font_size)),
                         xaxis = x, 
                         yaxis = y, 
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)))

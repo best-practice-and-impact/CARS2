@@ -29,9 +29,7 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
   }
   
   # Validate n
-  if (missing(n)) {
-    n <- sum(table[[3]])
-  } else if ((!is.numeric(n) & !is.character(n)) | length(n) > 1) {
+  if ((!is.numeric(n) & !is.character(n)) | length(n) > 1) {
     stop("Unexpected input - n is not a single number or string")
   }
   
@@ -98,6 +96,7 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
                                       y = 1,
                                       traceorder = "normal",
                                       font = list(size = font_size)),
+                        margin = list(b = 100),
                         xaxis = x, 
                         yaxis = y, 
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)),

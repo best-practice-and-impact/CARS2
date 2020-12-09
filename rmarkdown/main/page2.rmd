@@ -1,0 +1,16 @@
+---
+title: "Department profiles"
+---
+
+Below are links to department-specific profiles. These contain the outputs present on the summary statistics page, filtered by department. Only departments with 20 or more respondents are included.
+
+``` {r echo = FALSE}
+
+alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])
+urls <- sapply(alphabetical, URLencode)
+links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")
+html <- paste(links, collapse="\n\n")
+html <- paste0("<ol>", html, "</ol>")
+knitr::raw_html(html)
+
+```

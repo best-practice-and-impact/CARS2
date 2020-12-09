@@ -23,7 +23,8 @@ Imports:
 	plotly,
 	reshape2,
 	kableExtra,
-	stringi
+	stringi,
+	htmlwidgets
 Suggests: 
 	testthat (>= 2.1.0)
 Encoding: UTF-8

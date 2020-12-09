@@ -46,6 +46,10 @@ body {
   color: black;
 }
 
+.tocify-item.list-group-item.active{
+  background-color: #004556 !important;
+}
+
 .toggle-button {
   text-decoration: underline; 
 }
@@ -66,25 +70,26 @@ p > a:focus {
   color: black !important;
 }
 
-/* Use to compensate for navigation bar overpill
+/* Use to compensate for navigation bar overpill */
 
 body {
   padding-top: 45px !important;
 }
-@media (max-width: 1199px) {
+@media (max-width: 991px) {
   body {
     padding-top: 100px !important;
   }
 }
+/*
 @media (max-width: 991px) {
   body {
     padding-top: 150px !important;
   }
 }
+*/
 @media (max-width: 767px) {
   body {
-    padding-top: 0px !important;
+    padding-top: 50px !important;
   }
 }
 
-*/

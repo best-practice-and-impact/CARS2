@@ -10,6 +10,6 @@ data_10question_3answer <- data.frame(questions = c("Q1", "Q2", "Q3", "Q4", "Q5"
 
 
 test_that("function returns plotly html widget", {
-  expect_identical(class(plot_stacked(data_1question_3answer, xlab = "axis1", ylab = "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_stacked(data_10question_3answer, xlab = "axis1", ylab = "axis2")), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_stacked(data_1question_3answer, xlab = "axis1", ylab = "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_stacked(data_10question_3answer, xlab = "axis1", ylab = "axis2", n = 10)), c("plotly", "htmlwidget"))
 })

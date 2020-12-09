@@ -31,9 +31,9 @@ data_2question_6answer <- data.frame(questions = c("Q1", "Q2"),
                                      not_applicable = c(.2, .1))
 
 test_that("function returns plotly html widget", {
-  expect_identical(class(plot_likert(data_2question_3answer, mid = 2, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_likert(data_3question_3answer, mid = 2, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_likert(data_2question_4answer, mid = 2, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_likert(data_2question_5answer, mid = 3, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_likert(data_2question_6answer, mid = 3, "axis1", "axis2")), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_likert(data_2question_3answer, mid = 2, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_likert(data_3question_3answer, mid = 2, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_likert(data_2question_4answer, mid = 2, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_likert(data_2question_5answer, mid = 3, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_likert(data_2question_6answer, mid = 3, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
 })

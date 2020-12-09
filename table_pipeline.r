@@ -12,31 +12,40 @@ colnames(freq_table) <- c("Coding frequency", "Count")
 # Programming tools
 
 knowledge <- data[grepl("knowledge_", colnames(data))]
-knowledge <- apply(knowledge, 2, table)
+knowledge = data.frame(lapply(knowledge, function(x) factor(x, levels = c("Yes", "Don't Know", "No"))))
+knowledge <- data.frame(sapply(knowledge, table))
 knowledge <- data.frame(apply(knowledge, 1, function(x) x))
 knowledge$lang <- as.vector(stringr::str_split(rownames(knowledge), "_", simplify = TRUE)[,2])
-knowledge <- knowledge[c(4, 3, 1, 2)]
+knowledge <- knowledge[c(4, 1, 2, 3)]
 colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
 
 access <- data[grepl("available_", colnames(data))]
-access <- apply(access, 2, table)
+access = data.frame(lapply(access, function(x) factor(x, levels = c("Yes", "Don't Know", "No"))))
+access <- data.frame(sapply(access, table))
 access <- data.frame(apply(access, 1, function(x) x))
 access$lang <- as.vector(stringr::str_split(rownames(access), "_", simplify = TRUE)[,2])
-access <- access[c(4, 3, 1, 2)]
+access <- access[c(4, 1, 2, 3)]
 colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
 
 code_tool_status <- data[grepl("status_", colnames(data))]
-code_tool_status <- apply(code_tool_status, 2, table)
+code_tool_status = data.frame(lapply(code_tool_status, function(x) factor(x, levels = c("Access only", "Access and knowledge", "Knowledge only"))))
+code_tool_status <- data.frame(sapply(code_tool_status, table))
 code_tool_status <- data.frame(apply(code_tool_status, 1, function(x) x))
 code_tool_status$lang <- as.vector(stringr::str_split(rownames(code_tool_status), "_", simplify = TRUE)[,2])
-code_tool_status <- code_tool_status[c(5, 2, 1, 3)]
+code_tool_status <- code_tool_status[c(4, 1, 2, 3)]
 colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only")
 
 # RAP knowledge and opinions
 
 data$RAP_champ_known[data$RAP_heard_of == "No"] <- "Have not heard of RAP"
+data$RAP_champ_known <- factor(data$RAP_champ_known, levels = c(
+  "Have not heard of RAP",                                     
+  "I don't know what a RAP champion is",                          
+  "I know what a RAP champion is but don't know who the RAP champion in my department is",
+  "I know what a RAP champion is and there is no RAP champion in my department",
+  "I know who the RAP champion in my department is"
+))
 rap_knowledge <- data.frame(table(data$RAP_champ_known))
-rap_knowledge <- rap_knowledge[c(1, 2, 4, 3, 5), ]
 colnames(rap_knowledge) <- c("RAP knowledge", "Count")
 rap_knowledge_chart <- rap_knowledge
 rap_knowledge[1] <- c("Have not heard of RAP",
@@ -54,8 +63,12 @@ rap_knowledge_chart$`RAP knowledge` <- factor(rap_knowledge_chart$`RAP knowledge
 
 know_rap_data <- data[data$RAP_heard_of == "Yes", ]
 know_rap_data <- dplyr::select(know_rap_data, RAP_understand:RAP_using)
-rap_opinions <- data.frame(apply(know_rap_data, 2, table))
-rap_opinions <- rap_opinions[c(5, 2, 3, 1, 4), ]
+know_rap_data = data.frame(lapply(know_rap_data, function(x) factor(x, levels = c("Strongly Disagree",
+                                                                    "Disagree",
+                                                                    "Neutral",
+                                                                    "Agree",
+                                                                    "Strongly Agree"))))
+rap_opinions <- data.frame(sapply(know_rap_data, table))
 colnames(rap_opinions) <- c("I understand what the key components of the RAP methodology are",
                             "I feel confident implementing RAP in my work",
                             "I think it is important to implement RAP in my work",
@@ -128,17 +141,23 @@ colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
 
 code_prac_data <- data[grepl("gp_", colnames(data))]
 code_prac_data <- code_prac_data[data$code_freq != "Never", ]
-code_prac <- data.frame(apply(code_prac_data, 2, table))
+code_prac_data <- data.frame(lapply(code_prac_data, function(x) factor(x, levels = c("I don't understand this question",
+                                                                          "Never",
+                                                                          "Rarely",
+                                                                          "Sometimes",
+                                                                          "Regularly",
+                                                                          "All the time"))))
+code_prac <- data.frame(sapply(code_prac_data, table))
 code_prac <- data.frame(apply(code_prac, 1, function(x) x))
 code_prac$Question <- rownames(code_prac)
-colnames(code_prac) <- c("All the time",
+code_prac <- code_prac[c(7, 1, 2, 3, 4, 5, 6)]
+colnames(code_prac) <- c("Question",
                          "I don't understand this question",
                          "Never",
                          "Rarely",
-                         "Regularly",
                          "Sometimes",
-                         "Question")
-code_prac <- code_prac[c(7, 2, 3, 4, 5, 6, 1)]
+                         "Regularly",
+                         "All the time")
 code_prac$Question <- dplyr::recode(code_prac$Question, 
                                     gp_open_source = "I use open source software when programming",
                                     gp_dir_structure = "I follow a standard directory structure when programming",
@@ -150,7 +169,8 @@ code_prac$Question <- dplyr::recode(code_prac$Question,
                                     gp_unit_test = "I unit test my code",
                                     gp_auto_QA = "I write code to automatically quality assure data",
                                     gp_team_open_source = "My team open sources its code")
-code_prac[2:7] <- code_prac[2:7] / nrow(code_prac_data)                                    
+rownames(code_prac) <- NULL
+code_prac[,c(2:7)] <- code_prac[,c(2:7)] / nrow(data.frame(code_prac_data))                                    
 
 code_prac_chart <- code_prac
 code_prac_chart$Question <- dplyr::recode(code_prac$Question, 
@@ -169,17 +189,25 @@ code_prac_chart$Question <- dplyr::recode(code_prac$Question,
 doc_data <- data[grepl("doc_", colnames(data))]
 doc_data <- doc_data[data$code_freq != "Never", ]
 doc_data <- doc_data[!colnames(doc_data) %in% c("doc_score", "function_doc_score", "doc_other")]
-doc <- data.frame(apply(doc_data, 2, table))
+doc_data <- data.frame(lapply(doc_data, function(x) factor(x, levels = c("I don't understand this question",
+                                                                         "Never",
+                                                                         "Rarely",
+                                                                         "Sometimes",
+                                                                         "Regularly",
+                                                                         "All the time"))))
+
+
+doc <- data.frame(sapply(doc_data, table))
 doc <- data.frame(apply(doc, 1, function(x) x))
 doc$Question <- rownames(doc)
-colnames(doc) <- c("All the time",
-                  "I don't understand this question",
-                  "Never",
-                  "Rarely",
-                  "Regularly",
-                  "Sometimes",
-                  "Question")
-doc <- doc[c(7, 2, 3, 4, 5, 6, 1)]
+doc <- doc[c(7, 1,2, 3, 4, 5, 6)]
+colnames(doc) <- c("Question",
+                   "I don't understand this question",
+                   "Never",
+                   "Rarely",
+                   "Sometimes",
+                   "Regularly",
+                   "All the time")
 doc$Question <- dplyr::recode(doc$Question,
                               doc_AQA_log = "Analytical Quality Assurance (AQA) logs",
                               doc_assumption_reg = "Data or assumptions registers",

@@ -42,7 +42,10 @@ rmarkdown::render_site("rmarkdown/main")
 original_data <- data
 
 for (dep in dep_list[[1]]) {
-  url <- paste0("../../docs/", dep)
+  url <- gsub(" \\(excl. agencies\\)", "", dep)
+  url <- gsub(" ", "-", url)
+  url <- gsub(",", "", url)
+  url <- paste0("../../docs/", url)
   data <- original_data[original_data$dept == dep, ]
   source("table_pipeline.R")
   rmarkdown::render("rmarkdown/deps/template.rmd", output_file = url)

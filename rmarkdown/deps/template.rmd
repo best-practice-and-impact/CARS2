@@ -1,5 +1,5 @@
 ---
-title: "Department profile: `r dep`"
+title: "DRAFT: Department profile: `r dep`"
 output:
   html_document:
     toc: true
@@ -7,6 +7,8 @@ output:
     toc_float: 
       collapsed: false
 ---
+
+*Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
 
 # Coding frequency and tools
 
@@ -223,7 +225,7 @@ kableExtra::kable_styling(knitr::kable(components, row.names = FALSE)) %>%
 
 Below are the distributions of total basic and advanced RAP scores. These are the sum of the scores for each RAP component.
 
-## Basic RAP scores:
+## Basic RAP scores
 
 ```{r echo=FALSE}
 carsurvey2::insert_table_toggle("basic_score")
@@ -248,7 +250,7 @@ kableExtra::kable_styling(knitr::kable(basic_freqs, row.names = FALSE)) %>%
 ```
 </div>
 
-## Advanced RAP scores:
+## Advanced RAP scores
 
 ```{r echo=FALSE}
 carsurvey2::insert_table_toggle("advanced_score")

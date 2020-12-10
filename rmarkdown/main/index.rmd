@@ -1,8 +1,8 @@
 ---
-title: "Home"
+title: "DRAFT::: Home"
 ---
 
-## DRAFT::: How do analysts use programming and software engineering in the UK Public Sector?
+## How do analysts use programming and software engineering in the UK Public Sector?
 
 *Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
 

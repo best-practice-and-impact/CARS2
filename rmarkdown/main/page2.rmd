@@ -6,6 +6,7 @@ title: "DRAFT::: Department profiles"
 
 Below are links to department-specific profiles. These contain the outputs present on the summary statistics page, filtered by department. Only departments with 20 or more respondents are included.
 
+<<<<<<< HEAD
 ``` {r echo = FALSE}
 
 alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])
@@ -20,6 +21,8 @@ knitr::raw_html(html)
 ```
 
 
+=======
+>>>>>>> b95240ef741fbd666db9254b286d22884a408ba4
 ## Department sample sizes
 
 ``` {r echo = FALSE}
@@ -42,7 +45,11 @@ carsurvey2::insert_table_toggle("dep-freqs")
 dep_freqs_plot <- dep_freqs
 dep_freqs_plot[1] <- stringr::str_wrap(dep_freqs_plot[[1]], width = 40)
 dep_freqs_plot[1] <- gsub("\\n", "<br>", dep_freqs_plot[[1]])
+<<<<<<< HEAD
 dep_freqs_plot <- dep_freqs_plot[rev(order(dep_freqs_plot[2])), ]
+=======
+dep_freqs_plot <- dep_freqs_plot[rev(order(dep_freqs_plot[1])), ]
+>>>>>>> b95240ef741fbd666db9254b286d22884a408ba4
 dep_freqs_plot[1] <- factor(dep_freqs_plot[[1]], levels = dep_freqs_plot[[1]])
 carsurvey2::plot_freqs(dep_freqs_plot, "Department", "Sample size", n = samples$all, font_size = 14, orientation = "h", height = 1000)
 
@@ -57,3 +64,19 @@ kableExtra::kable_styling(knitr::kable(dep_freqs_plot, row.names = FALSE)) %>%
 
 ```
 </div>
+<<<<<<< HEAD
+=======
+
+``` {r echo = FALSE}
+
+alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])
+urls <- gsub(" \\(excl. agencies\\)", "", alphabetical)
+urls <- gsub(" ", "-", urls)
+urls <- gsub(",", "", urls)
+links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")
+html <- paste(links, collapse="\n\n")
+html <- paste0("<ol>", html, "</ol>")
+knitr::raw_html(html)
+
+```
+>>>>>>> b95240ef741fbd666db9254b286d22884a408ba4

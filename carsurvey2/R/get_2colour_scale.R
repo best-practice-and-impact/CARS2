@@ -1,7 +1,7 @@
 #' Create 2 colour scale palette
 #'
 #' Creates a list of  colour names (RGB). Generates a scale between two colours. By default these are the
-#' shades of yellow and blue used in outputs on the ONS website.
+#' shades of orange and blue used in the analysis function colour scheme.
 #'
 #' @param n the number of colours needed
 #' @param colour1 the first colour in the scale - a numeric vector representing red, green and blue (max 255)
@@ -11,7 +11,7 @@
 #'
 #' @export
 
-get_2colour_scale <- function(n, colour1 = c(32, 96, 149), colour2 = c(226, 188, 34)) {
+get_2colour_scale <- function(n, colour1 = c(0, 69, 86), colour2 = c(255, 105, 0)) {
   
   if (!is.numeric(n) | length(n) > 1) {
     stop("n is not a numeric value")

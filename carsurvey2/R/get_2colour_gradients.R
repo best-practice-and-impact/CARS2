@@ -2,8 +2,8 @@
 #'
 #' Creates a list of  colour names (RGB). Generates a palate using two colour gradients and an optional grey neutral colour.
 #' Each half of the palette contains different shades of the colour submitted to the function. These are useful where two colour
-#' scales in the same palette are needed, e.g. likert type plots. By default, the main colours are shades of blue and yellow
-#' used in ONS outputs.
+#' scales in the same palette are needed, e.g. likert type plots. By default, the main colours are shades of blue and orange
+#' used in the analysis function colour scheme.
 #'
 #' @param n the number of colours needed
 #' @param colour1 the first colour in the scale - a numeric vector representing red, green and blue (max 255)
@@ -17,7 +17,7 @@
 #' @export
 
 
-get_2colour_gradients <- function(n, colour1 = c(32, 96, 149), colour2 = c(226, 188, 34), mid, neutral_mid = TRUE) {
+get_2colour_gradients <- function(n, colour1 = c(0, 69, 86), colour2 = c(255, 105, 0), mid, neutral_mid = TRUE) {
   
   if (!is.numeric(n) | length(n) > 1) {
     stop("n is not a numeric value")
@@ -28,8 +28,8 @@ get_2colour_gradients <- function(n, colour1 = c(32, 96, 149), colour2 = c(226, 
   # Find scale midpoint if not specified
   if (missing(mid)) {
     mid <- ceiling((n + 1) / 2)
-  } else if (mid > n-1 | mid == 1) {
-    stop("Unexpected input: mid should not be greater than n-1 or smaller than 2")
+  } else if (mid > n-1 | mid == 0) {
+    stop("Unexpected input: mid should not be greater than n-1 or smaller than 1")
   }
   
   if (class(colour1) != "numeric" | class(colour2) != "numeric") {
@@ -63,12 +63,7 @@ get_2colour_gradients <- function(n, colour1 = c(32, 96, 149), colour2 = c(226, 
     c2_first <- c2_gradient[1]
     c2_brightness <- (max(c2_first[[1]]) + min (c2_first[[1]])) / 2
     
-    # Ensure sufficient contrast between the neutral colour and colours 1 and 2
-    if (abs(c1_brightness - c2_brightness) >= 60) {
-      mid_brightness <- mean(c(c1_brightness, c2_brightness))
-    } else {
-      mid_brightness <- 200
-    }
+    mid_brightness <- 200
     
     mid_colour <- c(mid_brightness, mid_brightness, mid_brightness)
     colours <- c(c1_gradient, list(mid_colour), c2_gradient)

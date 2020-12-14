@@ -4,7 +4,16 @@
 \alias{plot_freqs}
 \title{Plot frequency graph}
 \usage{
-plot_freqs(table, xlab, ylab, bar_colour, font_size = 12, orientation = "v")
+plot_freqs(
+  table,
+  xlab,
+  ylab,
+  bar_colour,
+  n,
+  font_size = 12,
+  orientation = "v",
+  ...
+)
 }
 \arguments{
 \item{table}{Frequency table (data frame). 2 columns - cateogry names and frequencies.}
@@ -15,9 +24,13 @@ plot_freqs(table, xlab, ylab, bar_colour, font_size = 12, orientation = "v")
 
 \item{bar_colour}{Colour name. Defaults to blue (see get_gradient())}
 
+\item{n}{sample size}
+
 \item{font_size}{minimum font size for the plot (numeric).}
 
 \item{orientation}{plot orientation ("h" = horizontal, "v" = verical). Vertical by default}
+
+\item{...}{additional plotly_ly arguments}
 }
 \value{
 bar chart

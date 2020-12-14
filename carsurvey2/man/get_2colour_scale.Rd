@@ -4,7 +4,7 @@
 \alias{get_2colour_scale}
 \title{Create 2 colour scale palette}
 \usage{
-get_2colour_scale(n, colour1 = c(32, 96, 149), colour2 = c(226, 188, 34))
+get_2colour_scale(n, colour1 = c(0, 69, 86), colour2 = c(255, 105, 0))
 }
 \arguments{
 \item{n}{the number of colours needed}
@@ -18,5 +18,5 @@ vector of hexadecimal colours containing shades between the two selected colours
 }
 \description{
 Creates a list of  colour names (RGB). Generates a scale between two colours. By default these are the
-shades of yellow and blue used in outputs on the ONS website.
+shades of orange and blue used in the analysis function colour scheme.
 }

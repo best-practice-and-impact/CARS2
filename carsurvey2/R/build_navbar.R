@@ -25,7 +25,7 @@ build_navbar <- function(navbar_info) {
         </button>
         <a class="navbar-brand" href="index.html">',
     navbar_info$title, 
-    '     </a>
+    '</a>
           </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">

@@ -5,14 +5,16 @@
 #'@param table Frequency table (data frame). 3 columns - cateogry names, groups and frequencies. 
 #'@param xlab X axis title
 #'@param ylab Y axis title
+#'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
 #'@param orientation plot orientation ("h" = horizontal, "v" = verical). Vertical by default.
+#'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
+plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v", ...) {
   
   # Set default bar colours
   n <- length(unique(table[[2]]))
@@ -33,6 +35,11 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
   # Validate labels
   if (!is.character(xlab) | !is.character(ylab) | length(xlab) > 1 | length(ylab) > 1) {
     stop("Unexpected input - labels should be single character strings.")
+  }
+  
+  # Validate n
+  if ((!is.numeric(n) & !is.character(n)) | length(n) > 1) {
+    stop("Unexpected input - n is not a single number or string")
   }
   
   # Validate font size
@@ -63,30 +70,42 @@ plot_grouped <- function(table, xlab, ylab, font_size = 12, orientation = "v") {
       y = table[[3]],
       color = table[[2]],
       marker = list(color = colours),
-      type = "bar"
+      type = "bar",
+      ...
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig, 
+    fig <- plotly::layout(fig,  
                           xaxis = x, 
                           yaxis = y, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
+                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
+                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                             xref='paper', yref='paper', font=list(size = font_size))
+    )
+                          
   } else if (orientation == "h") {
     fig <- plotly::plot_ly(
       x = table[[3]],
       y = table[[1]],
       color = table[[2]],
       marker = list(color = colours),
-      type = "bar"
+      type = "bar",
+      ...
     )
     
     fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig, 
+    fig <- plotly::layout(fig,  
                           orientation = "h",
                           xaxis = y, 
                           yaxis = x, 
                           hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
-                          legend = list(traceorder = "reversed"))
+                          legend = list(traceorder = "reversed"),
+                          margin = list(b = 100),
+                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                             xref='paper', yref='paper', font=list(size = font_size))
+                          )
   } 
 
   

@@ -18,10 +18,10 @@ data_6col <- data.frame(bars = c("bar1", "bar2", "bar3", "bar4", "bar5", "bar6")
 
 
 test_that("function returns plotly html widget", {
-  expect_identical(class(plot_freqs(data_1col, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_freqs(data_2col, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_freqs(data_3col, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_freqs(data_4col, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_freqs(data_5col, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_freqs(data_6col, "axis1", "axis2")), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_freqs(data_1col, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_freqs(data_2col, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_freqs(data_3col, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_freqs(data_4col, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_freqs(data_5col, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_freqs(data_6col, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
 })

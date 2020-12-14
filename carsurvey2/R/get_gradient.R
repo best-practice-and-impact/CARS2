@@ -9,7 +9,7 @@
 #'
 #' @export
 
-get_gradient <- function(n, colour = c(32, 96, 149)) {
+get_gradient <- function(n, colour = c(0, 69, 86)) {
   
   if (!is.numeric(n) | length(n) > 1) {
     stop("Unexpected value - n is not a numeric value")

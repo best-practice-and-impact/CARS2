@@ -4,8 +4,7 @@ library(magrittr)
 
 # Data ingest and basic cleaning
 
-data <- carsurvey2::ingest() %>% 
-  carsurvey2::convert_raw() %>%
+data <- read.csv("../../cars-data/latest_data.csv") %>%
   carsurvey2::tidy_ingest_data() %>%
   carsurvey2::rename_cols()
 

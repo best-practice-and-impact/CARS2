@@ -2,7 +2,7 @@
 #'
 #'@description Produce stacked bar chart (plotly). 
 #'
-#'@param table Frequency table for stacked bar chart (data frame). 4+ columns - sub-question names in column 1 with answer options in subsequent columns.. 
+#'@param table Frequency table for stacked bar chart (data frame). 3+ columns - sub-question names in column 1 with answer options in subsequent columns.. 
 #'@param colour_scale type of colour scale ("gradient", "scale" or "2gradients"). See get_gradient(), get_2colour_scale() and get_2colour_gradients(). 
 #'@param xlab X axis title
 #'@param ylab Y axis title
@@ -19,8 +19,8 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
   # Validate table
   if (!is.data.frame(table)) {
     stop("Unexpected input - table is not a data.frame.")
-  } else if (ncol(table) < 4) {
-    stop("Unexpected input - table should have at least four columns")
+  } else if (ncol(table) < 3) {
+    stop("Unexpected input - table should have at least three columns")
   }
   
   # Validate labels

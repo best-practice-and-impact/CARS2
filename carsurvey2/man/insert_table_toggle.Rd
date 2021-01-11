@@ -2,7 +2,7 @@
 % Please edit documentation in R/insert_table_toggle.R
 \name{insert_table_toggle}
 \alias{insert_table_toggle}
-\title{Add table toggle buttons to down document}
+\title{Add table toggle buttons to rmarkdowndown site}
 \usage{
 insert_table_toggle(output_name)
 }
@@ -13,5 +13,5 @@ insert_table_toggle(output_name)
 html buttons and CSS
 }
 \description{
-Add "show table" and "show chart" buttons to rmarkdown document (html). Expects table contaners to be named "name-table" and chart containers to be named "name-chart"
+Add "show table" and "show chart" buttons to rmarkdown site (html). Expects table contaners to be named "name-table" and chart containers to be named "name-chart"
 }

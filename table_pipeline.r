@@ -1,4 +1,5 @@
 # This script is designed to be used with the  project root as the working directory (../)
+library(magrittr)
 
 # Coding frequency table
 data$code_freq <- factor(data$code_freq, levels = c("Never",
@@ -11,29 +12,34 @@ colnames(freq_table) <- c("Coding frequency", "Count")
 
 # Programming tools
 
+langs <- c(
+  C = "C++ / C#",
+  java = "Java / Scala",	
+  JS = "javascript / Typescript",
+  python = "Python",
+  R = "R",
+  SAS = "SAS",	
+  SPSS = "SPSS",	
+  SQL = "SQL",	
+  stata = "Stata",	
+  VBA = "VBA"
+)
+
 knowledge <- data[grepl("knowledge_", colnames(data))]
-knowledge = data.frame(lapply(knowledge, function(x) factor(x, levels = c("Yes", "Don't Know", "No"))))
-knowledge <- data.frame(sapply(knowledge, table))
-knowledge <- data.frame(apply(knowledge, 1, function(x) x))
-knowledge$lang <- as.vector(stringr::str_split(rownames(knowledge), "_", simplify = TRUE)[,2])
-knowledge <- knowledge[c(4, 1, 2, 3)]
+knowledge <- carsurvey2::calc_multi_col_freqs(cols = knowledge, factor_levels = c("Yes", "Don't Know", "No"))
 colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
+knowledge[[1]] <- stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ]%>% dplyr::recode(!!!langs) # Rename questions
 
 access <- data[grepl("available_", colnames(data))]
-access = data.frame(lapply(access, function(x) factor(x, levels = c("Yes", "Don't Know", "No"))))
-access <- data.frame(sapply(access, table))
-access <- data.frame(apply(access, 1, function(x) x))
-access$lang <- as.vector(stringr::str_split(rownames(access), "_", simplify = TRUE)[,2])
-access <- access[c(4, 1, 2, 3)]
+access <- carsurvey2::calc_multi_col_freqs(cols = access, factor_levels = c("Yes", "Don't Know", "No"))
 colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
+access[[1]] <- stringr::str_split(access[[1]], "_", simplify = TRUE)[,2] %>% dplyr::recode(!!!langs) # Rename questions
 
 code_tool_status <- data[grepl("status_", colnames(data))]
-code_tool_status = data.frame(lapply(code_tool_status, function(x) factor(x, levels = c("Access only", "Access and knowledge", "Knowledge only"))))
-code_tool_status <- data.frame(sapply(code_tool_status, table))
-code_tool_status <- data.frame(apply(code_tool_status, 1, function(x) x))
-code_tool_status$lang <- as.vector(stringr::str_split(rownames(code_tool_status), "_", simplify = TRUE)[,2])
-code_tool_status <- code_tool_status[c(4, 1, 2, 3)]
-colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only")
+code_tool_status <- carsurvey2::calc_multi_col_freqs(cols = code_tool_status, factor_levels = c("Access only", "Access and knowledge", "Knowledge only"))
+colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only") 
+code_tool_status[[1]] <- stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2] %>% dplyr::recode(!!!langs) # Rename questions
+
 
 # RAP knowledge and opinions
 
@@ -47,53 +53,39 @@ data$RAP_champ_known <- factor(data$RAP_champ_known, levels = c(
 ))
 rap_knowledge <- data.frame(table(data$RAP_champ_known))
 colnames(rap_knowledge) <- c("RAP knowledge", "Count")
-rap_knowledge_chart <- rap_knowledge
 rap_knowledge[1] <- c("Have not heard of RAP",
                       "Heard of RAP, have not heard of RAP champions",
                       "Heard of RAP, does not know department champion",
                       "Heard of RAP champions, no champion in department",
                       "Knows department RAP champion")
-
-rap_knowledge_chart[1] <- c("Have not heard of RAP",
-                            "Heard of RAP, have not <br>heard of RAP champions",
-                            "Heard of RAP, does not <br>know department champion",
-                            "Heard of RAP champions, <br>no champion in department",
-                            "Knows department RAP <br>champion")
-rap_knowledge_chart$`RAP knowledge` <- factor(rap_knowledge_chart$`RAP knowledge`, levels = rap_knowledge_chart$`RAP knowledge`)
+rap_knowledge_chart <- rap_knowledge
+rap_knowledge_chart[[1]] <- carsurvey2::break_q_names(rap_knowledge_chart[[1]], 2)
+rap_knowledge_chart[[1]] <- factor(rap_knowledge_chart[[1]], levels = rap_knowledge_chart[[1]])
 
 know_rap_data <- data[data$RAP_heard_of == "Yes", ]
 know_rap_data <- dplyr::select(know_rap_data, RAP_understand:RAP_using)
-know_rap_data = data.frame(lapply(know_rap_data, function(x) factor(x, levels = c("Strongly Disagree",
-                                                                    "Disagree",
-                                                                    "Neutral",
-                                                                    "Agree",
-                                                                    "Strongly Agree"))))
-rap_opinions <- data.frame(sapply(know_rap_data, table))
-colnames(rap_opinions) <- c("I understand what the key components of the RAP methodology are",
-                            "I feel confident implementing RAP in my work",
-                            "I think it is important to implement RAP in my work",
-                            "I feel supported to implement RAP in my work",
-                            "I know where to find resources to help me implement RAP",
-                            "I and/or my team are currently implementing RAP")
+know_rap_levels <- c("Strongly Disagree",
+                     "Disagree",
+                     "Neutral",
+                     "Agree",
+                     "Strongly Agree")
+rap_opinions <- carsurvey2::calc_multi_col_freqs(know_rap_data, know_rap_levels, calc_props=TRUE)
+new_colnames <- c(RAP_understand = "I understand what the key components of the RAP methodology are",
+                  RAP_confident = "I feel confident implementing RAP in my work",
+                  RAP_important = "I think it is important to implement RAP in my work",
+                  RAP_supported = "I feel supported to implement RAP in my work",
+                  RAP_resources = "I know where to find resources to help me implement RAP",
+                  RAP_using = "I and/or my team are currently implementing RAP")
 
-rap_opinions <- rap_opinions/nrow(know_rap_data)
-rap_opinions <- data.frame(apply(rap_opinions, 1, function(x) x))
-rap_opinions$Question <- rownames(rap_opinions)
-rap_opinions <- rap_opinions[c(6, 1, 2, 3, 4, 5)]
+rap_opinions[[1]] <- dplyr::recode(rap_opinions[[1]], !!!new_colnames) 
 colnames(rap_opinions) <- c("Question",
                             "Strongly disagree",
                             "Disagree",
                             "Neutral",
                             "Agree",
                             "Strongly agree")
-
 rap_opinions_chart <- rap_opinions
-rap_opinions_chart$Question <- c("I understand what the key components <br>of the RAP methodology are",
-                            "I feel confident implementing RAP in <br>my work",
-                            "I think it is important to implement <br>RAP in my work",
-                            "I feel supported to implement RAP in <br>my work",
-                            "I know where to find resources to help<br> me implement RAP",
-                            "I and/or my team are currently <br>implementing RAP")
+rap_opinions_chart[[1]] <- carsurvey2::break_q_names(rap_opinions_chart[[1]], 2)
 
 # Rap scores
 
@@ -139,87 +131,51 @@ colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
 
 # Coding practices
 
+
 code_prac_data <- data[grepl("gp_", colnames(data))]
 code_prac_data <- code_prac_data[data$code_freq != "Never", ]
-code_prac_data <- data.frame(lapply(code_prac_data, function(x) factor(x, levels = c("I don't understand this question",
-                                                                          "Never",
-                                                                          "Rarely",
-                                                                          "Sometimes",
-                                                                          "Regularly",
-                                                                          "All the time"))))
-code_prac <- data.frame(sapply(code_prac_data, table))
-code_prac <- data.frame(apply(code_prac, 1, function(x) x))
-code_prac$Question <- rownames(code_prac)
-code_prac <- code_prac[c(7, 1, 2, 3, 4, 5, 6)]
-colnames(code_prac) <- c("Question",
-                         "I don't understand this question",
-                         "Never",
-                         "Rarely",
-                         "Sometimes",
-                         "Regularly",
-                         "All the time")
-code_prac$Question <- dplyr::recode(code_prac$Question, 
-                                    gp_open_source = "I use open source software when programming",
-                                    gp_dir_structure = "I follow a standard directory structure when programming",
-                                    gp_guidelines = "I follow coding guidelines or style guides when programming",
-                                    gp_version_control = "I use a source code version control system e.g. Git",
-                                    gp_code_review = "Code my team writes is reviewed by a colleague",
-                                    gp_function = "I write repetitive elements in my code as functions",
-                                    gp_packages = "I collect my code and supporting material into packages",
-                                    gp_unit_test = "I unit test my code",
-                                    gp_auto_QA = "I write code to automatically quality assure data",
-                                    gp_team_open_source = "My team open sources its code")
-rownames(code_prac) <- NULL
-code_prac[,c(2:7)] <- code_prac[,c(2:7)] / nrow(data.frame(code_prac_data))                                    
+code_prac_levels = c("I don't understand this question",
+                     "Never",
+                     "Rarely",
+                     "Sometimes",
+                     "Regularly",
+                     "All the time")
 
+code_prac <- carsurvey2::calc_multi_col_freqs(code_prac_data, code_prac_levels, calc_props = TRUE)
+
+colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
+code_prac_questions <- c(
+  gp_open_source = "I use open source software when programming",
+  gp_dir_structure = "I follow a standard directory structure when programming",
+  gp_guidelines = "I follow coding guidelines or style guides when programming",
+  gp_version_control = "I use a source code version control system e.g. Git",
+  gp_code_review = "Code my team writes is reviewed by a colleague",
+  gp_function = "I write repetitive elements in my code as functions",
+  gp_packages = "I collect my code and supporting material into packages",
+  gp_unit_test = "I unit test my code",
+  gp_auto_QA = "I write code to automatically quality assure data",
+  gp_team_open_source = "My team open sources its code"
+)
+
+code_prac[[1]] <- dplyr::recode(code_prac[[1]], !!!code_prac_questions) 
 code_prac_chart <- code_prac
-code_prac_chart$Question <- dplyr::recode(code_prac$Question, 
-                                          "I use open source software when programming" =  "I use open source software <br>when programming",
-                                          "I follow a standard directory structure when programming" = "I follow a standard directory <br>structure when programming",
-                                          "I follow coding guidelines or style guides when programming" = "I follow coding guidelines or <br>style guides when programming",
-                                          "I use a source code version control system e.g. Git" = "I use a source code version <br>control system e.g. Git",
-                                          "Code my team writes is reviewed by a colleague" = "Code my team writes is <br>reviewed by a colleague",
-                                          "I write repetitive elements in my code as functions" = "I write repetitive elements <br>in my code as functions",
-                                          "I collect my code and supporting material into packages" = "I collect my code and supporting <br>material into packages",
-                                          "I unit test my code" = "I unit test my code",
-                                          "I write code to automatically quality assure data" = "I write code to automatically <br>quality assure data",
-                                          "My team open sources its code" = "My team open sources its <br>code")
+code_prac_chart[[1]] <- carsurvey2::break_q_names(code_prac_chart[[1]], 2)
+
 # Doc
-
-doc_data <- data[grepl("doc_", colnames(data))]
+doc_data <- dplyr::select(data, doc_AQA_log:doc_desk)
 doc_data <- doc_data[data$code_freq != "Never", ]
-doc_data <- doc_data[!colnames(doc_data) %in% c("doc_score", "function_doc_score", "doc_other")]
-doc_data <- data.frame(lapply(doc_data, function(x) factor(x, levels = c("I don't understand this question",
-                                                                         "Never",
-                                                                         "Rarely",
-                                                                         "Sometimes",
-                                                                         "Regularly",
-                                                                         "All the time"))))
 
+doc <- carsurvey2::calc_multi_col_freqs(doc_data, code_prac_levels, calc_props = TRUE)
+colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
 
-doc <- data.frame(sapply(doc_data, table))
-doc <- data.frame(apply(doc, 1, function(x) x))
-doc$Question <- rownames(doc)
-doc <- doc[c(7, 1,2, 3, 4, 5, 6)]
-colnames(doc) <- c("Question",
-                   "I don't understand this question",
-                   "Never",
-                   "Rarely",
-                   "Sometimes",
-                   "Regularly",
-                   "All the time")
-doc$Question <- dplyr::recode(doc$Question,
-                              doc_AQA_log = "Analytical Quality Assurance (AQA) logs",
-                              doc_assumption_reg = "Data or assumptions registers",
-                              doc_func = "Documentation for each function or class",
-                              doc_comments = "Code comments",
-                              doc_flow = "Flow charts",
-                              doc_readme = "README files",
-                              doc_desk  = "Desk notes")
-doc[2:7] <- doc[2:7] / nrow(doc_data)                                    
+doc_questions <- c(doc_AQA_log = "Analytical Quality Assurance (AQA) logs",
+                   doc_assumption_reg = "Data or assumptions registers",
+                   doc_func = "Documentation for each function or class",
+                   doc_comments = "Code comments",
+                   doc_flow = "Flow charts",
+                   doc_readme = "README files",
+                   doc_desk  = "Desk notes")
 
+doc[[1]] <- dplyr::recode(doc[[1]], !!!doc_questions)
 doc_chart <- doc
-doc_chart$Question <- dplyr::recode(doc_chart$Question,
-                                    "Analytical Quality Assurance (AQA) logs" = "Analytical Quality <br>Assurance (AQA) logs",
-                                    "Data or assumptions registers" = "Data or assumptions <br>registers",
-                                    "Documentation for each function or class" ="Documentation for each <br>function or class")
+doc_chart[[1]] <- carsurvey2::break_q_names(doc_chart[[1]], 2)

@@ -15,5 +15,5 @@ get_gradient(n, colour = c(0, 69, 86))
 RGB colours
 }
 \description{
-Creates a list of colours for plotting. The vector contains shades of the original colour, increasing in brightness.
+Creates a list of colours for plotting. The list contains n shades of the original colour, increasing in brightness.
 }

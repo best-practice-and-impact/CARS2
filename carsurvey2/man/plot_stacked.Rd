@@ -15,7 +15,7 @@ plot_stacked(
 )
 }
 \arguments{
-\item{table}{Frequency table for stacked bar chart (data frame). 4+ columns - sub-question names in column 1 with answer options in subsequent columns..}
+\item{table}{Frequency table for stacked bar chart (data frame). 3+ columns - sub-question names in column 1 with answer options in subsequent columns..}
 
 \item{colour_scale}{type of colour scale ("gradient", "scale" or "2gradients"). See get_gradient(), get_2colour_scale() and get_2colour_gradients().}
 

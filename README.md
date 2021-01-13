@@ -1,6 +1,11 @@
+![R-CMD-check](https://github.com/best-practice-and-impact/CARS-2/workflows/R-CMD-check/badge.svg)
+![test-coverage](https://github.com/best-practice-and-impact/CARS-2/workflows/test-coverage/badge.svg)
+
 # Coding in Analysis and Research Survey
 
 The contents of the rmarkdown folder can be used to generate a template site to present results from the second wave of the Coding in Analysis and Research Survey (CARS). 
+
+A preview can be seen at the [CARS-2 website](https://best-practice-and-impact.github.io/CARS-2/).
 
 # Summary
 To build the site you will need to 

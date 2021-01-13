@@ -7,7 +7,10 @@ output:
     toc_float: 
       collapsed: false
 ---
-
+```{r global-options, include=FALSE}
+# Set echo=FALSE for all chunks
+knitr::opts_chunk$set(echo=FALSE)
+```
 *Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
 
 # Coding frequency and tools
@@ -16,25 +19,33 @@ output:
 
 We asked our respondents, "In my current role, I write code to complete my work objectives _____". The frequencies for each answer are presented below. 
 
-```{r echo=FALSE}
+```{r}
 library(magrittr)
-carsurvey2::setup_table_toggle()
+carsurvey2::html_setup_table_toggle()
+
+
+if(!exists("smart_survey_data")) stop("Dataframe called smart_survey_data not available. This should be in the 
+                                      function enviroment of render_main_site. Check that this is available in this
+                                      enviroment.")
+
+# Create tables
+tables <- carsurvey2::generate_tables(smart_survey_data)
 
 samples <- list(
-  all = nrow(data),
-  coders = sum(data$code_freq != "Never"),
-  heard_of_rap = sum(data$RAP_heard_of == "Yes")
+  all = nrow(smart_survey_data),
+  coders = sum(smart_survey_data$code_freq != "Never"),
+  heard_of_rap = sum(smart_survey_data$RAP_heard_of == "Yes")
 )
 ```
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("coding-freq")
+```{r}
+carsurvey2::html_insert_table_toggle("coding-freq")
 ```
 
 <div id="coding-freq-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_freqs(freq_table, "Coding frequency", "Count", n = samples$all, font_size = 14)
+carsurvey2::plot_freqs(tables$freq_table, "Coding frequency", "Count", n = samples$all, font_size = 14)
 
 ```
 </div>
@@ -42,7 +53,7 @@ carsurvey2::plot_freqs(freq_table, "Coding frequency", "Count", n = samples$all,
 <div id="coding-freq-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(freq_table)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$freq_table)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 ```
@@ -58,14 +69,14 @@ For each of the most popular programming languages from last year's CARS data, w
 
 ### Knowledge of programming tools
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("tools-knowledge")
+```{r}
+carsurvey2::html_insert_table_toggle("tools-knowledge")
 ```
 
 <div id="tools-knowledge-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_stacked(knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14)
+carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14)
 
 ```
 </div>
@@ -73,7 +84,7 @@ carsurvey2::plot_stacked(knowledge, xlab = "Count", ylab = "Programming tool", n
 <div id="tools-knowledge-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(knowledge, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$knowledge, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 ```
@@ -82,14 +93,14 @@ kableExtra::kable_styling(knitr::kable(knowledge, row.names = FALSE)) %>%
 
 ### Access to programming tools
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("tools-access")
+```{r}
+carsurvey2::html_insert_table_toggle("tools-access")
 ```
 
 <div id="tools-access-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_stacked(access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14)
+carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14)
 
 ```
 </div>
@@ -97,7 +108,7 @@ carsurvey2::plot_stacked(access, xlab = "Count", ylab = "Programming tool", n = 
 <div id="tools-access-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(access, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 ```
@@ -109,14 +120,14 @@ kableExtra::kable_styling(knitr::kable(access, row.names = FALSE)) %>%
 We used the above data to calculate the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. The results can be seen below.
 
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("tools-status")
+```{r}
+carsurvey2::html_insert_table_toggle("tools-status")
 ```
 
 <div id="tools-status-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_stacked(code_tool_status, colour_scale = "scale", xlab = "Count", ylab = "Programming tool", n = samples$all, font_size = 14)
+carsurvey2::plot_stacked(tables$code_tool_status, colour_scale = "scale", xlab = "Count", ylab = "Programming tool", n = samples$all, font_size = 14)
 
 
 ```
@@ -125,7 +136,7 @@ carsurvey2::plot_stacked(code_tool_status, colour_scale = "scale", xlab = "Count
 <div id="tools-status-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(code_tool_status, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$code_tool_status, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 ```
@@ -137,16 +148,16 @@ kableExtra::kable_styling(knitr::kable(code_tool_status, row.names = FALSE)) %>%
 
 ## Knowledge of RAP and RAP champions
 
-We asked our respondents whether they had heard of RAP and what their knowlegde is of their own department RAP champion. The combined responses are presented below.
+We asked our respondents whether they had heard of RAP and what their knowledge is of their own department RAP champion. The combined responses are presented below.
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("rap-knowledge")
+```{r}
+carsurvey2::html_insert_table_toggle("rap-knowledge")
 ```
 
 <div id="rap-knowledge-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_freqs(rap_knowledge_chart, "Knowledge of RAP champions", "Count", n = samples$all, font_size = 14, orientation = "h")
+carsurvey2::plot_freqs(tables$rap_knowledge_chart, "Knowledge of RAP champions", "Count", n = samples$all, font_size = 14, orientation = "h")
 
 ```
 </div>
@@ -154,7 +165,7 @@ carsurvey2::plot_freqs(rap_knowledge_chart, "Knowledge of RAP champions", "Count
 <div id="rap-knowledge-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(rap_knowledge, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$rap_knowledge, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 ```
@@ -163,7 +174,7 @@ kableExtra::kable_styling(knitr::kable(rap_knowledge, row.names = FALSE)) %>%
 
 ## Opinions on RAP
 
-We aked our respondents who had heard of RAP the extent to which they agree with the following statements:
+We asked our respondents who had heard of RAP the extent to which they agree with the following statements:
 
 * "I understand what the key components of the RAP methodology are"
 * "I feel confident implementing RAP in my work"
@@ -175,14 +186,14 @@ We aked our respondents who had heard of RAP the extent to which they agree with
 The results can be seen below. The figure and table show the percentage of respondents who picked each response option. Percentages are out of a sample of respondents who said they had heard of RAP.
 
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("rap-opinions")
+```{r}
+carsurvey2::html_insert_table_toggle("rap-opinions")
 ```
 
 <div id="rap-opinions-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_likert(rap_opinions_chart, 3, "Frequency", "Question", n = samples$heard_of_rap, font_size = 14, height = 700)
+carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "Question", n = samples$heard_of_rap, font_size = 14, height = 700)
 
 ```
 </div>
@@ -190,7 +201,7 @@ carsurvey2::plot_likert(rap_opinions_chart, 3, "Frequency", "Question", n = samp
 <div id="rap-opinions-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(carsurvey2::output_likert_table(rap_opinions)) %>% 
+kableExtra::kable_styling(carsurvey2::output_likert_table(tables$rap_opinions)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$heard_of_rap))
 
 ```
@@ -203,14 +214,14 @@ kableExtra::kable_styling(carsurvey2::output_likert_table(rap_opinions)) %>%
 
 The frequencies for each RAP component below are derived from a series of questions on coding practices (see the coding practices page). These were used to calculate scores for each component (0/1) where respondents answered "regularly" or "all the time" to the relevant questions. The list of RAP components used here is based on the [RAP minimum viable product](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md) guidance agreed by the RAP champions network.
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("rap-comps")
+```{r}
+carsurvey2::html_insert_table_toggle("rap-comps")
 ```
 
 <div id="rap-comps-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_grouped(components, "RAP component", "Count", n = samples$coders, orientation = "h", font_size = 14)
+carsurvey2::plot_grouped(tables$components, "RAP component", "Count", n = samples$coders, orientation = "h", font_size = 14)
 
 
 ```
@@ -219,7 +230,7 @@ carsurvey2::plot_grouped(components, "RAP component", "Count", n = samples$coder
 <div id="rap-comps-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(components, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$components, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```
@@ -229,16 +240,16 @@ Below are the distributions of total basic and advanced RAP scores. These are th
 
 ## Basic RAP scores
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("basic_score")
+```{r}
+carsurvey2::html_insert_table_toggle("basic_score")
 ```
 
 <div id="basic_score-chart">
-```{r echo=FALSE}
+```{r}
 
 bar_colour <- carsurvey2::get_2colour_scale(2)[2][[1]]
 bar_colour <- rgb(bar_colour[1],bar_colour[2],bar_colour[3], maxColorValue = 255)
-carsurvey2::plot_freqs(basic_freqs, "Basic RAP score", "Count", bar_colour = bar_colour, n = samples$coders, font_size = 14)
+carsurvey2::plot_freqs(tables$basic_freqs, "Basic RAP score", "Count", bar_colour = bar_colour, n = samples$coders, font_size = 14)
 
 ```
 </div>
@@ -246,7 +257,7 @@ carsurvey2::plot_freqs(basic_freqs, "Basic RAP score", "Count", bar_colour = bar
 <div id="basic_score-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(basic_freqs, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$basic_freqs, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```
@@ -254,21 +265,21 @@ kableExtra::kable_styling(knitr::kable(basic_freqs, row.names = FALSE)) %>%
 
 ## Advanced RAP scores
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("advanced_score")
+```{r}
+carsurvey2::html_insert_table_toggle("advanced_score")
 ```
 
 <div id="advanced_score-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_freqs(advanced_freqs, "Advanced RAP score", "Count", n = samples$coders, font_size = 14)
+carsurvey2::plot_freqs(tables$advanced_freqs, "Advanced RAP score", "Count", n = samples$coders, font_size = 14)
 ```
 </div>
 
 <div id="advanced_score-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(knitr::kable(advanced_freqs, row.names = FALSE)) %>% 
+kableExtra::kable_styling(knitr::kable(tables$advanced_freqs, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```
@@ -280,14 +291,14 @@ We asked respondents to report how often they make use of each of the coding pra
 
 ## General coding practices
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("code-prac")
+```{r}
+carsurvey2::html_insert_table_toggle("code-prac")
 ```
 
 <div id="code-prac-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_likert(code_prac_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700)
+carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700)
 
 
 ```
@@ -295,7 +306,7 @@ carsurvey2::plot_likert(code_prac_chart, 3, "Frequency", "Question", n = samples
 
 <div id="code-prac-table">
 ```{r echo = FALSE}
-kableExtra::kable_styling(carsurvey2::output_likert_table(code_prac)) %>% 
+kableExtra::kable_styling(carsurvey2::output_likert_table(tables$code_prac)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```
@@ -303,14 +314,14 @@ kableExtra::kable_styling(carsurvey2::output_likert_table(code_prac)) %>%
 
 ## Documentation
 
-```{r echo=FALSE}
-carsurvey2::insert_table_toggle("doc")
+```{r}
+carsurvey2::html_insert_table_toggle("doc")
 ```
 
 <div id="doc-chart">
-```{r echo=FALSE}
+```{r}
 
-carsurvey2::plot_likert(doc_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700)
+carsurvey2::plot_likert(tables$doc_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700)
 
 
 ```
@@ -319,7 +330,7 @@ carsurvey2::plot_likert(doc_chart, 3, "Frequency", "Question", n = samples$coder
 <div id="doc-table">
 ```{r echo = FALSE}
 
-kableExtra::kable_styling(carsurvey2::output_likert_table(doc)) %>% 
+kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```

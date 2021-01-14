@@ -7,7 +7,7 @@
 format_file_path(department)
 }
 \arguments{
-\item{department}{}
+\item{department}{A string}
 }
 \value{
 String

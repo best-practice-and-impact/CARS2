@@ -67,7 +67,6 @@ render_navbar = function() {
 #'
 #' @param smart_survey_data This is generated using the carsurvey2::data_ functions.
 #'
-#' @return
 #' @export
 
 render_department_pages = function(smart_survey_data) {

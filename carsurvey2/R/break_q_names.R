@@ -5,8 +5,6 @@
 #'
 #'@param q_names question names - character
 #'@param max_lines maximum number of lines. Int, defaults to 2
-#'@return 
-#'
 #'@export
 
 break_q_names <- function(q_names, max_lines = 2) {

@@ -2,16 +2,16 @@
 % Please edit documentation in R/helper_functions.R
 \name{print_success_cat}
 \alias{print_success_cat}
-\title{print_cat}
+\title{print_success_cat}
 \usage{
 print_success_cat()
 }
 \description{
-print_cat
+print_success_cat
 }
 \details{
 Who knows what this function does, run it to find out ... if you dare!
 }
 \examples{
-print_cat()
+print_success_cat()
 }

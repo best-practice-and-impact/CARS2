@@ -3,7 +3,7 @@
 #'
 #' @description This function cleans the department names
 #'
-#' @param department 
+#' @param department A string 
 #'
 #' @return String
 #' 
@@ -26,13 +26,13 @@ format_file_path = function(department) {
 
 
 
-#' @title print_cat
+#' @title print_success_cat
 #' 
 #' @details Who knows what this function does, run it to find out ... if you dare!
 #' 
 #' @export
 #'
-#' @examples print_cat()
+#' @examples print_success_cat()
 
 print_success_cat = function() {
   

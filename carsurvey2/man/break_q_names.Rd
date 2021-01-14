@@ -11,9 +11,6 @@ break_q_names(q_names, max_lines = 2)
 
 \item{max_lines}{maximum number of lines. Int, defaults to 2}
 }
-\value{
-
-}
 \description{
 add line breaks to question names - split into two lines.
 Line lengths are determined by the longest question.

@@ -9,9 +9,6 @@ render_department_pages(smart_survey_data)
 \arguments{
 \item{smart_survey_data}{This is generated using the carsurvey2::data_ functions.}
 }
-\value{
-
-}
 \description{
 Creates pages for each department.
 }

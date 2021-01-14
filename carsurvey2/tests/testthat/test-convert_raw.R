@@ -13,13 +13,13 @@ dummy_df <-  data.frame(columnA = c("1", "4"),
 
 
 test_that("function returns data.frame from raw character string", {
-  expect_s3_class(convert_raw(dummy_response), "data.frame")
+  expect_s3_class(data_convert_raw(dummy_response), "data.frame")
 })
 
 test_that("function returns correct column headers and rows", {
-  expect_identical(colnames(convert_raw(dummy_response)), colnames(dummy_df))
+  expect_identical(colnames(data_convert_raw(dummy_response)), colnames(dummy_df))
 })
 
 test_that("function rejects unsuccessful API responses", {
-  expect_error(convert_raw(dummy_failed_response))
+  expect_error(data_convert_raw(dummy_failed_response))
 })

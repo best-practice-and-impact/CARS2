@@ -7,6 +7,8 @@ The contents of the rmarkdown folder can be used to generate a template site to 
 
 A preview can be seen at the [CARS-2 website](https://best-practice-and-impact.github.io/CARS-2/).
 
+> Rscript build_site.r runs the project 
+
 # Summary
 To build the site you will need to 
 

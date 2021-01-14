@@ -10,8 +10,13 @@ generate_tables(smart_survey_data)
 \item{smart_survey_data}{This is generated using the carsurvey2::smart_survey_data_ functions.}
 }
 \value{
-
+A named list
 }
 \description{
-
+Creates a series of tables
+}
+\details{
+This is a high level function that is used to create a series of tables. The tables are defined in this package as a functions, all prefioxxed with table_.
+This function owns some objects used in the table formatting functions e.g langs, these are passed into the functions. Each table created is added to a named list.
+To add additional tables create a function in the table.R file, prefix with table_, add to this function and assign to the object tables.
 }

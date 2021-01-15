@@ -12,6 +12,8 @@ plot_freqs(
   n,
   font_size = 12,
   orientation = "v",
+  break_q_names_col = NULL,
+  max_lines = 2,
   ...
 )
 }
@@ -29,6 +31,10 @@ plot_freqs(
 \item{font_size}{minimum font size for the plot (numeric).}
 
 \item{orientation}{plot orientation ("h" = horizontal, "v" = verical). Vertical by default}
+
+\item{break_q_names_col}{applies break_q_names to the column. Not applied by default}
+
+\item{max_lines}{maximum number of lines. Int, defaults to 2/ See carsurvey::break_q_names()}
 
 \item{...}{additional plotly_ly arguments}
 }

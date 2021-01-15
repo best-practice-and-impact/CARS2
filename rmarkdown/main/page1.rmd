@@ -157,7 +157,7 @@ carsurvey2::html_insert_table_toggle("rap-knowledge")
 <div id="rap-knowledge-chart">
 ```{r}
 
-carsurvey2::plot_freqs(tables$rap_knowledge_chart, "Knowledge of RAP champions", "Count", n = samples$all, font_size = 14, orientation = "h")
+carsurvey2::plot_freqs(tables$rap_knowledge_chart, "Knowledge of RAP champions", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP knowledge", max_lines = 3)
 
 ```
 </div>
@@ -193,7 +193,7 @@ carsurvey2::html_insert_table_toggle("rap-opinions")
 <div id="rap-opinions-chart">
 ```{r}
 
-carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "Question", n = samples$heard_of_rap, font_size = 14, height = 700)
+carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "Question", n = samples$heard_of_rap, font_size = 12, height = 700, break_q_names_col = "Question")
 
 ```
 </div>
@@ -298,7 +298,8 @@ carsurvey2::html_insert_table_toggle("code-prac")
 <div id="code-prac-chart">
 ```{r}
 
-carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700)
+
+carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, break_q_names_col = "question")
 
 
 ```
@@ -306,7 +307,7 @@ carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "Question", n = 
 
 <div id="code-prac-table">
 ```{r echo = FALSE}
-kableExtra::kable_styling(carsurvey2::output_likert_table(tables$code_prac)) %>% 
+kableExtra::kable_styling(carsurvey2::output_likert_table(tables$code_prac_chart)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```
@@ -321,7 +322,7 @@ carsurvey2::html_insert_table_toggle("doc")
 <div id="doc-chart">
 ```{r}
 
-carsurvey2::plot_likert(tables$doc_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700)
+carsurvey2::plot_likert(tables$doc, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, break_q_names_col = "Question")
 
 
 ```

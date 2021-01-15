@@ -136,7 +136,6 @@ table_knowledge_of_rap <- function(smart_survey_data) {
                         "Knows department RAP champion")
   
   rap_knowledge_chart <- rap_knowledge
-  rap_knowledge_chart[[1]] <- carsurvey2::break_q_names(rap_knowledge_chart[[1]], 2)
   rap_knowledge_chart[[1]] <- factor(rap_knowledge_chart[[1]], levels = rap_knowledge_chart[[1]])
  
   return(rap_knowledge_chart)
@@ -176,7 +175,6 @@ table_opinion_of_rap <- function(smart_survey_data) {
                               "Agree",
                               "Strongly agree")
   rap_opinions_chart <- rap_opinions
-  rap_opinions_chart[[1]] <- carsurvey2::break_q_names(rap_opinions_chart[[1]], 2)
  
   return(rap_opinions_chart)
    
@@ -274,8 +272,6 @@ table_coding_practice_usage <- function(smart_survey_data, code_prac_levels) {
   
   code_prac_chart <- carsurvey2::coding_practices(smart_survey_data, code_prac_levels)
                                     
-  code_prac_chart[[1]] <- carsurvey2::break_q_names(code_prac_chart[[1]], 2)
-  
   return(code_prac_chart)
 }
 
@@ -298,7 +294,7 @@ table_documenation_usage <- function(smart_survey_data, code_prac_levels) {
   colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
   
   doc_questions <- c(doc_AQA_log = "Analytical Quality Assurance (AQA) logs",
-                     doc_assumption_reg = "smart_survey_data or assumptions registers",
+                     doc_assumption_reg = "Data or assumptions registers",
                      doc_func = "Documentation for each function or class",
                      doc_comments = "Code comments",
                      doc_flow = "Flow charts",
@@ -307,25 +303,15 @@ table_documenation_usage <- function(smart_survey_data, code_prac_levels) {
   
   doc[[1]] <- dplyr::recode(doc[[1]], !!!doc_questions)
   
+  colnames(doc) <- c("Question",
+                                             "Strongly disagree",
+                                             "Disagree",
+                                             "Neutral",
+                                             "Agree",
+                                             "Strongly agree",
+                                             "All the time")
+  
   return(doc)
-}
-
-
-#' @title table_documenation_usage_plotly_formatted
-#'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
-#' @param code_prac_levels A vector of strings, length 6
-#'
-#' @return data.frame
-#' @export
-
-format_plotly_documenation_usage <- function(smart_survey_data, code_prac_levels) {
-  
-  table_documenation_usage_df = table_documenation_usage(smart_survey_data, code_prac_levels)
-  
-  table_documenation_usage_df[[1]] <- break_q_names(table_documenation_usage_df[[1]], 2)
-  
-  return(table_documenation_usage_df)
 }
 
 
@@ -357,7 +343,7 @@ coding_practices <- function(smart_survey_data, code_prac_levels) {
     gp_function = "I write repetitive elements in my code as functions",
     gp_packages = "I collect my code and supporting material into packages",
     gp_unit_test = "I unit test my code",
-    gp_auto_QA = "I write code to automatically quality assure smart_survey_data",
+    gp_auto_QA = "I write code to automatically quality assure data",
     gp_team_open_source = "My team open sources its code"
   )
   

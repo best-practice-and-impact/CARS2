@@ -29,7 +29,7 @@
 #' @export 
 #'
 
-table_coding_frequency = function(smart_survey_data) {
+table_coding_frequency <- function(smart_survey_data) {
   
   smart_survey_data$code_freq <- factor(smart_survey_data$code_freq, levels = c("Never",
                                                                                 "Rarely",
@@ -53,7 +53,7 @@ table_coding_frequency = function(smart_survey_data) {
 #' @return data.frame
 #' @export
 
-table_knowledge_of_languages = function(smart_survey_data, langs) {
+table_knowledge_of_languages <- function(smart_survey_data, langs) {
   
   knowledge <- smart_survey_data[grepl("knowledge_", colnames(smart_survey_data))]
   knowledge <- carsurvey2::calc_multi_col_freqs(cols = knowledge, factor_levels = c("Yes", "Don't Know", "No"))
@@ -75,7 +75,7 @@ table_knowledge_of_languages = function(smart_survey_data, langs) {
 #' @return data.frame
 #' @export
 
-table_access_to_programming_language = function(smart_survey_data, langs) {
+table_access_to_programming_language <- function(smart_survey_data, langs) {
   
   access <- smart_survey_data[grepl("available_", colnames(smart_survey_data))]
   access <- carsurvey2::calc_multi_col_freqs(cols = access, factor_levels = c("Yes", "Don't Know", "No"))
@@ -95,7 +95,7 @@ table_access_to_programming_language = function(smart_survey_data, langs) {
 #' @return data.frame
 #' @export
 
-table_coding_tool_access_knowledge = function(smart_survey_data, langs) {
+table_coding_tool_access_knowledge <- function(smart_survey_data, langs) {
   
   code_tool_status <- smart_survey_data[grepl("status_", colnames(smart_survey_data))]
   code_tool_status <- carsurvey2::calc_multi_col_freqs(cols = code_tool_status, factor_levels = c("Access only", "Access and knowledge", "Knowledge only"))
@@ -114,7 +114,7 @@ table_coding_tool_access_knowledge = function(smart_survey_data, langs) {
 #' @export
 
 
-table_knowledge_of_rap = function(smart_survey_data) {
+table_knowledge_of_rap <- function(smart_survey_data) {
   
   smart_survey_data$RAP_champ_known[smart_survey_data$RAP_heard_of == "No"] <- "Have not heard of RAP"
   
@@ -151,7 +151,7 @@ table_knowledge_of_rap = function(smart_survey_data) {
 #' @return data.frame
 #' @export
 
-table_opinion_of_rap = function(smart_survey_data) {
+table_opinion_of_rap <- function(smart_survey_data) {
   
   know_rap_smart_survey_data <- smart_survey_data[smart_survey_data$RAP_heard_of == "Yes", ]
   know_rap_smart_survey_data <- dplyr::select(know_rap_smart_survey_data, RAP_understand:RAP_using)
@@ -190,7 +190,7 @@ table_opinion_of_rap = function(smart_survey_data) {
 #' @return data.frame
 #' @export
 
-table_rap_score_components = function(smart_survey_data) {
+table_rap_score_components <- function(smart_survey_data) {
   
   rap_score <- smart_survey_data[grepl("_score", colnames(smart_survey_data))]
   
@@ -238,7 +238,7 @@ table_rap_score_components = function(smart_survey_data) {
 #' @return data.frame
 #' @export
 
-table_rap_score_basic_frequencies= function(smart_survey_data) {
+table_rap_score_basic_frequencies <- function(smart_survey_data) {
   
   basic_freqs <- data.frame(table(smart_survey_data$basic_rap_score))
   colnames(basic_freqs) <- c("Basic RAP score", "Count")
@@ -253,7 +253,7 @@ table_rap_score_basic_frequencies= function(smart_survey_data) {
 #' @return data.frame
 #' @export
 
-table_rap_score_advanced_frequencies = function(smart_survey_data) {
+table_rap_score_advanced_frequencies <- function(smart_survey_data) {
   
   advanced_freqs <- data.frame(table(smart_survey_data$advanced_rap_score))
   colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
@@ -270,7 +270,7 @@ table_rap_score_advanced_frequencies = function(smart_survey_data) {
 #' @return data.frame
 #' @export
 
-table_coding_practice_usage = function(smart_survey_data, code_prac_levels) {
+table_coding_practice_usage <- function(smart_survey_data, code_prac_levels) {
   
   code_prac_chart <- carsurvey2::coding_practices(smart_survey_data, code_prac_levels)
                                     
@@ -287,7 +287,7 @@ table_coding_practice_usage = function(smart_survey_data, code_prac_levels) {
 #' @return data.frame
 #' @export
 
-table_documenation_usage = function(smart_survey_data, code_prac_levels) {
+table_documenation_usage <- function(smart_survey_data, code_prac_levels) {
   
   code_prac = carsurvey2::coding_practices(smart_survey_data, code_prac_levels)
   
@@ -319,11 +319,11 @@ table_documenation_usage = function(smart_survey_data, code_prac_levels) {
 #' @return data.frame
 #' @export
 
-table_documenation_usage_plotly_formatted = function(smart_survey_data, code_prac_levels) {
+format_plotly_documenation_usage <- function(smart_survey_data, code_prac_levels) {
   
-  table_documenation_usage_df = carsurvey2::table_documenation_usage(smart_survey_data, code_prac_levels)
+  table_documenation_usage_df = table_documenation_usage(smart_survey_data, code_prac_levels)
   
-  table_documenation_usage_df[[1]] <- carsurvey2::break_q_names(table_documenation_usage_df[[1]], 2)
+  table_documenation_usage_df[[1]] <- break_q_names(table_documenation_usage_df[[1]], 2)
   
   return(table_documenation_usage_df)
 }
@@ -339,7 +339,7 @@ table_documenation_usage_plotly_formatted = function(smart_survey_data, code_pra
 #' @return data.frame
 #' @export
 
-coding_practices = function(smart_survey_data, code_prac_levels) {
+coding_practices <- function(smart_survey_data, code_prac_levels) {
   
   code_prac_smart_survey_data <- smart_survey_data[grepl("gp_", colnames(smart_survey_data))]
   code_prac_smart_survey_data <- code_prac_smart_survey_data[smart_survey_data$code_freq != "Never", ]

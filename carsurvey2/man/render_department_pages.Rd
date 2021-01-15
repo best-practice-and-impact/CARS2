@@ -4,7 +4,11 @@
 \alias{render_department_pages}
 \title{render_department_pages}
 \usage{
-render_department_pages(smart_survey_data)
+render_department_pages(
+  smart_survey_data,
+  output_folder = "../../docs",
+  template_path = "rmarkdown/deps/template.rmd"
+)
 }
 \arguments{
 \item{smart_survey_data}{This is generated using the carsurvey2::data_ functions.}

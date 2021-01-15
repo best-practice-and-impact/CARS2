@@ -46,29 +46,29 @@ generate_tables <- function(smart_survey_data) {
   ################################################
   # Start creating tables
   
-  tables[["freq_table"]] <- carsurvey2::table_coding_frequency(smart_survey_data)
+  tables$freq_table <- table_coding_frequency(smart_survey_data)
  
-  tables[["knowledge"]] <- carsurvey2::table_knowledge_of_languages(smart_survey_data, langs)
+  tables$knowledge <- table_knowledge_of_languages(smart_survey_data, langs)
   
-  tables[["access"]] <- carsurvey2::table_access_to_programming_language(smart_survey_data, langs)
+  tables$access <- table_access_to_programming_language(smart_survey_data, langs)
   
-  tables[["code_tool_status"]] <- carsurvey2::table_coding_tool_access_knowledge(smart_survey_data, langs)
+  tables$code_tool_status <- table_coding_tool_access_knowledge(smart_survey_data, langs)
   
-  tables[["rap_knowledge_chart"]] <- carsurvey2::table_knowledge_of_rap(smart_survey_data)
+  tables$rap_knowledge_chart <- table_knowledge_of_rap(smart_survey_data)
   
-  tables[["rap_opinions_chart"]] <- carsurvey2::table_opinion_of_rap(smart_survey_data)
+  tables$rap_opinions_chart <- table_opinion_of_rap(smart_survey_data)
 
-  tables[["components"]] <- carsurvey2::table_rap_score_components(smart_survey_data)
+  tables$components <- table_rap_score_components(smart_survey_data)
   
-  tables[["basic_freqs"]] <- carsurvey2::table_rap_score_basic_frequencies(smart_survey_data)
+  tables$basic_freqs <- table_rap_score_basic_frequencies(smart_survey_data)
   
-  tables[["advanced_freqs"]] <- carsurvey2::table_rap_score_advanced_frequencies(smart_survey_data)
+  tables$advanced_freqs <- table_rap_score_advanced_frequencies(smart_survey_data)
   
-  tables[["code_prac_chart"]] <- carsurvey2::table_coding_practice_usage(smart_survey_data, code_prac_levels)
+  tables$code_prac_chart <- table_coding_practice_usage(smart_survey_data, code_prac_levels)
   
-  tables[["doc"]] <- carsurvey2::table_documenation_usage(smart_survey_data, code_prac_levels)
+  tables$doc <- table_documenation_usage(smart_survey_data, code_prac_levels)
   
-  tables[["doc_chart"]] <- carsurvey2::table_documenation_usage_plotly_formatted(smart_survey_data, code_prac_levels)
+  tables$doc_chart <- format_plotly_documenation_usage(smart_survey_data, code_prac_levels)
   
   
   ############################

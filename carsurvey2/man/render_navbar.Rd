@@ -4,8 +4,11 @@
 \alias{render_navbar}
 \title{render_navbar}
 \usage{
-render_navbar()
+render_navbar(yml_path = "rmarkdown/main/_site.yml")
+}
+\value{
+navbar_page html code for navbar
 }
 \description{
-Renders and saves the site navbar.
+Creates the site navbar.
 }

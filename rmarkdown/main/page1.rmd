@@ -334,4 +334,4 @@ kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) %>%
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 ```
-</div
+</div>

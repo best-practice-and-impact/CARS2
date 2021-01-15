@@ -19,7 +19,7 @@
 #' @export 
 
 
-render_main_site = function(smart_survey_data) {
+render_main_site <- function(smart_survey_data) {
   
   markdown_file_path = "rmarkdown/main"
   
@@ -35,26 +35,34 @@ render_main_site = function(smart_survey_data) {
   
 }
 
-
 #' @title render_navbar
 #'
-#' @description Renders and saves the site navbar.
+#' @description Creates the site navbar.
+#' 
+#' @return navbar_page html code for navbar
+#' 
 #' @export
 
-render_navbar = function() {
-  
-  # Function bound to render_navbar
-  save_navbar <- function(code, path) {
-    filename <- paste(path, "_navbar.html", sep = "/")
-    write(code, filename)
-  }
+render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
   
   # Create navigation bar
-  navbar_info <- carsurvey2::read_site_yml("rmarkdown/main/_site.yml")
+  navbar_info <- carsurvey2::read_site_yml(yml_path)
   navbar_page <- carsurvey2::html_build_navbar(navbar_info)
-  save_navbar(navbar_page, "rmarkdown/main")
-  save_navbar(navbar_page, "rmarkdown/deps")
+  
+  return(navbar_page)
 }
+
+#' @title Save navigation bar
+#'
+#' @description Saves the site navbar.
+#' 
+#' @export
+
+save_navbar <- function(code, path) {
+  filename <- paste(path, "_navbar.html", sep = "/")
+  write(code, filename)
+}
+
 
 
 #' @title render_department_pages
@@ -69,10 +77,7 @@ render_navbar = function() {
 #'
 #' @export
 
-render_department_pages = function(smart_survey_data) {
-  
-  output_folder = "../../docs"
-  template_path = "rmarkdown/deps/template.rmd"
+render_department_pages <- function(smart_survey_data, output_folder = "../../docs", template_path = "rmarkdown/deps/template.rmd") {
   
   message("Writing files to ", output_folder)
   # Get list of departments with sample >= 20

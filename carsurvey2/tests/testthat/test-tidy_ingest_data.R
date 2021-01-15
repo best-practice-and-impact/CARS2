@@ -40,16 +40,16 @@ dummy_data3 <- data.frame(
 )
 
 test_that("function returns correct numbered column names", {
-  expect_identical(colnames(tidy_ingest_data(dummy_data0)), c("userID", "IP.address", "Q1", "Q2"))
-  expect_identical(colnames(tidy_ingest_data(dummy_data1)), c("userID", "IP.address", "Q1", "Q1.1", "Q1.2", "Q1.3", "Q2"))
-  expect_identical(colnames(tidy_ingest_data(dummy_data2)), c("userID", "IP.address", "Q1", "Q1.1", "Q1.2", "Q1.3", "Q2"))
-  expect_identical(colnames(tidy_ingest_data(dummy_data3)), c("userID", "IP.address", "Q1", "Q1.1", "Q1.2", "Q1.3", "Q2"))
+  expect_identical(colnames(data_tidy_ingest(dummy_data0)), c("userID", "IP.address", "Q1", "Q2"))
+  expect_identical(colnames(data_tidy_ingest(dummy_data1)), c("userID", "IP.address", "Q1", "Q1.1", "Q1.2", "Q1.3", "Q2"))
+  expect_identical(colnames(data_tidy_ingest(dummy_data2)), c("userID", "IP.address", "Q1", "Q1.1", "Q1.2", "Q1.3", "Q2"))
+  expect_identical(colnames(data_tidy_ingest(dummy_data3)), c("userID", "IP.address", "Q1", "Q1.1", "Q1.2", "Q1.3", "Q2"))
 })
 
 
 test_that("function returns correct number of rows", {
-  expect_equal(nrow(tidy_ingest_data(dummy_data0)), 2)
-  expect_equal(nrow(tidy_ingest_data(dummy_data1)), 2)
-  expect_equal(nrow(tidy_ingest_data(dummy_data2)), 2)
-  expect_equal(nrow(tidy_ingest_data(dummy_data3)), 2)
+  expect_equal(nrow(data_tidy_ingest(dummy_data0)), 2)
+  expect_equal(nrow(data_tidy_ingest(dummy_data1)), 2)
+  expect_equal(nrow(data_tidy_ingest(dummy_data2)), 2)
+  expect_equal(nrow(data_tidy_ingest(dummy_data3)), 2)
 })

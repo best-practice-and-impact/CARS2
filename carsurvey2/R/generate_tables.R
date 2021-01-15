@@ -68,7 +68,6 @@ generate_tables <- function(smart_survey_data) {
   
   tables$doc <- table_documenation_usage(smart_survey_data, code_prac_levels)
   
-  tables$doc_chart <- format_plotly_documenation_usage(smart_survey_data, code_prac_levels)
   
   
   ############################

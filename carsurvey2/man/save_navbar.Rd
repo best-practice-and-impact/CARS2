@@ -6,6 +6,11 @@
 \usage{
 save_navbar(code, path)
 }
+\arguments{
+\item{code}{todo}
+
+\item{path}{todo}
+}
 \description{
 Saves the site navbar.
 }

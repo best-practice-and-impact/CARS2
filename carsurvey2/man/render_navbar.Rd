@@ -6,6 +6,9 @@
 \usage{
 render_navbar(yml_path = "rmarkdown/main/_site.yml")
 }
+\arguments{
+\item{yml_path}{Path to the rmarkdown site yml config}
+}
 \value{
 navbar_page html code for navbar
 }

@@ -39,6 +39,8 @@ render_main_site <- function(smart_survey_data) {
 #'
 #' @description Creates the site navbar.
 #' 
+#' @param yml_path Path to the rmarkdown site yml config
+#' 
 #' @return navbar_page html code for navbar
 #' 
 #' @export
@@ -55,6 +57,9 @@ render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
 #' @title Save navigation bar
 #'
 #' @description Saves the site navbar.
+#' 
+#' @param code todo
+#' @param path todo
 #' 
 #' @export
 
@@ -74,10 +79,13 @@ save_navbar <- function(code, path) {
 #' department. The template is located at the internal var template_path.  
 #'
 #' @param smart_survey_data This is generated using the carsurvey2::data_ functions.
-#'
+#' @param output_folder Folder the site is built and saved to
+#' @param template_path The path to the template that gets render for each department
 #' @export
 
-render_department_pages <- function(smart_survey_data, output_folder = "../../docs", template_path = "rmarkdown/deps/template.rmd") {
+render_department_pages <- function(smart_survey_data,
+                                    output_folder = "../../docs",
+                                    template_path = "rmarkdown/deps/template.rmd") {
   
   message("Writing files to ", output_folder)
   # Get list of departments with sample >= 20

@@ -17,13 +17,15 @@
 #'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
 #'@param orientation plot orientation ("h" = horizontal, "v" = verical). Vertical by default
+#'@param break_q_names_col applies break_q_names to the column. Not applied by default
+#'@param max_lines maximum number of lines. Int, defaults to 2/ See carsurvey::break_q_names()
 #'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orientation = "v", ...) {
+plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orientation = "v", break_q_names_col = NULL, max_lines = 2, ...) {
   
   # Set default bar colour
   if (missing(bar_colour)) {
@@ -60,6 +62,14 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
   # Validate orientation
   if (!(orientation %in% c("h", "v"))) {
     stop("Unexpected input - orientation should be set to 'h' or 'v'")
+  }
+  
+  # Apply break_q_names to a column
+  if(!is.null(break_q_names_col)) {
+    # Coerce to character type
+    table[[break_q_names_col]] <- as.character(table[[break_q_names_col]])
+    
+    table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]], max_lines = max_lines)
   }
   
   x <- list(
@@ -178,7 +188,10 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
   )
   
   # Reshape data
-  longdata <- reshape2::melt(table)
+  suppressMessages(
+    longdata <- reshape2::melt(table)
+  )
+
   
   # Get bar colours
   ncolours <- ncol(table) - 1
@@ -243,13 +256,14 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
 #'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
 #'@param neutral_mid whether the middle of the scale should be a neutral category (logical). TRUE by default
+#'@param break_q_names_col applies break_q_names to the column. Not applied by default
 #'@param ... additional plot_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, ...) {
+plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, break_q_names_col =NULL, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -289,6 +303,11 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
     stop("Unexpected input - mid is not logical (TRUE/FALSE)")
   }
   
+  # Apply break_q_names to a column
+  if(!is.null(break_q_names_col)) {
+    table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]])
+  }
+  
   x <- list(
     title = xlab,
     tickfont = list(size = font_size),
@@ -304,7 +323,9 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   )
   
   # Reshape data
-  longdata <- reshape2::melt(table)
+  suppressMessages(
+    longdata <- reshape2::melt(table)
+  )
   
   # Calculate bases for bars
   bases <- apply(table[2:ncol(table)], 1, cumsum)

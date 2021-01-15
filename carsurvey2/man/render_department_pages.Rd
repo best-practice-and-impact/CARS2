@@ -12,6 +12,10 @@ render_department_pages(
 }
 \arguments{
 \item{smart_survey_data}{This is generated using the carsurvey2::data_ functions.}
+
+\item{output_folder}{Folder the site is built and saved to}
+
+\item{template_path}{The path to the template that gets render for each department}
 }
 \description{
 Creates pages for each department.

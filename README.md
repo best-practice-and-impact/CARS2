@@ -9,6 +9,7 @@ A preview can be seen at the [CARS-2 website](https://best-practice-and-impact.g
 
 > Rscript build_site.r runs the project 
 
+Before joining the project read the [Contributing Guidance](https://github.com/best-practice-and-impact/CARS-2/wiki/Contributing-Guidance)
 # Summary
 To build the site you will need to 
 

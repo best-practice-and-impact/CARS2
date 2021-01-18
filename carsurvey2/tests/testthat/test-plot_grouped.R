@@ -20,9 +20,9 @@ data_6col_3group <- data.frame(bars = c("bar1", "bar2", "bar3", "bar4", "bar5", 
 
 
 test_that("function returns plotly html widget", {
-  expect_identical(class(plot_grouped(data_2col_2group, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_grouped(data_3col_2group, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_grouped(data_4col_2group, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_grouped(data_5col_3group, "axis1", "axis2")), c("plotly", "htmlwidget"))
-  expect_identical(class(plot_grouped(data_6col_3group, "axis1", "axis2")), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_grouped(data_2col_2group, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_grouped(data_3col_2group, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_grouped(data_4col_2group, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_grouped(data_5col_3group, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
+  expect_identical(class(plot_grouped(data_6col_3group, "axis1", "axis2", n = 10)), c("plotly", "htmlwidget"))
 })

@@ -1,3 +1,28 @@
+######                                ######                      
+#     # #    # #    # #    # #   #    #     #   ##   #####   ##   
+#     # #    # ##  ## ##  ##  # #     #     #  #  #    #    #  #  
+#     # #    # # ## # # ## #   #      #     # #    #   #   #    # 
+#     # #    # #    # #    #   #      #     # ######   #   ###### 
+#     # #    # #    # #    #   #      #     # #    #   #   #    # 
+######   ####  #    # #    #   #      ######  #    #   #   #    # 
+
+# Only the main function generate_dummy_data is documented 
+
+
+#' @title Generate dummy data similar to carsurvey wave 2 responses
+#'
+#' @details Generates non-disclosure data similar to the carsurvey wave 2 responses. 
+#' The column names are the same, same number of column. The data is similar but the distbutions are random. Where a question was multiple choice these are sampled randomly. 
+#' Free text is auto generated as a sting of random letters. The disrbutions are NOT the same, e.g for department this is sampled randomly so each deartment has a equal chance of being selected.
+#'
+#' @param dummy_data_row_number Number of rows to generate
+#' @param config Config used to control the data generation. Included in paackage and loaded by default.
+#'  BUT a custom config can be supplied if desired. Data generated is equal to what is produced by thecarsurvey2::data_convert_raw(API_data)  %>% carsurvey2::data_tidy_ingest() %>%  carsurvey2::data_rename_cols(). 
+#'  You can therefore run carsurvey2::data_derive_rap_scores(carsurvey2::generate_dummy_data(10)) 
+#'
+#' @return data.frame
+#' @export
+
 
 generate_dummy_data <- function(dummy_data_row_number = 100, config = NULL) {
   
@@ -23,7 +48,7 @@ generate_dummy_data <- function(dummy_data_row_number = 100, config = NULL) {
 
 
 dummy_data_free_text = function(config, dummy_data_row_number) {
-
+  
   dummy_data_text_df <- data.frame("init" = 1:dummy_data_row_number)
   
   for (col in config$column_free_text) {
@@ -75,7 +100,7 @@ dummy_data_unique = function(dummy_data_row_number) {
 generate_text <- function(dummy_data_row_number, frequency = 7) {
   # frequency controls how many are NA 
   # so frequency = 6 would mean on average 6 would be NA 4 would be text
-
+  
   vec <- c()
   
   for (i in 1:dummy_data_row_number) {

@@ -17,8 +17,8 @@
 #'
 #' @param dummy_data_row_number Number of rows to generate
 #' @param config Config used to control the data generation. Included in paackage and loaded by default.
-#'  BUT a custom config can be supplied if desired. Data generated is equal to what is produced by thecarsurvey2::data_convert_raw(API_data)  %>% carsurvey2::data_tidy_ingest() %>%  carsurvey2::data_rename_cols(). 
-#'  You can therefore run carsurvey2::data_derive_rap_scores(carsurvey2::generate_dummy_data(10)) 
+#'  BUT a custom config can be supplied if desired. Data generated is equal to what is produced by thecarsurvey2::data_convert_raw(API_data)  %>% carsurvey2::data_tidy_ingest(). 
+#'  You can therefore run carsurvey2::data_rename_cols(carsurvey2::generate_dummy_data(10)) 
 #'
 #' @return data.frame
 #' @export
@@ -26,7 +26,7 @@
 
 generate_dummy_data <- function(dummy_data_row_number = 100, config = NULL) {
   
-  if(is.null(config)) config = yaml::read_yaml("carsurvey2/dummy_data.yaml")
+  if(is.null(config)) config = yaml::read_yaml("dummy_data.yaml")
   
   multiple_choice <- dummy_data_options(config, dummy_data_row_number)
   
@@ -57,8 +57,9 @@ dummy_data_free_text = function(config, dummy_data_row_number) {
   }
   
   # handle use_other values are wither text or NO (not NA)
-  dummy_data_text_df$use_other <-ifelse(is.na(dummy_data_text_df$use_other), "No", dummy_data_text_df$use_other)
-  
+
+  dummy_data_text_df$Q25.5 <-ifelse(is.na(dummy_data_text_df$Q25.5), "No", dummy_data_text_df$Q25.5)
+ 
   dummy_data_text_df$init <- NULL
   
   return(dummy_data_text_df)
@@ -225,7 +226,7 @@ dummy_data_options <- function(config, dummy_data_row_number = 100) {
   
   for(col in names(column_options)) {
     
-    name = gsub("_options", "", col)
+    name = col
     
     sampled_data = sample(column_options[[col]], dummy_data_row_number, replace = TRUE)
     

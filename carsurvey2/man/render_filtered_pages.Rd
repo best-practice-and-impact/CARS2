@@ -15,6 +15,12 @@ render_filtered_pages(
 \arguments{
 \item{smart_survey_data}{This is generated using the carsurvey2::data_ functions.}
 
+\item{filter_variable}{The variable that the data is filtered on. This is given as a string such as "dept". 
+The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.}
+
+\item{page_title}{This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
+where filter is one element of the list as described above in filter_variable (values over 20) and the page title is this argument.}
+
 \item{output_folder}{Folder the site is built and saved to}
 
 \item{template_path}{The path to the template that gets render for each department}

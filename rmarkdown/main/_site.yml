@@ -12,3 +12,5 @@ navbar:
       href: page1.html
     - text: "Department profiles"
       href: page2.html
+    - text: "Grade Profiles"
+      href: page3.html

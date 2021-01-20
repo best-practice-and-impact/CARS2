@@ -83,38 +83,57 @@ save_navbar <- function(code, path) {
 #' @param template_path The path to the template that gets render for each department
 #' @export
 
-render_department_pages <- function(smart_survey_data,
-                                    output_folder = "../../docs",
-                                    template_path = "rmarkdown/deps/template.rmd") {
+
+render_filtered_pages <- function(smart_survey_data,
+                               filter_variable,
+                               page_title = "",
+                               output_folder = "../../docs",
+                               template_path = "rmarkdown/deps/template.rmd") {
   
-  message("Writing files to ", output_folder)
-  # Get list of departments with sample >= 20
-  deps <- data.frame(table(smart_survey_data$dept))
-  dep_list <- deps[deps[2] >= 20, ]
-  departments = as.character(dep_list$Var1)
+  if(!sum(colnames(smart_survey_data) == filter_variable) == 1) stop("filter column: ", filter_variable,
+                                                                     " doesn't exist in the data provided. \nCheck that filter is equal to a valid column name")
   
-  for (dep in departments) {
-    message("Writing page for ", carsurvey2::format_file_path(dep))
-    file_path <- carsurvey2::format_file_path(dep)
+  # get grade with sample > 20
+  filter_table <- data.frame(
+    table(smart_survey_data[filter_variable])
+  )
+  filter_over_20 <- filter_table[filter_table[2] >= 20, ]
+  filter_list = as.character(filter_over_20$Var1)
+  
+  for (filter in filter_list) {
+    
+    file_path <- carsurvey2::format_file_path(filter)
+    message("Writing page for ", file_path)
     
     # filter data to just the department
-    filtered_data <- smart_survey_data[smart_survey_data$dept == dep, ]
+    filtered_data <- smart_survey_data[smart_survey_data[filter_variable] == filter, ]
+    if(!nrow(filtered_data) == filter_over_20$Freq[filter_over_20$Var1 == filter]) stop("Filtered data row number is not equal to number of : ", file_path)
     
-    # Create a unique variable for each department
-    variable_name <- paste0(file_path, "_filtered_data")
+    title <- paste0("DRAFT: ", page_title , " profile: ", filter)
     
-    # Create a variable in the global enviroment 
-    # This is accessed by the rmarkdown::render()
-    assign(variable_name, filtered_data)
-
+    filtered_tables <- carsurvey2::generate_tables(filtered_data)
+    
+    samples <- list(
+      all = nrow(filtered_data),
+      coders = sum(filtered_data$code_freq != "Never"),
+      heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes")
+    )
+    
     rmarkdown::render(template_path, 
                       output_file = paste0(output_folder, "/", file_path),
-                      quiet = TRUE)
-    
-    # This is the opposite of assign
-    # This delete the variable cleaning the global enviroment 
-    rm(list = variable_name)
-    
+                      quiet = TRUE,
+                      params = list(
+                        title = title, 
+                        tables = filtered_tables,
+                        samples = samples
+                      ))
   } # end for-loop
-  
 }
+
+
+
+
+
+
+
+

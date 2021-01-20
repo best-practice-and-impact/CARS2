@@ -1,6 +1,7 @@
 # Custom
 carsurvey2.Rcheck
 .DS_Store
+*.yaml
 
 # Generic
 # History files

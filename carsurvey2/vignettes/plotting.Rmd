@@ -1,0 +1,91 @@
+---
+title: "Plotting"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+A guide to the carsurvey2 package plotting functions. 
+
+```{r}
+library(carsurvey2)
+
+library(dplyr)
+```
+
+All the plotting functions are grouped with the prefix `plot_`
+
+> *Autocomplete (tab) is your friend! carsurvey2::plot_`<tab>`*
+
+They all produce plotly interactive graphs. For fun the following examples use the [Gapminder](https://cran.r-project.org/web/packages/gapminder/README.html) dataset
+
+# Frequency Plot
+
+`plot_freqs` is used to generate interactive frequency graphs. Lets plot the number of countires per continent. An easy way to generate frequency data is using the base r function `table`.
+
+```{r}
+# Prepare Data
+data <- gapminder::gapminder
+one_year <- dplyr::filter(data, year == 2007) 
+freq = data.frame(
+  table(one_year$continent)
+  )
+
+plot_freqs(freq, 
+           xlab = "Continents", 
+           ylab = "Number of Countries",
+           n = sum(freq$Freq))
+```
+
+# Stacked plot 
+
+```{r}
+# Prepare Data
+data <- gapminder::gapminder
+years = list()
+for( year_iter in unique(data$year)) {
+  summarised = dplyr::filter(data, year == year_iter)  %>%
+    mutate("GDP_billion" = round((gdpPercap * pop) /1000000000)  ) %>%
+    dplyr::group_by(continent ) %>%
+    summarise(total_gdp = sum(gdpPercap))
+
+    row = summarised$total_gdp  
+    years[[as.character(year_iter)]] <- row
+}
+
+gdp_per_year <- data.frame(do.call(rbind, years))
+colnames(gdp_per_year)  <- c("Africa", "Americas", "Asia", "Europe", "Oceania" )
+gdp_per_year["Year"] <- row.names(gdp_per_year)
+
+
+plot_stacked(gdp_per_year, xlab = "GDP in Billions", ylab = "Year", n = "", colour_scale = "2gradients", font_size = 14)
+
+
+```
+
+
+# Part to whole
+
+```{r}
+
+gdp_per_year["world_gdp"]<- rowSums(gdp_per_year[1:5])
+gdp_per_year <- dplyr::select(gdp_per_year, Year, everything())
+
+for(col in colnames(gdp_per_year[2:6])) {
+  for (i in 1:nrow(gdp_per_year)) {
+    gdp_per_year[[col]][i] <- (gdp_per_year[[col]][i] / gdp_per_year$world_gdp[i] ) * 100
+  }
+}
+
+gdp_per_year$world_gdp <- NULL
+
+plot_stacked(gdp_per_year, xlab = "Percentage Contribution to World GDP", ylab = "Year", n = 100, colour_scale = "2gradients", font_size = 14)
+
+```
+
+
+
+
+

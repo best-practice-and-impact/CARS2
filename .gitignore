@@ -2,6 +2,7 @@
 carsurvey2.Rcheck
 .DS_Store
 *.yaml
+docs/
 
 # Generic
 # History files
@@ -46,4 +47,6 @@ vignettes/*.pdf
 
 # translation temp files
 po/*~
+
+
 

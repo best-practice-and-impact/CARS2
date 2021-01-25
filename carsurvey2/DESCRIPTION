@@ -24,7 +24,9 @@ Imports:
 	reshape2,
 	kableExtra,
 	stringi,
-	htmlwidgets
+	htmlwidgets,
+	magrittr,
+	lexicon
 Suggests: 
 	testthat (>= 2.1.0)
 Encoding: UTF-8

@@ -56,7 +56,6 @@ sample_vals <- function(vals, n_rows) {
   } else {
     set.seed(c(1:n_rows))
     vals <- as.character(vals)
-    print(vals)
     return(sample(vals, n_rows, replace=TRUE))
   }
   

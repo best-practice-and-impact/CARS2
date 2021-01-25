@@ -201,6 +201,8 @@ data_tidy_ingest <- function(data) {
     })
   )
   
+  data$IP.Address <- NULL
+  
   return(data)
 }
 

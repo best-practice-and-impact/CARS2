@@ -3,6 +3,7 @@ carsurvey2.Rcheck
 .DS_Store
 carsurvey2_0.7.0.tar.gz
 *.yaml
+docs/
 
 # Generic
 # History files
@@ -47,4 +48,6 @@ vignettes/*.pdf
 
 # translation temp files
 po/*~
+
+
 

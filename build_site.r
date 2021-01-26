@@ -1,11 +1,3 @@
-######     ###    ########   ######      ######  ##     ## ########  ##     ## ######## ##    ## 
-##    ##   ## ##   ##     ## ##    ##    ##    ## ##     ## ##     ## ##     ## ##        ##  ##  
-##        ##   ##  ##     ## ##          ##       ##     ## ##     ## ##     ## ##         ####   
-##       ##     ## ########   ######      ######  ##     ## ########  ##     ## ######      ##    
-##       ######### ##   ##         ##          ## ##     ## ##   ##    ##   ##  ##          ##    
-##    ## ##     ## ##    ##  ##    ##    ##    ## ##     ## ##    ##    ## ##   ##          ##    
-######   ##     ## ##     ##  ######      ######   #######  ##     ##    ###    ########    ##   
-
 
 # This script is designed to be used with the project root as the working directory (../)
 library(magrittr)
@@ -31,4 +23,3 @@ carsurvey2::save_navbar(navbar, "rmarkdown/deps")
 carsurvey2::render_main_site(carsurvey_data)
 carsurvey2::render_filtered_pages(carsurvey_data, filter_variable = "dept", page_title = "Department")
 carsurvey2::render_filtered_pages(carsurvey_data, filter_variable = "grade", page_title = "Grade")
-carsurvey2::print_success_cat()

@@ -1,14 +1,6 @@
-##     ## ######## ##     ## ##       
-##     ##    ##    ###   ### ##       
-##     ##    ##    #### #### ##       
-#########    ##    ## ### ## ##       
-##     ##    ##    ##     ## ##       
-##     ##    ##    ##     ## ##       
-##     ##    ##    ##     ## ######## 
+# A set of functions that create raw html/JS
 
-# A set of functions that deal with raw html/js
-
-#' @title html_build_navbar
+#' @title Build navigation bar
 #'
 #'@description  build rmarkdown site navbar
 #'
@@ -20,7 +12,7 @@
 #'
 #'@export
 
-html_build_navbar <- function(navbar_info) {
+build_navbar <- function(navbar_info) {
   
   if (!is.list(navbar_info)) {
     stop("Unexpected input - navbar_info should be a list")
@@ -80,7 +72,7 @@ html_build_navbar <- function(navbar_info) {
 }
 
 
-#' @title html_setup_table_toggle
+#' @title Set up table toggle
 #'
 #' @description  Set up JavaScript functions for show table/chart buttons 
 #'
@@ -91,7 +83,7 @@ html_build_navbar <- function(navbar_info) {
 #'
 #'@export
 
-html_setup_table_toggle <- function() {
+setup_table_toggle <- function() {
   
   script <- 
     '
@@ -117,7 +109,7 @@ html_setup_table_toggle <- function() {
 }
  
 
-#'@title html_insert_table_toggle
+#'@title Insert table toggle buttons
 #'
 #'@description Add table toggle buttons to rmarkdowndown site 
 #'
@@ -129,7 +121,7 @@ html_setup_table_toggle <- function() {
 #'
 #'@export
 
-html_insert_table_toggle <- function(output_name) {
+insert_table_toggle <- function(output_name) {
   
   if (length(output_name) > 1) {
     stop("Unexpected input - output name should be a single character string.")

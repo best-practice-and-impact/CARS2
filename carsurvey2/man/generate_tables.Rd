@@ -2,7 +2,7 @@
 % Please edit documentation in R/generate_tables.R
 \name{generate_tables}
 \alias{generate_tables}
-\title{generate_tables}
+\title{Generate tables}
 \usage{
 generate_tables(smart_survey_data)
 }

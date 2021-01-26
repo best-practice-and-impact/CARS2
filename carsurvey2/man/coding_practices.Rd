@@ -4,10 +4,10 @@
 \alias{coding_practices}
 \title{coding_practices}
 \usage{
-coding_practices(smart_survey_data, code_prac_levels)
+coding_practices(data, code_prac_levels)
 }
 \arguments{
-\item{smart_survey_data}{This is generated using the carsurvey2::smart_survey_data_ functions.}
+\item{data}{This is generated using the data functions.}
 
 \item{code_prac_levels}{A vector of strings, length 6}
 }
@@ -15,5 +15,5 @@ coding_practices(smart_survey_data, code_prac_levels)
 data.frame
 }
 \description{
-Used for genertaing more than 1 table = table_coding_practice_usage, table_documenation_usage
+Used for genertaing more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
 }

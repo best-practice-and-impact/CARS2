@@ -59,5 +59,5 @@ comparison_data <- data.frame(
 )
 
 test_that("function returns correct rap scores", {
-  expect_identical(data_derive_code_status(dummy_data), comparison_data)
+  expect_identical(derive_code_status(dummy_data), comparison_data)
 })

@@ -13,5 +13,5 @@ navbar_args <- list(
 )
 
 test_that("Function returns HTML string from list of arguments", {
-  expect_type(html_build_navbar(navbar_args), "character")
+  expect_type(build_navbar(navbar_args), "character")
 })

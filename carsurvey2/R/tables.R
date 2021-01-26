@@ -1,17 +1,8 @@
 
-
-#####   ##   #####  #      ######  ####   
-  #    #  #  #    # #      #      #      
-  #   #    # #####  #      #####   ####  
-  #   ###### #    # #      #           # 
-  #   #    # #    # #      #      #    # 
-  #   #    # #####  ###### ######  #### 
-
-###########################
 # README
 # Functions defined here are used in generate_tables()
 
-# All functions are to take smart_survey_data as the first argument
+# All functions are to take data as the first argument
 # Any objects needed, such as a list of languages are to be defined in generate_tables() and passed into the function.
 
 # The only output of the function in the generated table, no additional objects to be returned or shared with other functions.
@@ -20,23 +11,23 @@
 
 
 
-#' @title table_coding_frequency
+#' @title calc_freqs_coding_frequency
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @return data.frame
 #' 
 #' @export 
 #'
 
-table_coding_frequency <- function(smart_survey_data) {
+calc_freqs_coding_frequency <- function(data) {
   
-  smart_survey_data$code_freq <- factor(smart_survey_data$code_freq, levels = c("Never",
+  data$code_freq <- factor(data$code_freq, levels = c("Never",
                                                                                 "Rarely",
                                                                                 "Sometimes",
                                                                                 "Regularly",
                                                                                 "All the time"))
-  freq_table <- data.frame(table(smart_survey_data$code_freq))
+  freq_table <- data.frame(table(data$code_freq))
   
   colnames(freq_table) <- c("Coding frequency", "Count")
   
@@ -44,18 +35,18 @@ table_coding_frequency <- function(smart_survey_data) {
   
 }
 
-#' @title table_knowledge_of_languages
+#' @title calc_freqs_knowledge_of_languages
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #' 
 #' @param langs Formatted list of strings. langs object is available in carsurvey2::generate_tables()
 #'
 #' @return data.frame
 #' @export
 
-table_knowledge_of_languages <- function(smart_survey_data, langs) {
+calc_freqs_knowledge_of_languages <- function(data, langs) {
   
-  knowledge <- smart_survey_data[grepl("knowledge_", colnames(smart_survey_data))]
+  knowledge <- data[grepl("knowledge_", colnames(data))]
   knowledge <- carsurvey2::calc_multi_col_freqs(cols = knowledge, factor_levels = c("Yes", "Don't Know", "No"))
   colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
   knowledge[[1]] <- stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ]%>% dplyr::recode(!!!langs) # Rename questions
@@ -66,18 +57,18 @@ table_knowledge_of_languages <- function(smart_survey_data, langs) {
 
 
 
-#' @title table_access_to_programming_language
+#' @title calc_freqs_access_to_programming_language
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #' 
 #' @param langs Formatted list of strings. langs object is available in carsurvey2::generate_tables()
 #'
 #' @return data.frame
 #' @export
 
-table_access_to_programming_language <- function(smart_survey_data, langs) {
+calc_freqs_access_to_programming_language <- function(data, langs) {
   
-  access <- smart_survey_data[grepl("available_", colnames(smart_survey_data))]
+  access <- data[grepl("available_", colnames(data))]
   access <- carsurvey2::calc_multi_col_freqs(cols = access, factor_levels = c("Yes", "Don't Know", "No"))
   colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
   access[[1]] <- stringr::str_split(access[[1]], "_", simplify = TRUE)[,2] %>% dplyr::recode(!!!langs) # Rename questions
@@ -86,18 +77,18 @@ table_access_to_programming_language <- function(smart_survey_data, langs) {
   
 }
 
-#' @title table_coding_tool_access_knowledge
+#' @title calc_freqs_coding_tool_access_knowledge
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #' 
 #' @param langs Formatted list of strings. langs object is available in carsurvey2::generate_tables()
 #'
 #' @return data.frame
 #' @export
 
-table_coding_tool_access_knowledge <- function(smart_survey_data, langs) {
+calc_freqs_coding_tool_access_knowledge <- function(data, langs) {
   
-  code_tool_status <- smart_survey_data[grepl("status_", colnames(smart_survey_data))]
+  code_tool_status <- data[grepl("status_", colnames(data))]
   code_tool_status <- carsurvey2::calc_multi_col_freqs(cols = code_tool_status, factor_levels = c("Access only", "Access and knowledge", "Knowledge only"))
   colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only") 
   code_tool_status[[1]] <- stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2] %>% dplyr::recode(!!!langs) # Rename questions
@@ -106,19 +97,19 @@ table_coding_tool_access_knowledge <- function(smart_survey_data, langs) {
 }
 
 
-#' @title table_knowledge_of_rap
+#' @title calc_freqs_knowledge_of_rap
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @return data.frame
 #' @export
 
 
-table_knowledge_of_rap <- function(smart_survey_data) {
+calc_freqs_knowledge_of_rap <- function(data) {
   
-  smart_survey_data$RAP_champ_known[smart_survey_data$RAP_heard_of == "No"] <- "Have not heard of RAP"
+  data$RAP_champ_known[data$RAP_heard_of == "No"] <- "Have not heard of RAP"
   
-  smart_survey_data$RAP_champ_known <- factor(smart_survey_data$RAP_champ_known, levels = c(
+  data$RAP_champ_known <- factor(data$RAP_champ_known, levels = c(
     "Have not heard of RAP",                                     
     "I don't know what a RAP champion is",                          
     "I know what a RAP champion is but don't know who the RAP champion in my department is",
@@ -126,7 +117,7 @@ table_knowledge_of_rap <- function(smart_survey_data) {
     "I know who the RAP champion in my department is"
   ))
   
-  rap_knowledge <- data.frame(table(smart_survey_data$RAP_champ_known))
+  rap_knowledge <- data.frame(table(data$RAP_champ_known))
   
   colnames(rap_knowledge) <- c("RAP knowledge", "Count")
   rap_knowledge[1] <- c("Have not heard of RAP",
@@ -143,23 +134,23 @@ table_knowledge_of_rap <- function(smart_survey_data) {
 
 
 
-#' @title table_opinion_of_rap 
+#' @title calc_freqs_opinion_of_rap 
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @return data.frame
 #' @export
 
-table_opinion_of_rap <- function(smart_survey_data) {
+calc_freqs_opinion_of_rap <- function(data) {
   
-  know_rap_smart_survey_data <- smart_survey_data[smart_survey_data$RAP_heard_of == "Yes", ]
-  know_rap_smart_survey_data <- dplyr::select(know_rap_smart_survey_data, RAP_understand:RAP_using)
+  know_rap_data <- data[data$RAP_heard_of == "Yes", ]
+  know_rap_data <- dplyr::select(know_rap_data, RAP_understand:RAP_using)
   know_rap_levels <- c("Strongly Disagree",
                        "Disagree",
                        "Neutral",
                        "Agree",
                        "Strongly Agree")
-  rap_opinions <- carsurvey2::calc_multi_col_freqs(know_rap_smart_survey_data, know_rap_levels, calc_props=TRUE)
+  rap_opinions <- carsurvey2::calc_multi_col_freqs(know_rap_data, know_rap_levels, calc_props=TRUE)
   new_colnames <- c(RAP_understand = "I understand what the key components of the RAP methodology are",
                     RAP_confident = "I feel confident implementing RAP in my work",
                     RAP_important = "I think it is important to implement RAP in my work",
@@ -181,16 +172,16 @@ table_opinion_of_rap <- function(smart_survey_data) {
 }
 
 
-#' @title table_rap_score_components
+#' @title calc_freqs_rap_score_components
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @return data.frame
 #' @export
 
-table_rap_score_components <- function(smart_survey_data) {
+calc_freqs_rap_score_components <- function(data) {
   
-  rap_score <- smart_survey_data[grepl("_score", colnames(smart_survey_data))]
+  rap_score <- data[grepl("_score", colnames(data))]
   
   components <- rap_score[!colnames(rap_score) %in% c("basic_rap_score", "advanced_rap_score")]
   components[is.na(components)] <- 0
@@ -229,68 +220,68 @@ table_rap_score_components <- function(smart_survey_data) {
 }
 
 
-#' @title table_rap_score_basic_frequencies
+#' @title calc_freqs_rap_score_basic_frequencies
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @return data.frame
 #' @export
 
-table_rap_score_basic_frequencies <- function(smart_survey_data) {
+calc_freqs_rap_score_basic_frequencies <- function(data) {
   
-  basic_freqs <- data.frame(table(smart_survey_data$basic_rap_score))
+  basic_freqs <- data.frame(table(data$basic_rap_score))
   colnames(basic_freqs) <- c("Basic RAP score", "Count")
   
   return(basic_freqs)
 }
 
-#' @title table_rap_score_advanced_frequencies
+#' @title calc_freqs_rap_score_advanced_frequencies
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @return data.frame
 #' @export
 
-table_rap_score_advanced_frequencies <- function(smart_survey_data) {
+calc_freqs_rap_score_advanced_frequencies <- function(data) {
   
-  advanced_freqs <- data.frame(table(smart_survey_data$advanced_rap_score))
+  advanced_freqs <- data.frame(table(data$advanced_rap_score))
   colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
   
   return(advanced_freqs)
   
 }
 
-#' @title table_coding_practice_usage
+#' @title calc_freqs_coding_practice_usage
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #' @param code_prac_levels A vector of strings, length 6
 #'
 #' @return data.frame
 #' @export
 
-table_coding_practice_usage <- function(smart_survey_data, code_prac_levels) {
+calc_freqs_coding_practice_usage <- function(data, code_prac_levels) {
   
-  code_prac_chart <- carsurvey2::coding_practices(smart_survey_data, code_prac_levels)
+  code_prac_chart <- carsurvey2::coding_practices(data, code_prac_levels)
                                     
   return(code_prac_chart)
 }
 
-#' @title table_documenation_usage
+#' @title calc_freqs_documenation_usage
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #' @param code_prac_levels A vector of strings, length 6
 #' 
 #' @return data.frame
 #' @export
 
-table_documenation_usage <- function(smart_survey_data, code_prac_levels) {
+calc_freqs_documenation_usage <- function(data, code_prac_levels) {
   
-  code_prac = carsurvey2::coding_practices(smart_survey_data, code_prac_levels)
+  code_prac = carsurvey2::coding_practices(data, code_prac_levels)
   
-  doc_smart_survey_data <- dplyr::select(smart_survey_data, doc_AQA_log:doc_desk)
-  doc_smart_survey_data <- doc_smart_survey_data[smart_survey_data$code_freq != "Never", ]
+  doc_data <- dplyr::select(data, doc_AQA_log:doc_desk)
+  doc_data <- doc_data[data$code_freq != "Never", ]
   
-  doc <- carsurvey2::calc_multi_col_freqs(doc_smart_survey_data, code_prac_levels, calc_props = TRUE)
+  doc <- carsurvey2::calc_multi_col_freqs(doc_data, code_prac_levels, calc_props = TRUE)
   colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
   
   doc_questions <- c(doc_AQA_log = "Analytical Quality Assurance (AQA) logs",
@@ -304,12 +295,12 @@ table_documenation_usage <- function(smart_survey_data, code_prac_levels) {
   doc[[1]] <- dplyr::recode(doc[[1]], !!!doc_questions)
   
   colnames(doc) <- c("Question",
-                                             "Strongly disagree",
-                                             "Disagree",
-                                             "Neutral",
-                                             "Agree",
-                                             "Strongly agree",
-                                             "All the time")
+                    "Strongly disagree",
+                    "Disagree",
+                    "Neutral",
+                    "Agree",
+                    "Strongly agree",
+                    "All the time")
   
   return(doc)
 }
@@ -317,20 +308,20 @@ table_documenation_usage <- function(smart_survey_data, code_prac_levels) {
 
 #' @title coding_practices
 #' 
-#' @description Used for genertaing more than 1 table = table_coding_practice_usage, table_documenation_usage
+#' @description Used for genertaing more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::smart_survey_data_ functions.
+#' @param data This is generated using the data functions.
 #' @param code_prac_levels A vector of strings, length 6
 #'
 #' @return data.frame
 #' @export
 
-coding_practices <- function(smart_survey_data, code_prac_levels) {
+coding_practices <- function(data, code_prac_levels) {
   
-  code_prac_smart_survey_data <- smart_survey_data[grepl("gp_", colnames(smart_survey_data))]
-  code_prac_smart_survey_data <- code_prac_smart_survey_data[smart_survey_data$code_freq != "Never", ]
+  code_prac_data <- data[grepl("gp_", colnames(data))]
+  code_prac_data <- code_prac_data[data$code_freq != "Never", ]
   
-  code_prac <- carsurvey2::calc_multi_col_freqs(code_prac_smart_survey_data, code_prac_levels, calc_props = TRUE)
+  code_prac <- carsurvey2::calc_multi_col_freqs(code_prac_data, code_prac_levels, calc_props = TRUE)
   
   colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
   

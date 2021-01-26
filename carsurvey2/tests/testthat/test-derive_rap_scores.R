@@ -29,5 +29,5 @@ comparison_data <- data.frame(peer_review_score = c(1, 0),
                               advanced_rap_score = c(2, 5))
 
 test_that("function returns correct rap scores", {
-  expect_identical(data_derive_rap_scores(dummy_data)[c(14:27)], comparison_data)
+  expect_identical(derive_rap_scores(dummy_data)[c(14:27)], comparison_data)
 })

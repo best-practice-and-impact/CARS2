@@ -27,7 +27,7 @@ We asked our respondents, "In my current role, I write code to complete my work 
 
 ```{r }
 library(magrittr)
-carsurvey2::html_setup_table_toggle()
+carsurvey2::setup_table_toggle()
 
 tables <- params$tables
 
@@ -36,7 +36,7 @@ samples <- params$samples
 ```
 
 ```{r}
-carsurvey2::html_insert_table_toggle("coding-freq")
+carsurvey2::insert_table_toggle("coding-freq")
 ```
 
 <div id="coding-freq-chart">
@@ -66,7 +66,7 @@ For each of the most popular programming languages from last year's CARS data, w
 ### Knowledge of programming tools
 
 ```{r}
-carsurvey2::html_insert_table_toggle("tools-knowledge")
+carsurvey2::insert_table_toggle("tools-knowledge")
 ```
 
 <div id="tools-knowledge-chart">
@@ -90,7 +90,7 @@ kableExtra::kable_styling(knitr::kable(tables$knowledge, row.names = FALSE)) %>%
 ### Access to programming tools
 
 ```{r}
-carsurvey2::html_insert_table_toggle("tools-access")
+carsurvey2::insert_table_toggle("tools-access")
 ```
 
 <div id="tools-access-chart">
@@ -117,7 +117,7 @@ We used the above data to calculate the number of respondents who have access bu
 
 
 ```{r}
-carsurvey2::html_insert_table_toggle("tools-status")
+carsurvey2::insert_table_toggle("tools-status")
 ```
 
 <div id="tools-status-chart">
@@ -146,7 +146,7 @@ kableExtra::kable_styling(knitr::kable(tables$code_tool_status, row.names = FALS
 We asked our respondents whether they had heard of RAP and what their knowlegde is of their own department RAP champion. The combined responses are presented below.
 
 ```{r}
-carsurvey2::html_insert_table_toggle("rap-knowledge")
+carsurvey2::insert_table_toggle("rap-knowledge")
 ```
 
 <div id="rap-knowledge-chart">
@@ -182,7 +182,7 @@ The results can be seen below. The figure and table show the percentage of respo
 
 
 ```{r}
-carsurvey2::html_insert_table_toggle("rap-opinions")
+carsurvey2::insert_table_toggle("rap-opinions")
 ```
 
 <div id="rap-opinions-chart">
@@ -210,7 +210,7 @@ kableExtra::kable_styling(carsurvey2::output_likert_table(tables$rap_opinions)) 
 The frequencies for each RAP component below are derived from a series of questions on coding practices (see the coding practices page). These were used to calculate scores for each component (0/1) where respondents answered "regularly" or "all the time" to the relevant questions. The list of RAP components used here is based on the [RAP minimum viable product](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md) guidance agreed by the RAP champions network.
 
 ```{r}
-carsurvey2::html_insert_table_toggle("rap-comps")
+carsurvey2::insert_table_toggle("rap-comps")
 ```
 
 <div id="rap-comps-chart">
@@ -236,7 +236,7 @@ Below are the distributions of total basic and advanced RAP scores. These are th
 ## Basic RAP scores
 
 ```{r}
-carsurvey2::html_insert_table_toggle("basic_score")
+carsurvey2::insert_table_toggle("basic_score")
 ```
 
 <div id="basic_score-chart">
@@ -261,7 +261,7 @@ kableExtra::kable_styling(knitr::kable(tables$basic_freqs, row.names = FALSE)) %
 ## Advanced RAP scores
 
 ```{r}
-carsurvey2::html_insert_table_toggle("advanced_score")
+carsurvey2::insert_table_toggle("advanced_score")
 ```
 
 <div id="advanced_score-chart">
@@ -287,7 +287,7 @@ We asked respondents to report how often they make use of each of the coding pra
 ## General coding practices
 
 ```{r}
-carsurvey2::html_insert_table_toggle("code-prac")
+carsurvey2::insert_table_toggle("code-prac")
 ```
 
 <div id="code-prac-chart">
@@ -310,7 +310,7 @@ kableExtra::kable_styling(carsurvey2::output_likert_table(tables$code_prac)) %>%
 ## Documentation
 
 ```{r}
-carsurvey2::html_insert_table_toggle("doc")
+carsurvey2::insert_table_toggle("doc")
 ```
 
 <div id="doc-chart">

@@ -1,11 +1,15 @@
 ---
-title: "DRAFT: Department profile: `r dep`"
 output:
   html_document:
     toc: true
     toc_depth: 2
     toc_float: 
       collapsed: false
+params: 
+  title: "Default"
+  tables: NULL
+  samples: NULL
+title: "`r params$title`"
 ---
 
 ```{r global-options, include=FALSE}
@@ -25,17 +29,9 @@ We asked our respondents, "In my current role, I write code to complete my work 
 library(magrittr)
 carsurvey2::html_setup_table_toggle()
 
-data_var_name <- paste0(carsurvey2::format_file_path(dep), "_filtered_data")
+tables <- params$tables
 
-cars_filtered_data <- get(data_var_name)
-
-tables <- carsurvey2::generate_tables(cars_filtered_data)
-
-samples <- list(
-  all = nrow(cars_filtered_data),
-  coders = sum(cars_filtered_data$code_freq != "Never"),
-  heard_of_rap = sum(cars_filtered_data$RAP_heard_of == "Yes")
-)
+samples <- params$samples
 
 ```
 

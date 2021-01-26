@@ -39,7 +39,7 @@ dep_freqs_plot[1] <- stringr::str_wrap(dep_freqs_plot[[1]], width = 40)
 dep_freqs_plot[1] <- gsub("\\n", "<br>", dep_freqs_plot[[1]])
 dep_freqs_plot <- dep_freqs_plot[rev(order(dep_freqs_plot[1])), ]
 dep_freqs_plot[1] <- factor(dep_freqs_plot[[1]], levels = dep_freqs_plot[[1]])
-carsurvey2::plot_freqs(dep_freqs_plot, "Department", "Sample size", n = samples$all, font_size = 14, orientation = "h", height = 1000)
+carsurvey2::plot_freqs(dep_freqs_plot, "", "Sample size", n = sum(dep_freqs_plot$`Sample size`), font_size = 14, orientation = "h", height = 1000)
 
 ```
 </div>

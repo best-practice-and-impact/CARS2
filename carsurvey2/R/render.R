@@ -1,33 +1,18 @@
-########  ######## ##    ## ########  ######## ########  
-##     ## ##       ###   ## ##     ## ##       ##     ## 
-##     ## ##       ####  ## ##     ## ##       ##     ## 
-########  ######   ## ## ## ##     ## ######   ########  
-##   ##   ##       ##  #### ##     ## ##       ##   ##   
-##    ##  ##       ##   ### ##     ## ##       ##    ##  
-##     ## ######## ##    ## ########  ######## ##     ## 
-
 # High Level functions that are called to build the site. Prefixed render_
 
-#' @title render_main_site
+#' @title Render main site
 #'
 #' @description Processes the Smart survey data to generate a series of tables. 
 #' Then removes the old site and uses the generated tables to render a new site.
 #' Uses the markdown files located in the internal var markdown_file_path.
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #'
 #' @export 
 
 
-render_main_site <- function(smart_survey_data) {
-  
-  markdown_file_path = "rmarkdown/main"
-  
-  # smart_survey_data This data object is bound to the function render_main_site
-  # rmarkdown::render_site access this function enviroment to load the data 
-  # It looks for an r object called smart_survey_data
-  # DO NOT change the name of the dataframe! Keep it smart_survey_data
-  
+render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
+
   # Remove old site and knit
   knitr::opts_chunk$set(message = FALSE, warning = FALSE)
   rmarkdown::clean_site(markdown_file_path)
@@ -35,7 +20,7 @@ render_main_site <- function(smart_survey_data) {
   
 }
 
-#' @title render_navbar
+#' @title Render navigation bar
 #'
 #' @description Creates the site navbar.
 #' 
@@ -49,7 +34,7 @@ render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
   
   # Create navigation bar
   navbar_info <- carsurvey2::read_site_yml(yml_path)
-  navbar_page <- carsurvey2::html_build_navbar(navbar_info)
+  navbar_page <- carsurvey2::build_navbar(navbar_info)
   
   return(navbar_page)
 }
@@ -58,8 +43,8 @@ render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
 #'
 #' @description Saves the site navbar.
 #' 
-#' @param code todo
-#' @param path todo
+#' @param code html code (string)
+#' @param path path for saving the navigation bar (excluding file name)
 #' 
 #' @export
 
@@ -68,17 +53,15 @@ save_navbar <- function(code, path) {
   write(code, filename)
 }
 
-
-
-#' @title render_department_pages
+#' @title Render filtered pages
 #' 
-#' @description Creates pages for each department.
+#' @description Creates pages by filter (e.g. by department/profession/grade).
 #' 
-#' @details For each department filters the smart_survey_data to only that department
+#' @details For each department filters the data to only that department
 #' and then renders the common department template generating a unique page for each 
 #' department. The template is located at the internal var template_path.  
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
 #' @param filter_variable The variable that the data is filtered on. This is given as a string such as "dept". 
 #' The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.
 #' @param page_title This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
@@ -88,29 +71,29 @@ save_navbar <- function(code, path) {
 #' @export
 
 
-render_filtered_pages <- function(smart_survey_data,
+render_filtered_pages <- function(data,
                                filter_variable,
                                page_title = "",
                                output_folder = "../../docs",
                                template_path = "rmarkdown/deps/template.rmd") {
   
-  if(!sum(colnames(smart_survey_data) == filter_variable) == 1) stop("filter column: ", filter_variable,
+  if(!sum(colnames(data) == filter_variable) == 1) stop("filter column: ", filter_variable,
                                                                      " doesn't exist in the data provided. \nCheck that filter is equal to a valid column name")
   
   # get grade with sample > 20
   filter_table <- data.frame(
-    table(smart_survey_data[filter_variable])
+    table(data[filter_variable])
   )
   filter_over_20 <- filter_table[filter_table[2] >= 20, ]
   filter_list = as.character(filter_over_20$Var1)
   
   for (filter in filter_list) {
     
-    file_path <- carsurvey2::format_file_path(filter)
+    file_path <- carsurvey2::format_department_path(filter)
     message("Writing page for ", file_path)
     
     # filter data to just the department
-    filtered_data <- smart_survey_data[smart_survey_data[filter_variable] == filter, ]
+    filtered_data <- data[data[filter_variable] == filter, ]
     if(!nrow(filtered_data) == filter_over_20$Freq[filter_over_20$Var1 == filter]) stop("Filtered data row number is not equal to number of : ", file_path)
     
     title <- paste0("DRAFT: ", page_title , " profile: ", filter)
@@ -131,13 +114,5 @@ render_filtered_pages <- function(smart_survey_data,
                         tables = filtered_tables,
                         samples = samples
                       ))
-  } # end for-loop
+  } 
 }
-
-
-
-
-
-
-
-

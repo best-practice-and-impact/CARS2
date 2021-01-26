@@ -2,12 +2,12 @@
 % Please edit documentation in R/render.R
 \name{render_main_site}
 \alias{render_main_site}
-\title{render_main_site}
+\title{Render main site}
 \usage{
-render_main_site(smart_survey_data)
+render_main_site(data, markdown_file_path = "rmarkdown/main")
 }
 \arguments{
-\item{smart_survey_data}{This is generated using the carsurvey2::data_ functions.}
+\item{data}{This is generated using the carsurvey2::data_ functions.}
 }
 \description{
 Processes the Smart survey data to generate a series of tables. 

@@ -2,10 +2,10 @@
 % Please edit documentation in R/render.R
 \name{render_filtered_pages}
 \alias{render_filtered_pages}
-\title{render_department_pages}
+\title{Render filtered pages}
 \usage{
 render_filtered_pages(
-  smart_survey_data,
+  data,
   filter_variable,
   page_title = "",
   output_folder = "../../docs",
@@ -13,7 +13,7 @@ render_filtered_pages(
 )
 }
 \arguments{
-\item{smart_survey_data}{This is generated using the carsurvey2::data_ functions.}
+\item{data}{This is generated using the carsurvey2::data_ functions.}
 
 \item{filter_variable}{The variable that the data is filtered on. This is given as a string such as "dept". 
 The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.}
@@ -26,10 +26,10 @@ where filter is one element of the list as described above in filter_variable (v
 \item{template_path}{The path to the template that gets render for each department}
 }
 \description{
-Creates pages for each department.
+Creates pages by filter (e.g. by department/profession/grade).
 }
 \details{
-For each department filters the smart_survey_data to only that department
+For each department filters the data to only that department
 and then renders the common department template generating a unique page for each 
 department. The template is located at the internal var template_path.
 }

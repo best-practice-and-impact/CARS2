@@ -2,7 +2,7 @@
 % Please edit documentation in R/render.R
 \name{render_navbar}
 \alias{render_navbar}
-\title{render_navbar}
+\title{Render navigation bar}
 \usage{
 render_navbar(yml_path = "rmarkdown/main/_site.yml")
 }

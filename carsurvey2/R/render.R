@@ -7,6 +7,7 @@
 #' Uses the markdown files located in the internal var markdown_file_path.
 #'
 #' @param data This is generated using the carsurvey2::data_ functions.
+#' @param markdown_file_path the path containing the rmarkdown site documents
 #'
 #' @export 
 

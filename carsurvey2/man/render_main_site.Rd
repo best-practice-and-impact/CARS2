@@ -8,6 +8,8 @@ render_main_site(data, markdown_file_path = "rmarkdown/main")
 }
 \arguments{
 \item{data}{This is generated using the carsurvey2::data_ functions.}
+
+\item{markdown_file_path}{the path containing the rmarkdown site documents}
 }
 \description{
 Processes the Smart survey data to generate a series of tables. 

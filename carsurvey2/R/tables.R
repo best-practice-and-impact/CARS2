@@ -144,7 +144,7 @@ calc_freqs_knowledge_of_rap <- function(data) {
 calc_freqs_opinion_of_rap <- function(data) {
   
   know_rap_data <- data[data$RAP_heard_of == "Yes", ]
-  know_rap_data <- dplyr::select(know_rap_data, RAP_understand:RAP_using)
+  know_rap_data <- dplyr::select(know_rap_data, "RAP_understand":"RAP_using")
   know_rap_levels <- c("Strongly Disagree",
                        "Disagree",
                        "Neutral",
@@ -211,7 +211,7 @@ calc_freqs_rap_score_components <- function(data) {
                                         "cont_integreation_score" = "Continuous integration",
                                         "dep_management_score" = "Dependency management")
   
-  components <- dplyr::arrange(components, Group, Count)
+  components <- dplyr::arrange(components, "Group", "Count")
   components$Component <- factor(components$Component, levels = components$Component)
   components <- components[c(1, 3, 2)]
   
@@ -278,7 +278,7 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
   
   code_prac = carsurvey2::coding_practices(data, code_prac_levels)
   
-  doc_data <- dplyr::select(data, doc_AQA_log:doc_desk)
+  doc_data <- dplyr::select(data, "doc_AQA_log":"doc_desk")
   doc_data <- doc_data[data$code_freq != "Never", ]
   
   doc <- carsurvey2::calc_multi_col_freqs(doc_data, code_prac_levels, calc_props = TRUE)

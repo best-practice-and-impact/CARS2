@@ -306,7 +306,7 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
 }
 
 
-#' @title coding_practices
+#' @title calc_freqs_coding_practices
 #' 
 #' @description Used for genertaing more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
 #'
@@ -316,7 +316,7 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
 #' @return data.frame
 #' @export
 
-coding_practices <- function(data, code_prac_levels) {
+calc_freqs_coding_practices <- function(data, code_prac_levels) {
   
   code_prac_data <- data[grepl("gp_", colnames(data))]
   code_prac_data <- code_prac_data[data$code_freq != "Never", ]
@@ -341,6 +341,157 @@ coding_practices <- function(data, code_prac_levels) {
   code_prac[[1]] <- dplyr::recode(code_prac[[1]], !!!code_prac_questions) 
   
   return(code_prac)
+}
+
+
+
+#' @title calc_freq_operations_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions
+#'
+#' @return data.frame
+#'
+#' @export
+
+calc_freq_operations_frequency <- function(data){
+  
+  operations_data <- dplyr::select(data,"data_cleaning":"data_transfer") #other_ops
+  levels <- c("I don't do this",
+              "I do some or all of this by coding",
+              "I do this without coding")
+  operations_percent <- carsurvey2::calc_multi_col_freqs(operations_data, levels, calc_props=TRUE)
+  
+  operations_percent[[1]] <- c("Data Cleaning", "Data Analysis", "Data Visualisations","Quality Assurance", "Data Trasnfer / Migration")
+  colnames(operations_percent) <- c("Operation", "Don't do operation", "Do some or all with coding", "Do without code")
+  return(operations_percent)
+}
+
+
+
+#' @title calc_freqs_outside_work_experience_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions.
+#'
+#' @return data.frame
+#' 
+#' @export 
+#'
+
+calc_freqs_outside_work_experience_frequency <- function(data) {
+  data$code_experience <- factor(data$code_experience, levels = c("Yes",
+                                                                  "No"))
+  
+  frequency_table <- data.frame(table(data$code_experience))
+  
+  colnames(frequency_table) <- c("code experience outside of work", "count")
+  
+  return(frequency_table)
+}
+
+
+#' @title calc_freq_coding_ability_changed_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions.
+#'
+#' @return data.frame
+#' 
+#' @export
+
+calc_freq_coding_ability_changed_frequency <- function(data) {
+  
+  data$ability_change <- factor(data$ability_change, levels = c("Significantly worse",
+                                                                "Slightly worse",
+                                                                "No change",
+                                                                "Slightly better",
+                                                                "Significantly better"))
+  frequency_table <- data.frame(table(data$ability_change))
+  
+  colnames(frequency_table) <- c("Coding ability changes", "Count")
+  
+  return(frequency_table)
+  
+}
+
+
+#' @title calc_freq_prior_coding_knowledge_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions. 
+#'
+#' @return data.frame
+#'
+#' @export
+
+calc_freq_prior_coding_knowledge_frequency <- function(data){
+  
+  data$learn_before <- factor(data$learn_before, levels = c("Yes",
+                                                            "No"))
+  frequency_table <- data.frame(table(data$learn_before))
+  
+  colnames(frequency_table) <- c("Code knowledge before current role", "Count")
+  
+  return(frequency_table)
+  
+}
+
+
+#' @title calc_freq_first_learn_code_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions.
+#'
+#' @return data.frame
+#'
+#' @export
+
+calc_freq_first_learn_code_frequency <- function(data) {
+  
+  data$code_learn_where <- factor(data$code_learn_where, levels = c(unique(data$code_learn_where)) )
+  frequency_table <- data.frame(table(data$code_learn_where))
+  
+  colnames(frequency_table) <- c("First learn code", "Count")
+  frequency_table <- frequency_table[1:4,]
+  return(frequency_table)
+}
+
+
+#' @title calc_freq_reproducible_workflow_packages_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions.
+#'
+#' @return data.frame
+#'
+#' @export
+
+calc_freq_reproducible_workflow_packages_frequency <- function(data){
+  
+  data$use_reprod_workflow <- factor(data$use_reprod_workflow, levels = c("Yes",
+                                                                          "No",
+                                                                          "I don't know what reproducible workflows are"))
+  frequency_table <- data.frame(table(data$use_reprod_workflow))
+  
+  colnames(frequency_table) <- c("Use reproducible workflow packages", "Count")
+  frequency_table[[1]] <- c("Yes","No","Don't know reproducable workflow packages")
+  return(frequency_table)
+}
+
+
+
+#' @title calc_freq_version_control_platforms_frequency
+#'
+#' @param data This is generated using the carsurvey2:: functions.
+#'
+#' @return data.frame
+#'
+#' @export
+
+calc_freq_version_control_platforms_frequency <- function(data){
+  
+  version_control_platforms <- dplyr::select(data, "use_github":"use_googlecloud")
+  levels = c("Yes","No")
+  version_platform_percent <- carsurvey2::calc_multi_col_freqs(version_control_platforms, levels, calc_props=TRUE)
+  
+  version_platform_percent[[1]] <- c("GitHub","GitLab", "BitBucket", "AWS CodeCommit", "Cloud Source Repository (Google Cloud)")
+  colnames(version_platform_percent) <- c("Question","Yes","No")
+  return(version_platform_percent)
 }
 
 

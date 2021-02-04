@@ -487,9 +487,7 @@ calc_freq_learn_code <- function(data) {
 
 calc_freq_reproducible_workflow <- function(data){
   
-  use_reprod_workflow <- data %>% dplyr::filter(!is.na("use_reprod_workflow"))
-  
-  use_reprod_workflow <- factor(use_reprod_workflow, levels = c("Yes",
+  data$use_reprod_workflow <- factor(data$use_reprod_workflow, levels = c("Yes",
                                                                  "No",
                                                                  "I don't know what reproducible workflows are"))
   frequency_table <- data.frame(table(data$use_reprod_workflow))

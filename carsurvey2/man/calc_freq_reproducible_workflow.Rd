@@ -13,5 +13,5 @@ calc_freq_reproducible_workflow(data)
 data.frame
 }
 \description{
-Function creates frequency table of knowledge of reproducible workflow packages
+Create frequency table of knowledge of reproducible workflow packages
 }

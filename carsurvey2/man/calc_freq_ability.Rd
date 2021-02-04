@@ -13,5 +13,5 @@ calc_freq_ability(data)
 data.frame
 }
 \description{
-Function creates frequency table of coding ability changes in current role
+Create frequency table of coding ability changes in current role
 }

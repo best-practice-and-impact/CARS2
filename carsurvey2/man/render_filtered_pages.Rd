@@ -9,7 +9,7 @@ render_filtered_pages(
   filter_variable,
   page_title = "",
   output_folder = "../../docs",
-  template_path = "rmarkdown/deps/template.rmd"
+  template_path = "rmarkdown/summary_template/template.rmd"
 )
 }
 \arguments{

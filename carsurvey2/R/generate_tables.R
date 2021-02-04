@@ -74,8 +74,6 @@ generate_tables <- function(smart_survey_data) {
   
   tables$freq_abil <- calc_freq_ability(smart_survey_data)
     
-  tables$prior_code <- calc_freq_prior_coding(smart_survey_data)
-    
   tables$first_learnt <- calc_freq_learn_code(smart_survey_data)
   
   tables$rep_workflow <- calc_freq_reproducible_workflow(smart_survey_data)

@@ -107,7 +107,7 @@ calc_freqs_coding_tools <- function(data, langs) {
 
 #' @title Knowledge of RAP
 #' 
-#' @description Function creates a frequency table of knowledge of RAP
+#' @description Create a frequency table of knowledge of RAP
 #'
 #' @param data This is generated using the carsurvey2::data functions.
 #'
@@ -146,7 +146,7 @@ calc_freqs_knowledge_of_rap <- function(data) {
 
 #' @title Opinion of RAP
 #' 
-#' @description Function creates frequency table of opinions of RAP
+#' @description Create frequency table of opinions of RAP
 #'
 #' @param data This is generated using the carsurvey2::data functions.
 #'
@@ -186,7 +186,7 @@ calc_freqs_opinion_of_rap <- function(data) {
 
 #' @title RAP score components
 #' 
-#' @description Function creates frequency table of basic and advanced RAP score components
+#' @description Create frequency table of basic and advanced RAP score components
 #'
 #' @param data This is generated using the carsurvey2::data functions.
 #'
@@ -236,7 +236,7 @@ calc_freqs_rap_score_components <- function(data) {
 
 #' @title RAP score for basic components
 #' 
-#' @description Function creates frequency table of RAP score basic components
+#' @description Create frequency table of RAP score basic components
 #'
 #' @param data This is generated using the carsurvey2::data_ functions.
 #'
@@ -253,7 +253,7 @@ calc_freqs_rap_basic <- function(data) {
 
 #' @title RAP score for advanced components
 #' 
-#' @description Function creates frequency of RAP score for advanced components
+#' @description Create frequency of RAP score for advanced components
 #'
 #' @param data This is generated using the carsurvey2::data functions.
 #'
@@ -271,7 +271,7 @@ calc_freqs_rap_advanced <- function(data) {
 
 #' @title Types of coding practices used
 #' 
-#' @description Function creates frequency table of the types of coding practices used
+#' @description Create frequency table of the types of coding practices used
 #'
 #' @param data This is generated using the carsurvey2::data_ functions.
 #' @param code_prac_levels A vector of strings, length 6
@@ -288,7 +288,7 @@ calc_freqs_practices_usage <- function(data, code_prac_levels) {
 
 #' @title Use of documentation
 #'
-#' @description Function creates frequency table of the types of documentation used
+#' @description Create frequency table of the types of documentation used
 #'
 #' @param data This is generated using the carsurvey2::data_ functions.
 #' @param code_prac_levels A vector of strings, length 6
@@ -330,7 +330,7 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
 
 #' @title Types of coding practices used
 #' 
-#' @description Used for genertaing more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
+#' @description Generate more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
 #'
 #' @param data This is generated using the data functions.
 #' @param code_prac_levels A vector of strings, length 6
@@ -368,7 +368,7 @@ calc_freqs_coding_practices <- function(data, code_prac_levels) {
 
 #' @title Operations and how they are preformed
 #'
-#' @description Function creates frequency table of operations and how they are preformed 
+#' @description Create frequency table of operations and how they are preformed 
 #'
 #' @param data This is generated using the carsurvey2:: functions
 #'
@@ -391,11 +391,9 @@ calc_freq_operations <- function(data){
 }
 
 
-
-
 #' @title Coding experience outside of work frequency table
 #'
-#' @description Function creates frequency table of if any coding experience outside current role
+#' @description Create frequency table of if any coding experience outside current role
 #'
 #' @param data This is generated using the carsurvey2:: functions.
 #'
@@ -418,7 +416,7 @@ calc_freqs_outside_work <- function(data) {
 
 #' @title Has coding ability changed frequency table
 #'
-#' @description Function creates frequency table of coding ability changes in current role
+#' @description Create frequency table of coding ability changes in current role
 #'
 #' @param data This is generated using the carsurvey2:: functions.
 #'
@@ -442,32 +440,9 @@ calc_freq_ability <- function(data) {
 }
 
 
-#' @title Prior coding experience frequency table
-#'
-#' @description Function creates frequency table about coding experience prior to current role
-#'
-#' @param data This is generated using the carsurvey2:: functions. 
-#'
-#' @return data.frame
-#'
-#' @export
-
-calc_freq_prior_coding <- function(data){
-  
-  data$learn_before <- factor(data$learn_before, levels = c("Yes",
-                                                            "No"))
-  frequency_table <- data.frame(table(data$learn_before))
-  
-  colnames(frequency_table) <- c("Code knowledge before current role", "Count")
-  
-  return(frequency_table)
-  
-}
-
-
 #' @title First learnt code frequency table
 #'
-#' @description Function creates frequency table about where first coding was learnt
+#' @description Create frequency table about where first coding was learnt
 #'
 #' @param data This is generated using the carsurvey2:: functions.
 #'
@@ -477,18 +452,32 @@ calc_freq_prior_coding <- function(data){
 
 calc_freq_learn_code <- function(data) {
   
-  data$code_learn_where <- factor(data$code_learn_where, levels = c(unique(data$code_learn_where)) )
+  levels <- c("In education",
+              "In private sector employment",
+              "In public sector employment",
+              "Self-taught",
+              "Other")
+  
+  # Recode other responses
+  data$code_learn_where[!is.na(data$code_learn_where) & !data$code_learn_where %in% levels ] <- "Other"
+  
+  data$code_learn_where <- factor(data$code_learn_where, levels = levels)
+  
   frequency_table <- data.frame(table(data$code_learn_where))
   
+  frequency_table[[1]] <- factor(frequency_table[[1]], c("In current role", levels))
+  
+  frequency_table <- rbind(c("In current role", sum(data$learn_before == "No" & !is.na(data$learn_before))), frequency_table)
+  
   colnames(frequency_table) <- c("First learn code", "Count")
-  frequency_table <- frequency_table[1:4,]
+  
   return(frequency_table)
 }
 
 
 #' @title Knowledge of reproducible workflow packages frequency table
 #'
-#' @description Function creates frequency table of knowledge of reproducible workflow packages
+#' @description Create frequency table of knowledge of reproducible workflow packages
 #'
 #' @param data This is generated using the carsurvey2:: functions.
 #'
@@ -522,7 +511,7 @@ calc_freq_reproducible_workflow <- function(data){
 
 #' @title Version control platforms frequency table
 #'
-#' @description Function creates frequency table of use of version control software
+#' @description Create frequency table of use of version control software
 #'
 #' @param data This is generated using the carsurvey2:: functions.
 #'

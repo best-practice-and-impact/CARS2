@@ -15,5 +15,5 @@ calc_freqs_practices_usage(data, code_prac_levels)
 data.frame
 }
 \description{
-Function creates frequency table of the types of coding practices used
+Create frequency table of the types of coding practices used
 }

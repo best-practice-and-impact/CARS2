@@ -13,5 +13,5 @@ calc_freqs_outside_work(data)
 data.frame
 }
 \description{
-Function creates frequency table of if any coding experience outside current role
+Create frequency table of if any coding experience outside current role
 }

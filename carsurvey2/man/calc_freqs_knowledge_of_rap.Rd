@@ -13,5 +13,5 @@ calc_freqs_knowledge_of_rap(data)
 data.frame
 }
 \description{
-Function creates a frequency table of knowledge of RAP
+Create a frequency table of knowledge of RAP
 }

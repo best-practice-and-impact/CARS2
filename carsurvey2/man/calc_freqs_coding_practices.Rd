@@ -15,5 +15,5 @@ calc_freqs_coding_practices(data, code_prac_levels)
 data.frame
 }
 \description{
-Used for genertaing more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
+Generate more than 1 table = calc_freqs_coding_practice_usage, calc_freqs_documenation_usage
 }

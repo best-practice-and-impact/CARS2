@@ -13,5 +13,5 @@ calc_freq_learn_code(data)
 data.frame
 }
 \description{
-Function creates frequency table about where first coding was learnt
+Create frequency table about where first coding was learnt
 }

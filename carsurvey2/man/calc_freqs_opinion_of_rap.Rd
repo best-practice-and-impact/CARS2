@@ -13,5 +13,5 @@ calc_freqs_opinion_of_rap(data)
 data.frame
 }
 \description{
-Function creates frequency table of opinions of RAP
+Create frequency table of opinions of RAP
 }

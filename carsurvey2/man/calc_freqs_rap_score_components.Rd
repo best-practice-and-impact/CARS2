@@ -13,5 +13,5 @@ calc_freqs_rap_score_components(data)
 data.frame
 }
 \description{
-Function creates frequency table of basic and advanced RAP score components
+Create frequency table of basic and advanced RAP score components
 }

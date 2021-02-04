@@ -13,5 +13,5 @@ calc_freq_version_control(data)
 data.frame
 }
 \description{
-Function creates frequency table of use of version control software
+Create frequency table of use of version control software
 }

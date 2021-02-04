@@ -13,5 +13,5 @@ calc_freqs_rap_advanced(data)
 data.frame
 }
 \description{
-Function creates frequency of RAP score for advanced components
+Create frequency of RAP score for advanced components
 }

@@ -13,5 +13,5 @@ calc_freq_operations(data)
 data.frame
 }
 \description{
-Function creates frequency table of operations and how they are preformed
+Create frequency table of operations and how they are preformed
 }

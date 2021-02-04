@@ -2,7 +2,7 @@
 % Please edit documentation in R/tables.R
 \name{calc_freqs_documenation_usage}
 \alias{calc_freqs_documenation_usage}
-\title{calc_freqs_documenation_usage}
+\title{Use of documentation}
 \usage{
 calc_freqs_documenation_usage(data, code_prac_levels)
 }
@@ -15,5 +15,5 @@ calc_freqs_documenation_usage(data, code_prac_levels)
 data.frame
 }
 \description{
-calc_freqs_documenation_usage
+Function creates frequency table of the types of documentation used
 }

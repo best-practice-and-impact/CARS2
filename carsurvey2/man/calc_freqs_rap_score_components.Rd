@@ -2,16 +2,16 @@
 % Please edit documentation in R/tables.R
 \name{calc_freqs_rap_score_components}
 \alias{calc_freqs_rap_score_components}
-\title{calc_freqs_rap_score_components}
+\title{RAP score components}
 \usage{
 calc_freqs_rap_score_components(data)
 }
 \arguments{
-\item{data}{This is generated using the carsurvey2::data_ functions.}
+\item{data}{This is generated using the carsurvey2::data functions.}
 }
 \value{
 data.frame
 }
 \description{
-calc_freqs_rap_score_components
+Function creates frequency table of basic and advanced RAP score components
 }

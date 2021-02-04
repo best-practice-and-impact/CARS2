@@ -2,16 +2,16 @@
 % Please edit documentation in R/tables.R
 \name{calc_freqs_opinion_of_rap}
 \alias{calc_freqs_opinion_of_rap}
-\title{calc_freqs_opinion_of_rap}
+\title{Opinion of RAP}
 \usage{
 calc_freqs_opinion_of_rap(data)
 }
 \arguments{
-\item{data}{This is generated using the carsurvey2::data_ functions.}
+\item{data}{This is generated using the carsurvey2::data functions.}
 }
 \value{
 data.frame
 }
 \description{
-calc_freqs_opinion_of_rap
+Function creates frequency table of opinions of RAP
 }

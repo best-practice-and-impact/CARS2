@@ -90,7 +90,7 @@ render_filtered_pages <- function(data,
   
   for (filter in filter_list) {
     
-    file_path <- carsurvey2::format_department_path(filter)
+    file_path <- carsurvey2::format_filter_path(filter)
     message("Writing page for ", file_path)
     
     # filter data to just the department

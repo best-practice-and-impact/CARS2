@@ -1,18 +1,19 @@
 
-#' @title Format department path
+#' @title Format filter path
 #'
-#' @description This function cleans the department names
+#' @description This function cleans the filter names
 #'
-#' @param department A string 
+#' @param path A string 
 #'
 #' @return String
 #' 
 #' @export
 #'
 
-format_department_path = function(department) {
+format_filter_path = function(path) {
   
   url <- gsub(" \\(excl. agencies\\)", "", department)
+  url <- gsub(" \\(or equivalent\\)", "", department)
   url <- gsub(" ", "-", url)
   url <- gsub(",", "", url)
   return(url)

@@ -519,8 +519,14 @@ recode_grade <- function(data, grade_col = "grade", dep_col = "dept") {
   data[[grade_col]][grepl("nhs", data[[dep_col]], ignore.case=TRUE)] <- "Other - NHS"
   data[[grade_col]][grepl("nhs", data[[grade_col]], ignore.case=TRUE)] <- "Other - NHS"
   
-  # Recode DSTL grades
-  data[[grade_col]][!data[[grade_col]] %in% final_grades & data[[dep_col]] == "Defence Science and Technology Laboratory"] <- "Other - DSTL"
+  # Recode DSTL grades (based on equivalent grades on Civil Service Jobs)
+  dstl_mask <- data[[dep_col]] == "Defence Science and Technology Laboratory"
+  data[[grade_col]][dstl_mask & grepl("level 1|l1|grade 1|level 2|l2|grade 2|level 3|l3|grade 3", data[[grade_col]], ignore.case=TRUE)] <- "Administrative Officer (or equivalent)"
+  data[[grade_col]][dstl_mask & grepl("level 4|l4|grade 4", data[[grade_col]], ignore.case=TRUE)] <- "Higher Executive Officer (or equivalent)"
+  data[[grade_col]][dstl_mask & grepl("level 5|l5|grade 5", data[[grade_col]], ignore.case=TRUE)] <- "Senior Executive Officer (or equivalent)"
+  data[[grade_col]][dstl_mask & grepl("level 6|l6|level 7|l7", data[[grade_col]], ignore.case=TRUE)] <- "Grade 7 (or equivalent)"
+  
+  data[[grade_col]][!data[[grade_col]] %in% final_grades & dstl_mask] <- "Other - DSTL"
   
   data[[grade_col]][!data[[grade_col]] %in% final_grades] <- "Other"
   

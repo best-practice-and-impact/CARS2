@@ -1,0 +1,70 @@
+---
+title: "DRAFT::: Grade profiles"
+---
+
+```{r global-options, include=FALSE}
+# Set echo=false for all chunks
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+*Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
+
+Below are links to grade-specific profiles. These contain the outputs present on the summary statistics page, filtered by grade. Only grades with 20 or more respondents are included.
+
+## Department sample sizes
+
+``` {r}
+
+library(magrittr)
+
+if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
+
+grade_freqs <- data.frame(table(data$grade))
+grade_freqs <- grade_freqs[grade_freqs[2] >= 20, ]
+grade_freqs[1] <- as.character(grade_freqs[[1]])
+colnames(grade_freqs) <- c("Department", "Sample size")
+
+carsurvey2::setup_table_toggle()
+carsurvey2::insert_table_toggle("dep-freqs")
+
+```
+
+<div id="dep-freqs-chart">
+``` {r}
+
+freqs_plot <- grade_freqs
+freqs_plot[1] <- stringr::str_wrap(freqs_plot[[1]], width = 40)
+freqs_plot[1] <- gsub("\\n", "<br>", freqs_plot[[1]])
+freqs_plot <- freqs_plot[rev(order(freqs_plot[1])), ]
+freqs_plot[1] <- factor(freqs_plot[[1]], levels = freqs_plot[[1]])
+carsurvey2::plot_freqs(freqs_plot, "", "Sample size", n = sum(freqs_plot$`Sample size`), font_size = 14, orientation = "h", height = 400)
+
+```
+</div>
+
+<div id="dep-freqs-table">
+``` {r}
+
+kableExtra::kable_styling(knitr::kable(freqs_plot, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(freqs_plot$`Sample size`)))
+
+```
+</div>
+
+
+``` {r}
+
+grades <- data.frame(table(data$grade))
+grades_list <- grades[grades[2] >= 20, ]
+
+alphabetical <- as.character(grades_list$Var1[order(grades_list[[1]])])
+urls <- gsub(" \\(excl. agencies\\)", "", alphabetical)
+urls <- gsub(" ", "-", urls)
+urls <- gsub(",", "", urls)
+links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")
+html <- paste(links, collapse="\n\n")
+html <- paste0("<ol>", html, "</ol>")
+knitr::raw_html(html)
+
+```
+

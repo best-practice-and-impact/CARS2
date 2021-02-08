@@ -1,4 +1,4 @@
-#' @title generate_tables
+#' @title Generate tables
 #' 
 #' @description Creates a series of tables 
 #' 
@@ -43,36 +43,45 @@ generate_tables <- function(smart_survey_data) {
                        "All the time")
   
   # End of objects
-  ################################################
-  # Start creating tables
   
-  tables$freq_table <- table_coding_frequency(smart_survey_data)
+  # Create tables
+  
+  tables$freq_table <- calc_freqs_coding(smart_survey_data)
  
-  tables$knowledge <- table_knowledge_of_languages(smart_survey_data, langs)
+  tables$knowledge <- calc_freqs_knowledge(smart_survey_data, langs)
   
-  tables$access <- table_access_to_programming_language(smart_survey_data, langs)
+  tables$access <- calc_freqs_access_lang(smart_survey_data, langs)
   
-  tables$code_tool_status <- table_coding_tool_access_knowledge(smart_survey_data, langs)
+  tables$code_tool_status <- calc_freqs_coding_tools(smart_survey_data, langs)
   
-  tables$rap_knowledge_chart <- table_knowledge_of_rap(smart_survey_data)
+  tables$rap_knowledge_chart <- calc_freqs_knowledge_of_rap(smart_survey_data)
   
-  tables$rap_opinions_chart <- table_opinion_of_rap(smart_survey_data)
+  tables$rap_opinions_chart <- calc_freqs_opinion_of_rap(smart_survey_data)
 
-  tables$components <- table_rap_score_components(smart_survey_data)
+  tables$components <- calc_freqs_rap_score_components(smart_survey_data)
   
-  tables$basic_freqs <- table_rap_score_basic_frequencies(smart_survey_data)
+  tables$basic_freqs <- calc_freqs_rap_basic(smart_survey_data)
   
-  tables$advanced_freqs <- table_rap_score_advanced_frequencies(smart_survey_data)
+  tables$advanced_freqs <- calc_freqs_rap_advanced(smart_survey_data)
   
-  tables$code_prac_chart <- table_coding_practice_usage(smart_survey_data, code_prac_levels)
+  tables$code_prac_chart <- calc_freqs_practices_usage(smart_survey_data, code_prac_levels)
   
-  tables$doc <- table_documenation_usage(smart_survey_data, code_prac_levels)
+  tables$doc <- calc_freqs_documenation_usage(smart_survey_data, code_prac_levels)
   
+  tables$freq_ops <- calc_freq_operations(smart_survey_data)
   
+  tables$outside_work <- calc_freqs_outside_work(smart_survey_data)
   
-  ############################
+  tables$freq_abil <- calc_freq_ability(smart_survey_data)
+    
+  tables$first_learnt <- calc_freq_learn_code(smart_survey_data)
+  
+  tables$rep_workflow <- calc_freq_reproducible_workflow(smart_survey_data)
+  
+  tables$vers_cont <- calc_freq_version_control(smart_survey_data)
+  
   # Error handling
-  # Check tables struct 
+  # Check tables 
 
   for (table in names(tables)) {
     

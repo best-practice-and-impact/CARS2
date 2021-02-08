@@ -17,17 +17,17 @@ Below are links to department-specific profiles. These contain the outputs prese
 
 library(magrittr)
 
-if(!exists("smart_survey_data")) stop("Dataframe called smart_survey_data not available. This should be in the 
+if(!exists("data")) stop("Dataframe called data not available. This should be in the 
                                       function enviroment of render_main_site. Check that this is available in this
                                       enviroment.")
 
-dep_freqs <- data.frame(table(smart_survey_data$dept))
+dep_freqs <- data.frame(table(data$dept))
 dep_freqs <- dep_freqs[dep_freqs[2] >= 20, ]
 dep_freqs[1] <- as.character(dep_freqs[[1]])
 colnames(dep_freqs) <- c("Department", "Sample size")
 
-carsurvey2::html_setup_table_toggle()
-carsurvey2::html_insert_table_toggle("dep-freqs")
+carsurvey2::setup_table_toggle()
+carsurvey2::insert_table_toggle("dep-freqs")
 
 ```
 
@@ -39,7 +39,7 @@ dep_freqs_plot[1] <- stringr::str_wrap(dep_freqs_plot[[1]], width = 40)
 dep_freqs_plot[1] <- gsub("\\n", "<br>", dep_freqs_plot[[1]])
 dep_freqs_plot <- dep_freqs_plot[rev(order(dep_freqs_plot[1])), ]
 dep_freqs_plot[1] <- factor(dep_freqs_plot[[1]], levels = dep_freqs_plot[[1]])
-carsurvey2::plot_freqs(dep_freqs_plot, "Department", "Sample size", n = samples$all, font_size = 14, orientation = "h", height = 1000)
+carsurvey2::plot_freqs(dep_freqs_plot, "", "Sample size", n = sum(dep_freqs_plot$`Sample size`), font_size = 14, orientation = "h", height = 1000)
 
 ```
 </div>
@@ -56,7 +56,7 @@ kableExtra::kable_styling(knitr::kable(dep_freqs_plot, row.names = FALSE)) %>%
 
 ``` {r}
 
-deps <- data.frame(table(smart_survey_data$dept))
+deps <- data.frame(table(data$dept))
 dep_list <- deps[deps[2] >= 20, ]
 
 alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])

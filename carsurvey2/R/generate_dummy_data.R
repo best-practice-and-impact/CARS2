@@ -13,11 +13,11 @@
 
 generate_dummy_data <- function(nrows = 100) {
   
-  API_data <- carsurvey2::data_ingest()
+  API_data <- carsurvey2::ingest()
   if(API_data$status_code != 200) stop("Unsuccessful API request. Status code: ", API_data$status_code, "\n Process Killed.")
   
-  data <- carsurvey2::data_convert_raw(API_data) %>% 
-    carsurvey2::data_tidy_ingest()     
+  data <- carsurvey2::convert_raw(API_data) %>% 
+    carsurvey2::tidy_ingest()     
   
   cols <- colnames(data)
   vals <- lapply(cols, function(x) extract_vals(data, x))

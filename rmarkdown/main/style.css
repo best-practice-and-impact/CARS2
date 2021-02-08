@@ -80,26 +80,25 @@ ol > li > a:focus {
   color: black !important;
 }
 
-/* Use to compensate for navigation bar overpill */
-
 body {
   padding-top: 45px !important;
 }
+
 @media (max-width: 991px) {
   body {
-    padding-top: 100px !important;
+    padding-top: 45px !important;
   }
 }
-/*
-@media (max-width: 991px) {
+
+@media (max-width:991px) and (min-width:767px){
   body {
-    padding-top: 150px !important;
+    padding-top: 90px !important;
   }
 }
 */
 @media (max-width: 767px) {
   body {
-    padding-top: 50px !important;
+    padding-top: 45px !important;
   }
 }
 

@@ -6,18 +6,17 @@
 \usage{
 plot_stacked(
   table,
-  colour_scale = "2gradients",
   xlab,
   ylab,
   n,
+  colour_scale = "2gradients",
   font_size = 12,
+  neutral_mid = TRUE,
   ...
 )
 }
 \arguments{
 \item{table}{Frequency table for stacked bar chart (data frame). 3+ columns - sub-question names in column 1 with answer options in subsequent columns..}
-
-\item{colour_scale}{type of colour scale ("gradient", "scale" or "2gradients"). See get_gradient(), get_2colour_scale() and get_2colour_gradients().}
 
 \item{xlab}{X axis title}
 
@@ -25,7 +24,11 @@ plot_stacked(
 
 \item{n}{sample size}
 
+\item{colour_scale}{type of colour scale ("gradient", "scale" or "2gradients"). See get_gradient(), get_2colour_scale() and get_2colour_gradients().}
+
 \item{font_size}{minimum font size for the plot (numeric).}
+
+\item{neutral_mid}{whether the midpoint of the colour scale should be neutral ("2gradients" scale only). TRUE by default}
 
 \item{...}{additional plotly_ly arguments}
 }

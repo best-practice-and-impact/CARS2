@@ -1,10 +1,3 @@
-########  ##        #######  ######## 
-##     ## ##       ##     ##    ##    
-##     ## ##       ##     ##    ##    
-########  ##       ##     ##    ##    
-##        ##       ##     ##    ##    
-##        ##       ##     ##    ##    
-##        ########  #######     ##  
 
 #'@title Plot frequency graph
 #'
@@ -140,13 +133,14 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
 #'@param ylab Y axis title
 #'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
+#'@param neutral_mid whether the midpoint of the colour scale should be neutral ("2gradients" scale only). TRUE by default
 #'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font_size = 12, ...) {
+plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font_size = 12, neutral_mid = TRUE, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -201,7 +195,7 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
     colours <- get_2colour_scale(ncolours)
   } else if (colour_scale == "2gradients") {
     mid <- ceiling(ncolours/2)
-    colours <- get_2colour_gradients(ncol(table)-1, mid = mid)
+    colours <- get_2colour_gradients(ncol(table)-1, mid = mid, neutral_mid = neutral_mid)
   }
   
   colours <- lapply(colours, function(x) grDevices::rgb(x[1], x[2], x[3], max = 255))
@@ -421,8 +415,8 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
 plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v", ...) {
   
   # Set default bar colours
-  n <- length(unique(table[[2]]))
-  c <- get_2colour_scale(n)
+  n_groups <- length(unique(table[[2]]))
+  c <- get_2colour_scale(n_groups)
   colours <- unlist(lapply(c, function(x) grDevices::rgb(x[1], x[2], x[3], maxColorValue = 255))) 
   colours <- unlist(colours)
   colours <- rep(colours, c(unlist(table(table[[2]]))))

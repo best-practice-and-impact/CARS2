@@ -1,16 +1,4 @@
-########     ###    ########    ###    
-##     ##   ## ##      ##      ## ##   
-##     ##  ##   ##     ##     ##   ##  
-##     ## ##     ##    ##    ##     ## 
-##     ## #########    ##    ######### 
-##     ## ##     ##    ##    ##     ## 
-########  ##     ##    ##    ##     ## 
-       
-# Functions for ingesting and cleaning Smart Survey API Data. All functions prefixed with data_                         
-
-
-
-#'@title data_ingest
+#'@title Ingest smartsurvey data
 #'
 #'@description Download smartsurvey export via the API. Download the exported data from smartsurvey using the API. Use convert_raw() to convert the API response to a data.frame.
 #'
@@ -24,7 +12,7 @@
 #'
 #'@export
 
-data_ingest <- function(survey = "790800",
+ingest <- function(survey = "790800",
                    export = "1438876",
                    token = Sys.getenv("CARS_TOKEN"),
                    secret = Sys.getenv("CARS_SECRET"),
@@ -69,7 +57,7 @@ data_ingest <- function(survey = "790800",
   
   # Check request status code
   if (r$status_code != 200) {
-    warning(paste0("Unsuccessful API request. Status code: ", r$status_code))
+    stop(paste0("Unsuccessful API request. Status code: ", r$status_code))
     return(r)
   }
   
@@ -84,7 +72,7 @@ data_ingest <- function(survey = "790800",
   return(r)
 }
 
-#'@title data_convert_raw
+#'@title Convert raw data to data.frame
 #'
 #'@description Convert raw smartsurvey data to data.frame . Extract contents (raw csv) from smartsurvey API request and convert to data.frame
 #'
@@ -94,7 +82,7 @@ data_ingest <- function(survey = "790800",
 #'
 #'@export
 
-data_convert_raw <- function(r) {
+convert_raw <- function(r) {
   
   if (class(r) != "response") {
     stop("Unexpected input - r is not a response object.")
@@ -116,7 +104,7 @@ data_convert_raw <- function(r) {
   return(data)
 }
 
-#'@title data_tidy_ingest
+#'@title Tidy ingested data
 #'
 #'@description Tidy the ingested data from the smartsurvey API. Tidy column names and remove empty rows from the ingested data. 
 #' The question numbers returned are only nested to one level, e.g. Q1.1, Q1.2, etc. However, the function will work on any number of nester levels or none. 
@@ -128,7 +116,7 @@ data_convert_raw <- function(r) {
 #'
 #'@export
 
-data_tidy_ingest <- function(data) {
+tidy_ingest <- function(data) {
   
   # Check input
   if (!is.data.frame(data)) {
@@ -206,7 +194,7 @@ data_tidy_ingest <- function(data) {
   return(data)
 }
 
-#'@title data_rename_cols
+#'@title Rename columns
 #'
 #'@description Rename columns in CARS wave 2 dataset.
 #'
@@ -216,7 +204,7 @@ data_tidy_ingest <- function(data) {
 #'
 #'@export
 
-data_rename_cols <- function(data) {
+rename_cols <- function(data) {
   
   if (!is.data.frame(data)) {
     stop("Unexpected input - data should be a data frame")
@@ -356,7 +344,7 @@ data_rename_cols <- function(data) {
   
 }
 
-#'@title data_derive_rap_scores
+#'@title Derive RAP scores
 #'
 #'@description Calculate RAP scores. Derive RAP score columns from existing variables and add to the dataframe.
 #'
@@ -366,7 +354,7 @@ data_rename_cols <- function(data) {
 #'
 #'@export
 
-data_derive_rap_scores <- function(data) {
+derive_rap_scores <- function(data) {
   
   # Check input
   expected_cols <- c("gp_code_review", 
@@ -428,7 +416,7 @@ data_derive_rap_scores <- function(data) {
   return(data)
 }
 
-#'@title data_derive_code_status
+#'@title Derive code status
 #'
 #'@description Derive coding tool knowledge but no access/access but no knowledge status..
 #'
@@ -438,7 +426,7 @@ data_derive_rap_scores <- function(data) {
 #'
 #'@export
 
-data_derive_code_status <- function(data) {
+derive_code_status <- function(data) {
   # Check input
   expected_cols <- c(
     "knowledge_R",
@@ -490,3 +478,59 @@ data_derive_code_status <- function(data) {
   
   return(data)
 }
+
+
+#'@title Recode grade
+#'
+#'@description Recode non-set responses to grade question
+#'
+#'@param data a data frame containing cleaned CARS wave 2 data
+#'@param grade_col the name of the column containing the grade (set to "grade" by default)
+#'@param dep_col the name of the column containing the department (set to "dept" by default)
+#'
+#'@return the original data with the reocded grade column
+#'
+#'@export
+
+
+recode_grade <- function(data, grade_col = "grade", dep_col = "dept") {
+  
+  if (class(data) != "data.frame") {
+    stop("Unexpected input - data is not a data.frame")
+  } else if (!grade_col %in% colnames(data)) {
+    stop("Unexpected input - data does not contain the grade column")
+  } else if (!dep_col %in% colnames(data)) {
+    stop("Unexpected input - data does not contain the department column")
+  }
+  
+  final_grades <- c(
+    "Administrative Officer (or equivalent)",
+    "Executive Officer (or equivalent)",
+    "Higher Executive Officer (or equivalent)",                             
+    "Senior Executive Officer (or equivalent)",
+    "Grade 7 (or equivalent)",                 
+    "Grade 6 (or equivalent)",
+    "Fast Stream",
+    "Other - NHS", 
+    "Other - DSTL"
+  )
+  
+  # Merge NHS into single category
+  data[[grade_col]][grepl("nhs", data[[dep_col]], ignore.case=TRUE)] <- "Other - NHS"
+  data[[grade_col]][grepl("nhs", data[[grade_col]], ignore.case=TRUE)] <- "Other - NHS"
+  
+  # Recode DSTL grades (based on equivalent grades on Civil Service Jobs)
+  dstl_mask <- data[[dep_col]] == "Defence Science and Technology Laboratory"
+  data[[grade_col]][dstl_mask & grepl("level 1|l1|grade 1|level 2|l2|grade 2|level 3|l3|grade 3", data[[grade_col]], ignore.case=TRUE)] <- "Administrative Officer (or equivalent)"
+  data[[grade_col]][dstl_mask & grepl("level 4|l4|grade 4", data[[grade_col]], ignore.case=TRUE)] <- "Higher Executive Officer (or equivalent)"
+  data[[grade_col]][dstl_mask & grepl("level 5|l5|grade 5", data[[grade_col]], ignore.case=TRUE)] <- "Senior Executive Officer (or equivalent)"
+  data[[grade_col]][dstl_mask & grepl("level 6|l6|level 7|l7", data[[grade_col]], ignore.case=TRUE)] <- "Grade 7 (or equivalent)"
+  
+  data[[grade_col]][!data[[grade_col]] %in% final_grades & dstl_mask] <- "Other - DSTL"
+  
+  data[[grade_col]][!data[[grade_col]] %in% final_grades] <- "Other"
+  
+  return(data)
+
+}
+

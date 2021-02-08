@@ -1,10 +1,4 @@
-# No nested survey questions
-dummy_data0 <- data.frame(
-  id = c(1, 2),
-  IP.address = c("754", "42"),
-  Q1..question.name = c("yes", "no"),
-  Q2..question.name = c("no", "no")
-)
+
 
 dummy_data <- data.frame(columnA = c("Yes", "Yes", "No"),
                          columnB = c("No", "No", "No"),

@@ -1,8 +1,11 @@
 
-test_that("function returns raw html", {
-  expect_s3_class(insert_table_toggle("valid-id"), "knit_asis")
-  expect_s3_class(insert_table_toggle("valid.id"), "knit_asis")
-  expect_s3_class(insert_table_toggle("valid_id"), "knit_asis")
+test_that("function returns character string", {
+  expect_type(insert_table_toggle("valid-id"), "character")
+  expect_type(insert_table_toggle("valid.id"), "character")
+  expect_type(insert_table_toggle("valid_id"), "character")
+  expect_equal(length(insert_table_toggle("valid-id")), 1)
+  expect_equal(length(insert_table_toggle("valid.id")), 1)
+  expect_equal(length(insert_table_toggle("valid_id")), 1)
 })
 
 test_that("function rejects invalid html ids", {

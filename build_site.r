@@ -19,7 +19,7 @@ carsurvey_data <- carsurvey2::convert_raw(API_data)  %>%
 # Build the site
 navbar <- carsurvey2::render_navbar()
 carsurvey2::save_navbar(navbar, "rmarkdown/main")
-carsurvey2::save_navbar(navbar, "rmarkdown/deps")
-carsurvey2::render_main_site(carsurvey_data)
+carsurvey2::save_navbar(navbar, "rmarkdown/summary_template")
+render_main_site(carsurvey_data)
 carsurvey2::render_filtered_pages(carsurvey_data, filter_variable = "dept", page_title = "Department")
 carsurvey2::render_filtered_pages(carsurvey_data, filter_variable = "grade", page_title = "Grade")

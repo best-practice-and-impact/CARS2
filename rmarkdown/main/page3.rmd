@@ -24,12 +24,8 @@ grade_freqs <- grade_freqs[grade_freqs[2] >= 20, ]
 grade_freqs[1] <- as.character(grade_freqs[[1]])
 colnames(grade_freqs) <- c("Department", "Sample size")
 
-carsurvey2::setup_table_toggle()
-carsurvey2::insert_table_toggle("dep-freqs")
-
 ```
 
-<div id="dep-freqs-chart">
 ``` {r}
 
 freqs_plot <- grade_freqs
@@ -37,20 +33,14 @@ freqs_plot[1] <- stringr::str_wrap(freqs_plot[[1]], width = 40)
 freqs_plot[1] <- gsub("\\n", "<br>", freqs_plot[[1]])
 freqs_plot <- freqs_plot[rev(order(freqs_plot[1])), ]
 freqs_plot[1] <- factor(freqs_plot[[1]], levels = freqs_plot[[1]])
-carsurvey2::plot_freqs(freqs_plot, "", "Sample size", n = sum(freqs_plot$`Sample size`), font_size = 14, orientation = "h", height = 400)
+plot <- carsurvey2::plot_freqs(freqs_plot, "", "Sample size", n = sum(freqs_plot$`Sample size`), font_size = 14, orientation = "h", height = 400)
 
-```
-</div>
-
-<div id="dep-freqs-table">
-``` {r}
-
-kableExtra::kable_styling(knitr::kable(freqs_plot, row.names = FALSE)) %>% 
+table <- kableExtra::kable_styling(knitr::kable(freqs_plot, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", sum(freqs_plot$`Sample size`)))
 
-```
-</div>
+carsurvey2::wrap_outputs("dep-freqs", plot, table)
 
+```
 
 ``` {r}
 
@@ -58,7 +48,7 @@ grades <- data.frame(table(data$grade))
 grades_list <- grades[grades[2] >= 20, ]
 
 alphabetical <- as.character(grades_list$Var1[order(grades_list[[1]])])
-urls <- gsub(" \\(excl. agencies\\)", "", alphabetical)
+urls <- gsub(" \\(or equivalent\\)", "", alphabetical)
 urls <- gsub(" ", "-", urls)
 urls <- gsub(",", "", urls)
 links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")

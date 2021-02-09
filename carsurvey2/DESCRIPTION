@@ -25,6 +25,7 @@ Imports:
 	kableExtra,
 	stringi,
 	htmlwidgets,
+	htmltools,
 	magrittr,
 	lexicon
 Suggests: 

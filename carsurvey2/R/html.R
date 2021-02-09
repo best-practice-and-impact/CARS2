@@ -72,6 +72,57 @@ build_navbar <- function(navbar_info) {
 }
 
 
+#'@title Wrap outputs
+#'
+#'@description Wrap corresponding chart and table outputs and add toggle functionality 
+#'
+#'@param name output name - string
+#'@param chart plotly widget
+#'@param table html table (string) - knitr::kable is recommended 
+#'
+#'@return html widget containing the chart, table and toggling functionality
+#'
+#'@export
+
+wrap_outputs <- function(name, chart, table) {
+  
+  # Validate name 
+  if (typeof(name) != "character" | length(name) != 1) {
+    stop("Unexpected input - name should be a single character string")
+  } else if (!grepl("^[A-Za-z]+$", substring(name, 1, 1))) { # If the first character of output_name is not a letter
+    stop("Invalid html ID - output_name should begin with a letter")
+  } else if (!grepl("^[a-zA-Z0-9_.-]*$", name)) { # If output_name contains invalid characters for html id
+    stop("invalid html ID - output_name should not include special characters other than underscores, hyphens or stops")
+  }
+  
+  # Validate chart and table
+  if (!any(class(chart) == "htmlwidget")) {
+    stop("Unexpected input - chart is not an html widget")
+  }
+  
+  if (typeof(table) != "character" | length(table) != 1) {
+    stop("Unexpected input - table is not a character object")
+  }
+  
+  
+  # Remove knitr tags from table html if needed
+  table <- htmltools::HTML(gsub("```\\{=html\\}|```\n", "", table))
+  
+  js <- htmltools::HTML(setup_table_toggle())
+  
+  buttons <- htmltools::HTML(insert_table_toggle(name))
+  
+  chart_div <- htmltools::HTML(paste0('<div id="', name, '-chart">'))
+  table_div <- htmltools::HTML(paste0('<div id="', name, '-table">'))
+  close_div <- htmltools::HTML("</div>")
+  
+  widget <- htmlwidgets::prependContent(chart, js, buttons, chart_div)
+  widget <- htmlwidgets::appendContent(widget, close_div, table_div, table, close_div)
+  
+  return(widget)
+  
+}
+
 #' @title Set up table toggle
 #'
 #' @description  Set up JavaScript functions for show table/chart buttons 
@@ -82,6 +133,7 @@ build_navbar <- function(navbar_info) {
 #'@return JavaScript code (raw html)
 #'
 #'@export
+#'
 
 setup_table_toggle <- function() {
   
@@ -104,7 +156,7 @@ setup_table_toggle <- function() {
   </script>
 '
   
-  knitr::raw_html(script)
+  return(script)
   
 }
  
@@ -160,12 +212,12 @@ insert_table_toggle <- function(output_name) {
     ' </style>'
   )
   
-  knitr::raw_html(
-    paste(
-      toggle_chart_button,
-      toggle_table_button,
-      style,
-      sep = "\n"
-    )
+  html <- paste(
+    toggle_chart_button,
+    toggle_table_button,
+    style,
+    sep = "\n"
   )
+  
+  return(html)
 }

@@ -63,6 +63,8 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
     table[[break_q_names_col]] <- as.character(table[[break_q_names_col]])
     
     table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]], max_lines = max_lines)
+    
+    table[[break_q_names_col]] <- factor(table[[break_q_names_col]], levels = table[[break_q_names_col]])
   }
   
   x <- list(
@@ -300,6 +302,8 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   # Apply break_q_names to a column
   if(!is.null(break_q_names_col)) {
     table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]])
+    table[[break_q_names_col]] <- factor(table[[break_q_names_col]], levels = table[[break_q_names_col]])
+    
   }
   
   x <- list(

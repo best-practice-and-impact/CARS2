@@ -379,17 +379,17 @@ calc_freqs_coding_practices <- function(data, code_prac_levels) {
 calc_freq_operations <- function(data){
   
   operations_data <- dplyr::select(data,"data_cleaning":"data_transfer")
-  levels <- c("I don't do this",
-              "I do this without coding",
+  levels <- c("I do this without coding",
               "I do some or all of this by coding")
   
-  operations_percent <- carsurvey2::calc_multi_col_freqs(operations_data, levels)
+  operations <- carsurvey2::calc_multi_col_freqs(operations_data, levels)
   
-  operations_percent[[1]] <- c("Data Cleaning", "Data Analysis", "Data Visualisations","Quality Assurance", "Data Trasnfer / Migration")
-  colnames(operations_percent) <- c("Operation", "Don't do operation", "Do some or all with coding", "Do without code")
-  return(operations_percent)
+  operations[[1]] <- c("Data Cleaning", "Data Analysis", "Data Visualisations","Quality Assurance", "Data Trasnfer / Migration")
+  
+  colnames(operations) <- c("Data operation", "I do this without coding", "I do some or all of this by coding")
+  
+  return(operations)
 }
-
 
 #' @title Coding experience outside of work frequency table
 #'

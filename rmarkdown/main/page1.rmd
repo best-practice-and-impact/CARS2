@@ -32,7 +32,8 @@ tables <- carsurvey2::generate_tables(data)
 samples <- list(
   all = nrow(data),
   coders = sum(data$code_freq != "Never"),
-  heard_of_rap = sum(data$RAP_heard_of == "Yes")
+  heard_of_rap = sum(data$RAP_heard_of == "Yes"),
+  code_outside_current_role = sum(carsurvey_data$code_experience == "Yes")
 )
 
 ```
@@ -95,6 +96,56 @@ table <- kableExtra::kable_styling(knitr::kable(tables$code_tool_status, row.nam
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 carsurvey2::wrap_outputs("tools-status", plot, table)
+
+```
+
+## What are people using code for?
+
+We asked respondents what data operations they do in their work, and whether they use code to do them. 
+
+``` {r}
+
+plot <- carsurvey2::plot_stacked(tables$freq_ops, xlab = "Count", ylab = "Data operation", n = samples$all, neutral_mid = FALSE)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$freq_ops, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("operations", plot, table)
+
+```
+
+
+# Coding capability 
+
+We asked respondents a series of questions about whether they feel their coding ability is improving in their current role and where they first learned to code. A summary of these responses can be seen below. 
+
+## Change in coding ability
+
+Respondents who had coding experience outside of their current role were asked whether there has been a change in their coding ability.
+
+``` {r}
+
+plot <- carsurvey2::plot_freqs(tables$freq_abil, xlab = "Change in ability", ylab = "Count", n = samples$code_outside_current_role, break_q_names_col = "Coding ability changes")
+
+table <- kableExtra::kable_styling(knitr::kable(tables$freq_abil, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("ability", plot, table)
+
+```
+
+## Where respondents have learned to code
+
+Respondents were asked whether they had coding experience outside their current role and, if so, where. 
+
+``` {r}
+
+plot <- carsurvey2::plot_freqs(tables$first_learnt, xlab = "First coding experience", ylab = "count", n = samples$coders, break_q_names_col = "First learn code", orientation = "h")
+
+table <- kableExtra::kable_styling(knitr::kable(tables$first_learnt, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("first-learn", plot, table)
 
 ```
 
@@ -217,5 +268,35 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
 
 carsurvey2::wrap_outputs("doc", plot, table)
+
+```
+
+## Reproducible workflow packages
+
+We asked respondents "do you use reproducible workflow packages e.g. drake, make or pymake?". 
+
+``` {r}
+
+plot <- carsurvey2::plot_freqs(tables$rep_workflow, xlab = "Use reproducible workflows packages", ylab = "count", n = samples$coders, break_q_names_col = "Use reproducible workflow packages")
+
+table <- kableExtra::kable_styling(knitr::kable(tables$rep_workflow)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+wrap_outputs("workflow", plot, table)
+
+```
+
+## Version control platforms
+
+The number of users of each version control platform. 
+
+``` {r}
+
+plot <- carsurvey2::plot_freqs(tables$vers_cont, xlab = "Version control platform", ylab = "Count", n = samples$all, orientation = "h", break_q_names_col = "Question")
+
+table <- kableExtra::kable_styling(knitr::kable(tables$vers_cont)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+wrap_outputs("version-control", plot, table)
 
 ```

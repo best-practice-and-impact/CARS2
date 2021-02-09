@@ -12,6 +12,7 @@ test_that("Function that tests the freqency",{
 
 test_that("Function to test column names", {
   expect_identical(colnames(operations_test), c("Data operation", "I do this without coding", "I do some or all of this by coding"))
+  expect_identical(colnames(operations_test), c("Data operation",  "I do this without coding", "I do some or all of this by coding"))
 })
 
 test_that("function to test number of rows and column", {

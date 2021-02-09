@@ -13,7 +13,7 @@
 format_filter_path = function(path) {
   
   url <- gsub(" \\(excl. agencies\\)", "", path)
-  url <- gsub(" \\(or equivalent\\)", "", path)
+  url <- gsub(" \\(or equivalent\\)", "", url)
   url <- gsub(" ", "-", url)
   url <- gsub(",", "", url)
   return(url)

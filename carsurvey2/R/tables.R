@@ -398,7 +398,6 @@ calc_freq_operations <- function(data){
   return(operations)
 }
 
-
 #' @title Coding experience outside of work frequency table
 #'
 #' @description Create frequency table of if any coding experience outside current role

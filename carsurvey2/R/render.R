@@ -14,6 +14,8 @@
 
 render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
 
+  knitr::opts_chunk$set(warning = FALSE)
+  
   # Remove old site and knit
   knitr::opts_chunk$set(message = FALSE, warning = FALSE)
   rmarkdown::clean_site(markdown_file_path)
@@ -104,8 +106,11 @@ render_filtered_pages <- function(data,
     samples <- list(
       all = nrow(filtered_data),
       coders = sum(filtered_data$code_freq != "Never"),
-      heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes")
+      heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
+      code_outside_current_role = sum(carsurvey_data$code_experience == "Yes")
     )
+    
+    knitr::opts_chunk$set(warning = FALSE)
     
     rmarkdown::render(template_path, 
                       output_file = paste0(output_folder, "/", file_path),

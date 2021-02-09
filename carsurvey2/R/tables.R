@@ -476,6 +476,8 @@ calc_freq_learn_code <- function(data) {
   
   frequency_table <- rbind(c("In current role", sum(data$learn_before == "No" & !is.na(data$learn_before))), frequency_table)
   
+  frequency_table[[2]] <- as.numeric(frequency_table[[2]])
+  
   colnames(frequency_table) <- c("First learn code", "Count")
   
   return(frequency_table)
@@ -510,6 +512,8 @@ calc_freq_reproducible_workflow <- function(data){
   
   frequency_table[[1]] <- dplyr::recode(frequency_table[[1]], !!!code_prac_questions) 
   
+  frequency_table[[1]] <- factor(frequency_table[[1]], levels = frequency_table[[1]])
+  
   return(frequency_table)
 }
 
@@ -527,9 +531,9 @@ calc_freq_reproducible_workflow <- function(data){
 calc_freq_version_control <- function(data){
   
   version_control_platforms <- dplyr::select(data, "use_github":"use_googlecloud")
-  levels = c("Yes","No")
-  version_platform_percent <- carsurvey2::calc_multi_col_freqs(version_control_platforms, levels)
-  
+  levels = c("Yes", "No") 
+  version_platform_freqs <- carsurvey2::calc_multi_col_freqs(version_control_platforms, levels)
+
   code_prac_questions <- c(
     use_github = "GitHub",
     use_gitlab = "GitLab",
@@ -537,10 +541,12 @@ calc_freq_version_control <- function(data){
     use_AWS = "AWS CodeCommit",
     use_googlecloud = "Cloud Source Repository (Google Cloud)")
   
-  version_platform_percent[[1]] <- dplyr::recode(version_platform_percent[[1]], !!!code_prac_questions) 
+  version_platform_freqs[[1]] <- dplyr::recode(version_platform_freqs[[1]], !!!code_prac_questions) 
   
-  colnames(version_platform_percent) <- c("Question","Yes","No")
-  return(version_platform_percent)
+  version_platform_freqs <- version_platform_freqs[c(1,2)]
+  
+  colnames(version_platform_freqs) <- c("Question","Yes")
+  return(version_platform_freqs)
 }
 
 

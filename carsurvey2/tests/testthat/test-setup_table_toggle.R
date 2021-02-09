@@ -1,4 +1,6 @@
-test_that("function returns raw html", {
-  expect_s3_class(setup_table_toggle(), "knit_asis")
+test_that("function returns character string", {
+  expect_type(setup_table_toggle(), "character")
+  expect_equal(length(setup_table_toggle()), 1)
 })
+
 

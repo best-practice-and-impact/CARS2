@@ -15,7 +15,6 @@ carsurvey_data <- carsurvey2::convert_raw(API_data)  %>%
                   carsurvey2::derive_rap_scores() %>%
                   carsurvey2::derive_code_status()      
 
-
 # Build the site
 navbar <- carsurvey2::render_navbar()
 carsurvey2::save_navbar(navbar, "rmarkdown/main")

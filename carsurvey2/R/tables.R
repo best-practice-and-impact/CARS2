@@ -384,7 +384,14 @@ calc_freq_operations <- function(data){
   
   operations <- carsurvey2::calc_multi_col_freqs(operations_data, levels)
   
-  operations[[1]] <- c("Data Cleaning", "Data Analysis", "Data Visualisations","Quality Assurance", "Data Trasnfer / Migration")
+  code_prac_questions <- c(
+    data_cleaning = "Data Cleaning",
+    data_analysis = "Data Analysis",
+    data_vis = "Data Visualisations",
+    QA = "Quality Assurance",
+    data_transfer = "Data Trasnfer / Migration")
+  
+  operations[[1]] <- dplyr::recode(operations[[1]], !!!code_prac_questions) 
   
   colnames(operations) <- c("Data operation", "I do this without coding", "I do some or all of this by coding")
   

@@ -15,6 +15,9 @@ title: "`r params$title`"
 ```{r global-options, include=FALSE}
 # Set echo=false for all chunks
 knitr::opts_chunk$set(echo=FALSE)
+
+tables <- params$tables
+samples <- params$samples
 ```
 
 *Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*

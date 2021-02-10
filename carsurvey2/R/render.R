@@ -60,10 +60,6 @@ save_navbar <- function(code, path) {
 #' 
 #' @description Creates pages by filter (e.g. by department/profession/grade).
 #' 
-#' @details For each department filters the data to only that department
-#' and then renders the common department template generating a unique page for each 
-#' department. The template is located at the internal var template_path.  
-#'
 #' @param data This is generated using the carsurvey2::data_ functions.
 #' @param filter_variable The variable that the data is filtered on. This is given as a string such as "dept". 
 #' The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.
@@ -107,7 +103,87 @@ render_filtered_pages <- function(data,
       all = nrow(filtered_data),
       coders = sum(filtered_data$code_freq != "Never"),
       heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
-      code_outside_current_role = sum(carsurvey_data$code_experience == "Yes")
+      code_outside_current_role = sum(data$code_experience == "Yes")
+    )
+    
+    knitr::opts_chunk$set(warning = FALSE)
+    
+    rmarkdown::render(template_path, 
+                      output_file = paste0(output_folder, "/", file_path),
+                      quiet = TRUE,
+                      params = list(
+                        title = title, 
+                        tables = filtered_tables,
+                        samples = samples
+                      ))
+  } 
+}
+
+#' @title Render profession pages
+#' 
+#' @description Creates pages by multi-column filter (profession)
+#' 
+#' @param data This is generated using the carsurvey2::data_ functions.
+#' @param page_title This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
+#' where filter is one element of the list as described above in filter_variable (values over 20) and the page title is this argument.
+#' @param output_folder Folder the site is built and saved to
+#' @param template_path The path to the template that gets render for each department
+#' @export
+
+
+render_prof_pages <- function(data,
+                              page_title = "",
+                              output_folder = "../../docs",
+                              template_path = "rmarkdown/summary_template/template.rmd") {
+  
+  
+  library(magrittr)
+  
+  if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
+  
+  profs <- dplyr::select(data, "nonCS":"non_prof")
+  prof_freqs <- carsurvey2::calc_multi_col_freqs(profs, c("Yes", "No"))
+  prof_freqs <- prof_freqs[c(1,2)]
+  
+  prof_freqs <- prof_freqs[prof_freqs[2] >= 20, ]
+  prof_freqs[1] <- as.character(prof_freqs[[1]])
+  colnames(prof_freqs) <- c("Profession", "Sample size")
+  
+  recode_vals <- c(
+    nonCS = "Non Civil Service",
+    GSG = "Government Statistician Group",
+    GES = "Government Economic Service",
+    GSR = "Government Social Research",
+    GORS = "Government Operational Research Service",
+    sci_eng = "Government Science and Engineering",
+    DDAT = "Digital, Data and Technology Profession",
+    datasci_GSG = "Data Scientist (GSG/GORS)",
+    datasci_non = "Data Scientist (Non-GSG/GORS)",
+    non_prof = "Civil Service, no profession membership"
+  )
+  
+  filter_list <- prof_freqs$Profession
+  filter_names <- dplyr::recode(prof_freqs$Profession, !!!recode_vals)
+  
+  for (i in c(1:length(filter_list))) {
+    
+    filter_col <- filter_list[i]
+    name <- filter_names[i]
+    
+    file_path <- carsurvey2::format_filter_path(name)
+    message("Writing page for ", file_path)
+    
+    filtered_data <- data[data[filter_col] == "Yes", ]
+    
+    title <- paste0("DRAFT: ", page_title , " profile: ", name)
+    
+    filtered_tables <- carsurvey2::generate_tables(filtered_data)
+    
+    samples <- list(
+      all = nrow(filtered_data),
+      coders = sum(filtered_data$code_freq != "Never"),
+      heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
+      code_outside_current_role = sum(data$code_experience == "Yes")
     )
     
     knitr::opts_chunk$set(warning = FALSE)

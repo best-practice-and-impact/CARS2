@@ -136,9 +136,6 @@ render_prof_pages <- function(data,
                               output_folder = "../../docs",
                               template_path = "rmarkdown/summary_template/template.rmd") {
   
-  
-  library(magrittr)
-  
   if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
   
   profs <- dplyr::select(data, "nonCS":"non_prof")

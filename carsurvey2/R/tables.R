@@ -46,6 +46,7 @@ calc_freqs_coding <- function(data) {
 #' @param langs Formatted list of strings. langs object is available in carsurvey2::generate_tables()
 #'
 #' @return data.frame
+#' 
 #' @export
 
 calc_freqs_knowledge <- function(data, langs) {
@@ -53,7 +54,8 @@ calc_freqs_knowledge <- function(data, langs) {
   knowledge <- data[grepl("knowledge_", colnames(data))]
   knowledge <- carsurvey2::calc_multi_col_freqs(cols = knowledge, factor_levels = c("Yes", "Don't Know", "No"))
   colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
-  knowledge[[1]] <- stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ]%>% dplyr::recode(!!!langs) # Rename questions
+  knowledge[[1]] <- dplyr::recode(stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ],
+                                  !!!langs) # Rename questions
   
   return(knowledge)
   
@@ -77,7 +79,8 @@ calc_freqs_access_lang <- function(data, langs) {
   access <- data[grepl("available_", colnames(data))]
   access <- carsurvey2::calc_multi_col_freqs(cols = access, factor_levels = c("Yes", "Don't Know", "No"))
   colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
-  access[[1]] <- stringr::str_split(access[[1]], "_", simplify = TRUE)[,2] %>% dplyr::recode(!!!langs) # Rename questions
+  access[[1]] <- dplyr::recode(stringr::str_split(access[[1]], "_", simplify = TRUE)[,2],
+                               !!!langs) # Rename questions
   
   return(access)
   
@@ -92,6 +95,7 @@ calc_freqs_access_lang <- function(data, langs) {
 #' @param langs Formatted list of strings. langs object is available in carsurvey2::generate_tables()
 #'
 #' @return data.frame
+#' 
 #' @export
 
 calc_freqs_coding_tools <- function(data, langs) {
@@ -99,7 +103,8 @@ calc_freqs_coding_tools <- function(data, langs) {
   code_tool_status <- data[grepl("status_", colnames(data))]
   code_tool_status <- carsurvey2::calc_multi_col_freqs(cols = code_tool_status, factor_levels = c("Access only", "Access and knowledge", "Knowledge only"))
   colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only") 
-  code_tool_status[[1]] <- stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2] %>% dplyr::recode(!!!langs) # Rename questions
+  code_tool_status[[1]] <- dplyr::recode(stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2],
+                                         !!!langs) # Rename questions
   
   return(code_tool_status)
 }

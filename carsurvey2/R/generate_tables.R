@@ -25,7 +25,7 @@ generate_tables <- function(smart_survey_data) {
   langs <- c(
     C = "C++ / C#",
     java = "Java / Scala",	
-    JS = "javascript / Typescript",
+    JS = "Javascript / Typescript",
     python = "Python",
     R = "R",
     SAS = "SAS",	

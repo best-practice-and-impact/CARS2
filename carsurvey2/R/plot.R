@@ -99,6 +99,8 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
                                              xref='paper', yref='paper', font=list(size = font_size))
     )
   } else if (orientation == "h") {
+    table <- table %>% dplyr::arrange(desc(table))
+    table[,1] <- factor(table[,1], levels = table[,1])
     fig <- plotly::plot_ly(
       x = table[[2]],
       y = table[[1]],
@@ -183,6 +185,10 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
     titlefont = list(size = font_size * 1.2)
   )
   
+  #reorder table
+  table <- table %>% dplyr::arrange(desc(table))
+  table[,1] <- factor(table[,1], levels = table[,1])
+  
   # Reshape data
   suppressMessages(
     longdata <- reshape2::melt(table)
@@ -210,7 +216,7 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
                          color = longdata[[2]], 
                          orientation = "h", 
                          hoverinfo = "text",
-                         text = longdata[[3]],
+                         text = paste0(longdata[[2]], ", " ,longdata[[3]]),
                          marker = list(color = colours),
                          ...)
   
@@ -315,10 +321,14 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   )
   
   y <- list(
-    title = ylab,
+    title = "",
     tickfont = list(size = font_size),
     titlefont = list(size = font_size * 1.2)
   )
+  
+  #Reorder table 
+  table <- table %>% dplyr::arrange(desc(table))
+  table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
   suppressMessages(
@@ -487,6 +497,8 @@ plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v"
     )
     
   } else if (orientation == "h") {
+    table <- table %>% dplyr::arrange(desc(table))
+    table[,1] <- factor(table[,1], levels = table[,1])
     fig <- plotly::plot_ly(
       x = table[[3]],
       y = table[[1]],

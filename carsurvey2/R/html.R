@@ -112,7 +112,7 @@ wrap_outputs <- function(name, chart, table) {
   
   buttons <- htmltools::HTML(insert_table_toggle(name))
   
-  chart_div <- htmltools::HTML(paste0('<div id="', name, '-chart">'))
+  chart_div <- htmltools::HTML(paste0('<div id="', name, '-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">'))
   table_div <- htmltools::HTML(paste0('<div id="', name, '-table">'))
   close_div <- htmltools::HTML("</div>")
   

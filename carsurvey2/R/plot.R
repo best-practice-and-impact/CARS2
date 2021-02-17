@@ -99,7 +99,7 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
                                              xref='paper', yref='paper', font=list(size = font_size))
     )
   } else if (orientation == "h") {
-    table <- table %>% dplyr::arrange(desc(table))
+    table <- dplyr::arrange(table, desc(table[,1]))
     table[,1] <- factor(table[,1], levels = table[,1])
     fig <- plotly::plot_ly(
       x = table[[2]],
@@ -186,7 +186,7 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
   )
   
   #reorder table
-  table <- table %>% dplyr::arrange(desc(table))
+  table <- dplyr::arrange(table,desc(table[,1]))
   table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
@@ -327,7 +327,7 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   )
   
   #Reorder table 
-  table <- table %>% dplyr::arrange(desc(table))
+  table <- dplyr::arrange(table, desc(table[,1]))
   table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
@@ -497,7 +497,7 @@ plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v"
     )
     
   } else if (orientation == "h") {
-    table <- table %>% dplyr::arrange(desc(table))
+    table <- dplyr::arrange(table, desc(table[,1]))
     table[,1] <- factor(table[,1], levels = table[,1])
     fig <- plotly::plot_ly(
       x = table[[3]],

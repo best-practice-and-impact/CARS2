@@ -56,7 +56,7 @@ calc_freqs_knowledge <- function(data, langs) {
   colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
   knowledge[[1]] <- dplyr::recode(stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ],
                                   !!!langs) # Rename questions
-  
+  knowledge <- dplyr::arrange(knowledge, `Programming language`)
   return(knowledge)
   
 }
@@ -81,7 +81,7 @@ calc_freqs_access_lang <- function(data, langs) {
   colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
   access[[1]] <- dplyr::recode(stringr::str_split(access[[1]], "_", simplify = TRUE)[,2],
                                !!!langs) # Rename questions
-  
+  access <- dplyr::arrange(access, `Programming language`)
   return(access)
   
 }
@@ -105,7 +105,7 @@ calc_freqs_coding_tools <- function(data, langs) {
   colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only") 
   code_tool_status[[1]] <- dplyr::recode(stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2],
                                          !!!langs) # Rename questions
-  
+  code_tool_status <- dplyr::arrange(code_tool_status, `Programming language`)
   return(code_tool_status)
 }
 
@@ -134,7 +134,7 @@ calc_freqs_knowledge_of_rap <- function(data) {
   
   rap_knowledge <- data.frame(table(data$RAP_champ_known))
   
-  colnames(rap_knowledge) <- c("RAP knowledge", "Count")
+  colnames(rap_knowledge) <- c("RAP champion knowledge", "Count")
   rap_knowledge[1] <- c("Have not heard of RAP",
                         "Heard of RAP, have not heard of RAP champions",
                         "Heard of RAP, does not know department champion",
@@ -215,7 +215,7 @@ calc_freqs_rap_score_components <- function(data) {
     "open_code_score"
   )
   
-  components$Group <- ifelse(components$Component %in% basic_comps, "Basic", "Advanced")
+  components$Type <- ifelse(components$Component %in% basic_comps, "Basic", "Advanced")
   components$Component <- dplyr::recode(components$Component, 
                                         "peer_review_score" = "Peer review",
                                         "version_control_score" = "Version control",
@@ -230,12 +230,11 @@ calc_freqs_rap_score_components <- function(data) {
                                         "cont_integreation_score" = "Continuous integration",
                                         "dep_management_score" = "Dependency management")
   
-  components <- dplyr::arrange(components, "Group", "Count")
+  components <- components[with(components, order(-rank(Type),Component)), ]  
   components$Component <- factor(components$Component, levels = components$Component)
   components <- components[c(1, 3, 2)]
-  
+
   return(components)
-  
 }
 
 
@@ -307,9 +306,11 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
   
   doc_data <- dplyr::select(data, "doc_AQA_log":"doc_desk")
   doc_data <- doc_data[data$code_freq != "Never", ]
-  
+
   doc <- carsurvey2::calc_multi_col_freqs(doc_data, code_prac_levels, calc_props = TRUE)
-  colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
+
+  colnames(doc)[1] <- "Question"
+  colnames(doc)[c(2:length(doc))] <- code_prac_levels
   
   doc_questions <- c(doc_AQA_log = "Analytical Quality Assurance (AQA) logs",
                      doc_assumption_reg = "Data or assumptions registers",
@@ -320,14 +321,7 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
                      doc_desk  = "Desk notes")
   
   doc[[1]] <- dplyr::recode(doc[[1]], !!!doc_questions)
-  
-  colnames(doc) <- c("Question",
-                    "Strongly disagree",
-                    "Disagree",
-                    "Neutral",
-                    "Agree",
-                    "Strongly agree",
-                    "All the time")
+  doc <- dplyr::arrange(doc,Question)
   
   return(doc)
 }
@@ -350,6 +344,7 @@ calc_freqs_coding_practices <- function(data, code_prac_levels) {
   
   code_prac <- carsurvey2::calc_multi_col_freqs(code_prac_data, code_prac_levels, calc_props = TRUE)
   
+  colnames(code_prac)[1] <- "Question"
   colnames(code_prac)[c(2:length(code_prac))] <- code_prac_levels
   
   code_prac_questions <- c(
@@ -390,15 +385,18 @@ calc_freq_operations <- function(data){
   operations <- carsurvey2::calc_multi_col_freqs(operations_data, levels)
   
   code_prac_questions <- c(
-    data_cleaning = "Data Cleaning",
     data_analysis = "Data Analysis",
+    data_cleaning = "Data Cleaning",
+    data_transfer = "Data Trasnfer / Migration",
     data_vis = "Data Visualisations",
-    QA = "Quality Assurance",
-    data_transfer = "Data Trasnfer / Migration")
+    QA = "Quality Assurance")
+    
   
   operations[[1]] <- dplyr::recode(operations[[1]], !!!code_prac_questions) 
   
   colnames(operations) <- c("Data operation", "I do this without coding", "I do some or all of this by coding")
+  
+  operations <- dplyr::arrange(operations,`Data operation`)
   
   return(operations)
 }
@@ -550,7 +548,10 @@ calc_freq_version_control <- function(data){
   
   version_platform_freqs <- version_platform_freqs[c(1,2)]
   
-  colnames(version_platform_freqs) <- c("Question","Yes")
+  colnames(version_platform_freqs) <- c("Version control platform","Yes")
+  
+  version_platform_freqs <- dplyr::arrange(version_platform_freqs,`Version control platform`)
+  
   return(version_platform_freqs)
 }
 

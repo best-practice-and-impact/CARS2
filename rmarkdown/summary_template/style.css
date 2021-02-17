@@ -102,3 +102,13 @@ body {
   }
 }
 
+.plotly.html-widget {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .plotly.html-widget {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}

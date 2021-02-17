@@ -36,7 +36,7 @@ dep_freqs_plot[1] <- gsub("\\n", "<br>", dep_freqs_plot[[1]])
 dep_freqs_plot <- dep_freqs_plot[rev(order(dep_freqs_plot[1])), ]
 dep_freqs_plot[1] <- factor(dep_freqs_plot[[1]], levels = dep_freqs_plot[[1]])
 
-plot <- carsurvey2::plot_freqs(dep_freqs_plot, "", "Sample size", n = samples$all, font_size = 14, orientation = "h", height = 1000)
+plot <- carsurvey2::plot_freqs(dep_freqs_plot, "", "Sample size", n = samples$all, font_size = 14, orientation = "h", width = 700, height = 1000)
 
 table <- kableExtra::kable_styling(knitr::kable(dep_freqs_plot, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))

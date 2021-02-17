@@ -112,6 +112,7 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
                         xaxis = x_axis, 
                         yaxis = y_axis,
                         margin = list(b = 100),
+                        hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
                         annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
                                            showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
                                            xref='paper', yref='paper', font=list(size = font_size))
@@ -516,6 +517,7 @@ plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v"
   fig <- plotly::layout(fig,  
                         xaxis = x_axis, 
                         yaxis = y_axis, 
+                        margin = list(b = 100),
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
                         annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
                                            showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,

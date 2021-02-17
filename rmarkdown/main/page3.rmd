@@ -33,7 +33,7 @@ freqs_plot[1] <- stringr::str_wrap(freqs_plot[[1]], width = 40)
 freqs_plot[1] <- gsub("\\n", "<br>", freqs_plot[[1]])
 freqs_plot <- freqs_plot[rev(order(freqs_plot[1])), ]
 freqs_plot[1] <- factor(freqs_plot[[1]], levels = freqs_plot[[1]])
-plot <- carsurvey2::plot_freqs(freqs_plot, "", "Sample size", n = samples$all, font_size = 14, orientation = "h", height = 400)
+plot <- carsurvey2::plot_freqs(freqs_plot, "", "Sample size", n = samples$all, font_size = 14, orientation = "h", width = 700, height = 400)
 
 table <- kableExtra::kable_styling(knitr::kable(freqs_plot, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))

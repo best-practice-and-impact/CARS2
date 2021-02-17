@@ -103,7 +103,7 @@ render_filtered_pages <- function(data,
       all = nrow(filtered_data),
       coders = sum(filtered_data$code_freq != "Never"),
       heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
-      code_outside_current_role = sum(data$code_experience == "Yes")
+      code_outside_current_role = sum(filtered_data$code_experience == "Yes")
     )
     
     knitr::opts_chunk$set(warning = FALSE)
@@ -180,7 +180,7 @@ render_prof_pages <- function(data,
       all = nrow(filtered_data),
       coders = sum(filtered_data$code_freq != "Never"),
       heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
-      code_outside_current_role = sum(data$code_experience == "Yes")
+      code_outside_current_role = sum(filtered_data$code_experience == "Yes")
     )
     
     knitr::opts_chunk$set(warning = FALSE)

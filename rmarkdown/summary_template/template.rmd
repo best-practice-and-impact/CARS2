@@ -165,8 +165,7 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 We asked our respondents whether they had heard of RAP and what their knowledge is of their own department RAP champion. The combined responses are presented below.
 
 ```{r}
-
-plot <- carsurvey2::plot_freqs(tables$rap_knowledge_chart, "Knowledge of RAP champions", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP knowledge", max_lines = 3, width = 600)
+plot <- carsurvey2::plot_freqs(tables$rap_knowledge_chart, "Knowledge of RAP champions", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP champion knowledge", max_lines = 3, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$rap_knowledge, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
@@ -190,8 +189,7 @@ The results can be seen below. The figure and table show the percentage of respo
 
 
 ```{r}
-
-plot <- carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "Question", n = samples$heard_of_rap, font_size = 12, height = 700, width = 700, break_q_names_col = "Question")
+plot <- carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "", n = samples$heard_of_rap, font_size = 12, height = 700, width = 700, break_q_names_col = "Question")
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$rap_opinions)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$heard_of_rap))
@@ -256,8 +254,7 @@ We asked respondents to report how often they make use of each of the coding pra
 ## General coding practices
 
 ```{r}
-
-plot <- carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "question")
+plot <- carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$code_prac_chart)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
@@ -269,8 +266,7 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 ## Documentation
 
 ```{r}
-
-plot <- carsurvey2::plot_likert(tables$doc, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
+plot <- carsurvey2::plot_likert(tables$doc, 3, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
@@ -299,8 +295,7 @@ wrap_outputs("workflow", plot, table)
 The number of users of each version control platform. 
 
 ``` {r}
-
-plot <- carsurvey2::plot_freqs(tables$vers_cont, xlab = "Version control platform", ylab = "Count", n = samples$all, orientation = "h", break_q_names_col = "Question", width = 600)
+plot <- carsurvey2::plot_freqs(tables$vers_cont, xlab = "Version control platform", ylab = "Count", n = samples$all, orientation = "h", break_q_names_col = "Version control platform", width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$vers_cont)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))

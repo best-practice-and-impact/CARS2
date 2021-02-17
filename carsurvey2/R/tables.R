@@ -56,7 +56,7 @@ calc_freqs_knowledge <- function(data, langs) {
   colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
   knowledge[[1]] <- dplyr::recode(stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ],
                                   !!!langs) # Rename questions
-  knowledge <- knowledge %>% dplyr::arrange(`Programming language`)
+  knowledge <- dplyr::arrange(knowledge, `Programming language`)
   return(knowledge)
   
 }
@@ -81,7 +81,7 @@ calc_freqs_access_lang <- function(data, langs) {
   colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
   access[[1]] <- dplyr::recode(stringr::str_split(access[[1]], "_", simplify = TRUE)[,2],
                                !!!langs) # Rename questions
-  access <- access %>% dplyr::arrange(`Programming language`)
+  access <- dplyr::arrange(access, `Programming language`)
   return(access)
   
 }
@@ -105,7 +105,7 @@ calc_freqs_coding_tools <- function(data, langs) {
   colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only") 
   code_tool_status[[1]] <- dplyr::recode(stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2],
                                          !!!langs) # Rename questions
-  code_tool_status <- code_tool_status %>% dplyr::arrange(`Programming language`)
+  code_tool_status <- dplyr::arrange(code_tool_status, `Programming language`)
   return(code_tool_status)
 }
 
@@ -321,7 +321,8 @@ calc_freqs_documenation_usage <- function(data, code_prac_levels) {
                      doc_desk  = "Desk notes")
   
   doc[[1]] <- dplyr::recode(doc[[1]], !!!doc_questions)
-  doc <- doc %>% dplyr::arrange(doc)
+  doc <- dplyr::arrange(doc,Question)
+  
   return(doc)
 }
 
@@ -395,7 +396,7 @@ calc_freq_operations <- function(data){
   
   colnames(operations) <- c("Data operation", "I do this without coding", "I do some or all of this by coding")
   
-  operations <- operations %>% dplyr::arrange(`Data operation`)
+  operations <- dplyr::arrange(operations,`Data operation`)
   
   return(operations)
 }
@@ -549,7 +550,7 @@ calc_freq_version_control <- function(data){
   
   colnames(version_platform_freqs) <- c("Version control platform","Yes")
   
-  version_platform_freqs <- version_platform_freqs %>% dplyr::arrange(version_platform_freqs)
+  version_platform_freqs <- dplyr::arrange(version_platform_freqs,`Version control platform`)
   
   return(version_platform_freqs)
 }

@@ -183,7 +183,7 @@ The results can be seen below. The figure and table show the percentage of respo
 
 ```{r}
 
-plot <- carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "Question", n = samples$heard_of_rap, font_size = 12, height = 700, break_q_names_col = "Question")
+plot <- carsurvey2::plot_likert(tables$rap_opinions_chart, 3, "Frequency", "", n = samples$heard_of_rap, font_size = 12, height = 700, break_q_names_col = "Question")
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$rap_opinions)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$heard_of_rap))
@@ -249,7 +249,7 @@ We asked respondents to report how often they make use of each of the coding pra
 
 ```{r}
 
-plot <- carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, break_q_names_col = "Question")
+plot <- carsurvey2::plot_likert(tables$code_prac_chart, 3, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, break_q_names_col = "Question")
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$code_prac_chart)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
@@ -262,7 +262,7 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 
 ```{r}
 
-plot <- carsurvey2::plot_likert(tables$doc, 3, "Frequency", "Question", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, break_q_names_col = "Question")
+plot <- carsurvey2::plot_likert(tables$doc, 3, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, break_q_names_col = "Question")
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))

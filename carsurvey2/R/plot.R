@@ -321,7 +321,7 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   )
   
   y <- list(
-    title = "",
+    title = ylab,
     tickfont = list(size = font_size),
     titlefont = list(size = font_size * 1.2)
   )

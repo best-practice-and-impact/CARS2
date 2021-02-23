@@ -16,16 +16,16 @@ code_prac_levels = c("I don't understand this question",
 
 documenation_usage_dummy <- carsurvey2::calc_freqs_documenation_usage(dummy_data,code_prac_levels)
 
-test_that("Function checks percentages of factors", {
+test_that("Percentages match expected values", {
   expect_identical(c(as.character(documenation_usage_dummy[1,1]),round(as.numeric(documenation_usage_dummy[1,2:7]),7)), c("Analytical Quality Assurance (AQA) logs",0.5,	0,	0.25,	0.2500000,	0.0000000,	0.0000000))
   expect_identical(c(as.character(documenation_usage_dummy[2,1]),round(as.numeric(documenation_usage_dummy[2,2:7]),7)), c("Desk notes"	,0.0	,0	,0.00	,0.3333333	,0.3333333	,0.3333333))
 })
 
-test_that("Function to check colum names", {
-  expect_identical(colnames(documenation_usage_dummy), c("Question", "Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree", "All the time"))
+test_that("Column names match expected values", {
+  expect_identical(colnames(documenation_usage_dummy), c("Question", "I don't understand this question", "Never", "Rarely", "Sometimes", "Regularly", "All the time"))
 })
 
-test_that("Function to test number of columns and rows", {
+test_that("Data frame matches expected values", {
   expect_equal(nrow(documenation_usage_dummy),2)
   expect_equal(ncol(documenation_usage_dummy),7)
 })

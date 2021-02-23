@@ -13,7 +13,7 @@ test_that("Function checks frequency of RAP knowledge", {
 })
 
 test_that("Function checks column headings" , { 
-  expect_equal(colnames(knowledge_of_rap_dummy[1]), "RAP knowledge")
+  expect_equal(colnames(knowledge_of_rap_dummy[1]), "RAP champion knowledge")
   expect_equal(colnames(knowledge_of_rap_dummy[2]), "Count")
 })
 

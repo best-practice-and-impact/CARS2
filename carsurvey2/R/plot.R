@@ -87,7 +87,7 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
     x_axis <- x
     y_axis <- y
   } else if (orientation == "h") {
-    table <- dplyr::arrange(table, desc(table[,1]))
+    table <- dplyr::arrange(table, dplyr::desc(table[,1]))
     table[,1] <- factor(table[,1], levels = table[,1])
     x_vals <- table[[2]]
     y_vals <- table[[1]]
@@ -183,7 +183,7 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
   )
   
   #reorder table
-  table <- dplyr::arrange(table,desc(table[,1]))
+  table <- dplyr::arrange(table, dplyr::desc(table[,1]))
   table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
@@ -325,7 +325,7 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   )
   
   #Reorder table 
-  table <- dplyr::arrange(table, desc(table[,1]))
+  table <- dplyr::arrange(table, dplyr::desc(table[,1]))
   table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
@@ -493,7 +493,7 @@ plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v"
     x_axis <- x
     y_axis <- y
   } else if (orientation == "h") {
-    table <- dplyr::arrange(table, desc(table[,1]))
+    table <- dplyr::arrange(table, dplyr::desc(table[,1]))
     table[,1] <- factor(table[,1], levels = table[,1])
     x_vals <- table[[3]]
     y_vals <- table[[1]]

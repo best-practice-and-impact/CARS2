@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo=FALSE)
 
 ## **Coding frequency**
 
-We asked our respondents, "In my current role, I write code to complete my work objectives _____". 
+We asked our respondents, "In my current role, I write code to complete my work objectives _____". Most of respondents either coded regularly or all the time.
 
 ```{r}
 library(magrittr)
@@ -64,6 +64,8 @@ For each of the most popular programming languages from last year's CARS data, w
 
 ### **Knowledge of programming tools**
 
+Most common programming tool was R followed by SQL.
+
 ```{r}
 
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14, width = 600)
@@ -77,6 +79,8 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 
 
 ### **Access to programming tools**
+
+The programming tools with the greatest access were R and Python respectively.
 
 ```{r}
 
@@ -92,8 +96,7 @@ carsurvey2::wrap_outputs("tools-access", plot, table)
 
 ### **Access and knowledge gaps**
 
-We used the above data to calculate the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language.
-
+We used the above data to calculate the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. The tool with the greatest access only was Python and the tool with the greatest access and knowledge was R.
 
 ```{r}
 
@@ -109,7 +112,7 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 ## **What are people using code for?**
 
-We asked respondents what data operations they do in their work, and whether they use code to do them. 
+We asked respondents what data operations they do in their work, and whether they use code to do them. The data operation with the highest frequency done with some or all code is data analysis. The data operation with the highest frequency done without coding is quality assurance.
 
 ``` {r}
 
@@ -132,7 +135,7 @@ We asked respondents a series of questions about whether they feel their coding 
 
 ## **Change in coding ability during current role**
 
-Respondents who had coding experience outside of their current role were asked whether there has been a change in their coding ability during current employment.
+Respondents who had coding experience outside of their current role were asked whether there has been a change in their coding ability during current employment. Most respondents coding ability improved during current role.
 
 ``` {r}
 
@@ -148,7 +151,7 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ## **Where respondents have learned to code**
 
-Respondents were asked whether they had coding experience outside their current role and, if so, where. 
+Respondents were asked whether they had coding experience outside their current role and, if so, where. Most of the respondents first learnt code in education.
 
 ``` {r}
 
@@ -170,6 +173,8 @@ We asked respondents to report how often they make use of each of the coding pra
 
 ## **General coding practices**
 
+The most used coding practice is “I write repetitive elements in my code as functions”.
+
 ```{r}
 plot <- carsurvey2::plot_likert(tables$code_prac_chart, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
 
@@ -182,6 +187,8 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 
 
 ## **Documentation**
+
+The most used documentation is code comments.
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$doc, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
@@ -196,7 +203,7 @@ carsurvey2::wrap_outputs("doc", plot, table)
 
 ## **Reproducible workflow packages**
 
-We asked respondents "do you use reproducible workflow packages e.g. drake, make or pymake?". 
+We asked respondents "do you use reproducible workflow packages e.g. drake, make or pymake?". Most respondents didn’t use reproducible workflow packages.
 
 ``` {r}
 
@@ -212,7 +219,7 @@ wrap_outputs("workflow", plot, table)
 
 ## **Source control platform**
 
-The number of users of each source control platform. 
+The number of users of each source control platform. If a source control platform was used most respondents used GitHub.
 
 ``` {r}
 plot <- carsurvey2::plot_freqs(tables$vers_cont, xlab = "", ylab = "Count", n = samples$coders, orientation = "h", break_q_names_col = "Version control platform", font_size = 14, width = 600)
@@ -230,7 +237,7 @@ wrap_outputs("version-control", plot, table)
 
 ## **Knowledge of RAP and RAP champions**
 
-We asked our respondents whether they had heard of RAP and what their knowledge is of their own department RAP champion.
+We asked our respondents whether they had heard of RAP and what their knowledge is of their own department RAP champion. The most frequent response was “Have not heard of RAP”.
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$rap_knowledge_chart, "", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP champion knowledge", max_lines = 3, width = 600)
@@ -254,7 +261,7 @@ We asked our respondents who had heard of RAP the extent to which they agree wit
 * "I know where to find resources to help me implement RAP"
 * "I and/or my team are currently implementing RAP"
 
-The figure and table show the percentage of respondents who picked each response option. Percentages are out of a sample of respondents who said they had heard of RAP.
+The figure and table show the percentage of respondents who picked each response option. Percentages are out of a sample of respondents who said they had heard of RAP. The statement most respondents agree with is “I think it is important to implement RAP in my work”.
 
 
 ```{r}
@@ -274,7 +281,7 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 ## **RAP components**
 
-The frequencies for each RAP component below are derived from a series of questions on coding practices (see the coding practices page). These were used to calculate scores for each component (0/1) where respondents answered "regularly" or "all the time" to the relevant questions. The list of RAP components used here is based on the [RAP minimum viable product](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md) guidance agreed by the RAP champions network.
+The frequencies for each RAP component below are derived from a series of questions on coding practices (see the coding practices page). These were used to calculate scores for each component (0/1) where respondents answered "regularly" or "all the time" to the relevant questions. The list of RAP components used here is based on the [RAP minimum viable product](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md) guidance agreed by the RAP champions network. The RAP components most used were “Functions” and “Follow code style guidelines” respectively which are both in “Advanced” components. 
 
 ```{r}
 plot <- carsurvey2::plot_grouped(tables$components, "", "Count", n = samples$coders, orientation = "h", font_size = 14, width = 600)

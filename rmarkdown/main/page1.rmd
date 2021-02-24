@@ -33,7 +33,9 @@ samples <- list(
   all = nrow(data),
   coders = sum(data$code_freq != "Never"),
   heard_of_rap = sum(data$RAP_heard_of == "Yes"),
-  code_outside_current_role = sum(carsurvey_data$code_experience == "Yes")
+  code_outside_current_role = sum(carsurvey_data$code_experience == "Yes"),
+  any_code_experience = sum(data$code_experience == "Yes" | data$code_freq != "Never")
+
 )
 
 ```
@@ -140,10 +142,10 @@ Respondents were asked whether they had coding experience outside their current 
 
 ``` {r}
 
-plot <- carsurvey2::plot_freqs(tables$first_learnt, xlab = "First coding experience", ylab = "count", n = samples$coders, break_q_names_col = "First learn code", orientation = "h", font_size = 14, width = 600)
+plot <- carsurvey2::plot_freqs(tables$first_learnt, xlab = "First coding experience", ylab = "Count", n = samples$any_code_experience, break_q_names_col = "First coding experience", orientation = "h", font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$first_learnt, row.names = FALSE)) %>% 
-  kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
+  kableExtra::add_footnote(paste0("Sample size = ", samples$any_code_experience))
 
 carsurvey2::wrap_outputs("first-learn", plot, table)
 
@@ -272,7 +274,7 @@ We asked respondents "do you use reproducible workflow packages e.g. drake, make
 
 ``` {r}
 
-plot <- carsurvey2::plot_freqs(tables$rep_workflow, xlab = "Use reproducible workflows packages", ylab = "count", n = samples$coders, break_q_names_col = "Use reproducible workflow packages", font_size = 14, width = 600)
+plot <- carsurvey2::plot_freqs(tables$rep_workflow, xlab = "Use reproducible workflows packages", ylab = "Count", n = samples$coders, break_q_names_col = "Use reproducible workflow packages", font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$rep_workflow)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))

@@ -41,7 +41,7 @@ enforce_streaming <- function(data){
   
   #If Q19: select source code and I don't understand ot never then skip P13
   Q19_data <- dplyr::select(data,"Q25":"Q25.5")
-  Q19_data[!is.na(data$Q19) & data$Q19 %in% c("Never","I don't understand this question"),] <- NA
+  Q19_data[!is.na(data$Q19.3) & data$Q19.3 %in% c("Never","I don't understand this question"),] <- NA
   data[colnames(Q19_data)] <- Q19_data
 
   return(data)

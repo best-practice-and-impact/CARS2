@@ -479,11 +479,16 @@ calc_freq_learn_code <- function(data) {
   
   frequency_table[[1]] <- factor(frequency_table[[1]], c("In current role", levels))
   
-  frequency_table <- rbind(c("In current role", sum(data$learn_before == "No" & !is.na(data$learn_before))), frequency_table)
+  frequency_table <- rbind(
+    c(
+      "In current role", sum(
+        (is.na(data$learn_before) | data$learn_before == "No") & data$code_freq != "Never")
+      ), 
+    frequency_table)
   
   frequency_table[[2]] <- as.numeric(frequency_table[[2]])
   
-  colnames(frequency_table) <- c("First learn code", "Count")
+  colnames(frequency_table) <- c("First coding experience", "Count")
   
   return(frequency_table)
 }

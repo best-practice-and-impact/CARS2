@@ -390,7 +390,7 @@ calc_freq_operations <- function(data){
     data_analysis = "Data Analysis",
     data_cleaning = "Data Cleaning",
     data_transfer = "Data Transfer / Migration",
-    data_vis = "Data Visualisations",
+    data_vis = "Data Visualisation",
     QA = "Quality Assurance")
     
   

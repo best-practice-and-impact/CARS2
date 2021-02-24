@@ -1,5 +1,10 @@
-.hasAnchor {
+h1, h2, h3, h4{
   padding-top: 2em !important;
+  font-weight: 550;
+}
+
+.title {
+  padding-top: 0 !important;
 }
 
 body {
@@ -88,18 +93,12 @@ body {
   padding-top: 45px !important;
 }
 
-@media (max-width: 991px) {
-  body {
-    padding-top: 45px !important;
-  }
-}
-
-@media (max-width:991px) and (min-width:767px){
+@media (max-width:1199px) and (min-width:767px){
   body {
     padding-top: 90px !important;
   }
 }
-*/
+
 @media (max-width: 767px) {
   body {
     padding-top: 45px !important;

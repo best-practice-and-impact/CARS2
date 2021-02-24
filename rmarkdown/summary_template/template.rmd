@@ -23,10 +23,10 @@ samples <- params$samples
 *Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
 
 
-# **Coding frequency and tools**
+# Coding frequency and tools
 
 
-## **Coding frequency**
+## Coding frequency
 
 
 We asked our respondents, "In my current role, I write code to complete my work objectives _____". 
@@ -45,7 +45,7 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 
 
-## **Access to and knowledge of programming languages**
+## Access to and knowledge of programming languages
 
 For each of the most popular programming languages from last year's CARS data, we asked respondents to answer "yes", "no" or "I don't know" for the following statements: 
 
@@ -54,7 +54,7 @@ For each of the most popular programming languages from last year's CARS data, w
 
 
 
-### **Knowledge of programming tools**
+### Knowledge of programming tools
 
 ```{r}
 
@@ -68,7 +68,7 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 ```
 
 
-### **Access to programming tools**
+### Access to programming tools
 
 ```{r}
 
@@ -82,7 +82,7 @@ carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
 
 
-### **Access and knowledge gaps**
+### Access and knowledge gaps
 
 We used the above data to calculate the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language.
 
@@ -99,7 +99,7 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 ```
 
 
-## **What are people using code for?**
+## What are people using code for?
 
 We asked respondents what data operations they do in their work, and whether they use code to do them. 
 
@@ -116,13 +116,13 @@ carsurvey2::wrap_outputs("operations", plot, table)
 
 
 
-# **Coding capability** 
+# Coding capability 
 
 We asked respondents a series of questions about whether they feel their coding ability is improving in their current role and where they first learned to code. 
 
 
 
-## **Change in coding ability during current role**
+## Change in coding ability during current role
 
 Respondents who had coding experience outside of their current role were asked whether there has been a change in their coding ability during current employment.
 
@@ -138,7 +138,7 @@ carsurvey2::wrap_outputs("ability", plot, table)
 ```
 
 
-## **Where respondents have learned to code**
+## Where respondents have learned to code
 
 Respondents were asked whether they had coding experience outside their current role and, if so, where. 
 
@@ -154,13 +154,13 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 ```
 
 
-# **Coding practices**
+# Coding practices
 
 We asked respondents to report how often they make use of each of the coding practices. Please note that while there are many different coding practices listed below, we understand that not all are proportionate for every coding project. 
 
 
 
-## **General coding practices**
+## General coding practices
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$code_prac_chart, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
@@ -173,7 +173,7 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 ```
 
 
-## **Documentation**
+## Documentation
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$doc, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
@@ -186,7 +186,7 @@ carsurvey2::wrap_outputs("doc", plot, table)
 ```
 
 
-## **Reproducible workflow packages**
+## Reproducible workflow packages
 
 We asked respondents "do you use reproducible workflow packages e.g. drake, make or pymake?". 
 
@@ -202,7 +202,7 @@ wrap_outputs("workflow", plot, table)
 ```
 
 
-## **Source control platform**
+## Source control platform
 
 The number of users of each source control platform. 
 
@@ -216,9 +216,9 @@ wrap_outputs("version-control", plot, table)
 
 ```
 
-# **RAP knowledge and opinions**
+# RAP knowledge and opinions
 
-## **Knowledge of RAP and RAP champions**
+## Knowledge of RAP and RAP champions
 
 We asked our respondents whether they had heard of RAP and what their knowledge is of their own department RAP champion.
 
@@ -233,7 +233,7 @@ carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 ```
 
 
-## **Opinions on RAP**
+## Opinions on RAP
 
 We asked our respondents who had heard of RAP the extent to which they agree with the following statements:
 
@@ -258,10 +258,10 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 ```
 
 
-# **RAP scores**
+# RAP scores
 
 
-## **RAP components**
+## RAP components
 
 The frequencies for each RAP component below are derived from a series of questions on coding practices (see the coding practices page). These were used to calculate scores for each component (0/1) where respondents answered "regularly" or "all the time" to the relevant questions. The list of RAP components used here is based on the [RAP minimum viable product](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md) guidance agreed by the RAP champions network.
 
@@ -276,7 +276,7 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 ```
 
 
-## **Basic RAP scores**
+## Basic RAP scores
 
 ```{r}
 
@@ -293,7 +293,7 @@ carsurvey2::wrap_outputs("basic_score", plot, table)
 ```
 
 
-## **Advanced RAP scores**
+## Advanced RAP scores
 
 ```{r}
 

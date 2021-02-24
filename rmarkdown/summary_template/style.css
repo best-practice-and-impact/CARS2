@@ -1,5 +1,10 @@
-h1, h2, h3, h4{
+h1, h2 {
   padding-top: 2em !important;
+  font-weight: 550;
+}
+
+h3, h4 {
+  padding-top: 3em !important;
   font-weight: 550;
 }
 

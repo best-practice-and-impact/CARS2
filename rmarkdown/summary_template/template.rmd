@@ -20,14 +20,10 @@ tables <- params$tables
 samples <- params$samples
 ```
 
-*Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
-
 
 # Coding frequency and tools
 
-
 ## Coding frequency
-
 
 We asked our respondents, "In my current role, I write code to complete my work objectives _____". 
 

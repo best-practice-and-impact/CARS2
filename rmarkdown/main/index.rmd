@@ -1,10 +1,8 @@
 ---
-title: "DRAFT::: Home"
+title: "Home"
 ---
 
 ## How do analysts use programming and software engineering in the UK Public Sector?
-
-*Please note that this is a draft piece of analysis which has not yet undergone full quality assurance. Do not use this research for any purpose until this message is removed.*
 
 ### The Coding in Analysis and Research survey (CARS) was collected in October 2020
 
@@ -30,7 +28,6 @@ Avoid:
 
 * Attempting to estimate absolute frequencies - we did not use random sampling
 * Inferring differences between groups - these outputs are only intended to be descriptive and inferential tests were not carried out
-* Comparing results from different departments
 
 ### More information on reproducible analytical pipelines
 

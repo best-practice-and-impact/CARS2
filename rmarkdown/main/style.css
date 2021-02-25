@@ -1,3 +1,17 @@
+h1, h2 {
+  padding-top: 2em !important;
+  font-weight: 550;
+}
+
+h3, h4 {
+  padding-top: 3em !important;
+  font-weight: 550;
+}
+
+.title {
+  padding-top: 0 !important;
+}
+
 body {
   font-size: 16px;
 }
@@ -80,26 +94,29 @@ ol > li > a:focus {
   color: black !important;
 }
 
-/* Use to compensate for navigation bar overpill */
-
 body {
   padding-top: 45px !important;
 }
-@media (max-width: 991px) {
+
+@media (max-width:1199px) and (min-width:767px){
   body {
-    padding-top: 100px !important;
-  }
-}
-/*
-@media (max-width: 991px) {
-  body {
-    padding-top: 150px !important;
-  }
-}
-*/
-@media (max-width: 767px) {
-  body {
-    padding-top: 50px !important;
+    padding-top: 90px !important;
   }
 }
 
+@media (max-width: 767px) {
+  body {
+    padding-top: 45px !important;
+  }
+}
+
+.plotly.html-widget {
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .plotly.html-widget {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}

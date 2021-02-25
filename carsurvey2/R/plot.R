@@ -1,10 +1,3 @@
-########  ##        #######  ######## 
-##     ## ##       ##     ##    ##    
-##     ## ##       ##     ##    ##    
-########  ##       ##     ##    ##    
-##        ##       ##     ##    ##    
-##        ##       ##     ##    ##    
-##        ########  #######     ##  
 
 #'@title Plot frequency graph
 #'
@@ -70,6 +63,8 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
     table[[break_q_names_col]] <- as.character(table[[break_q_names_col]])
     
     table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]], max_lines = max_lines)
+    
+    table[[break_q_names_col]] <- factor(table[[break_q_names_col]], levels = table[[break_q_names_col]])
   }
   
   x <- list(
@@ -85,46 +80,45 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
   )
   
   if (orientation == "v") {
-    fig <- plotly::plot_ly(
-      x = table[[1]],
-      y = table[[2]],
-      marker = list(color = bar_colour),
-      type = "bar",
-      ...
-    )
-    
-    fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig,  
-                          xaxis = x, 
-                          yaxis = y, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
-                          margin = list(b = 100),
-                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
-                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
-                                             xref='paper', yref='paper', font=list(size = font_size))
-    )
+    table <- dplyr::arrange(table, table[,1])
+    table[,1] <- factor(table[,1], levels = table[,1])
+    x_vals <- table[[1]]
+    y_vals <- table[[2]]
+    x_axis <- x
+    y_axis <- y
   } else if (orientation == "h") {
-    fig <- plotly::plot_ly(
-      x = table[[2]],
-      y = table[[1]],
-      marker = list(color = bar_colour),
-      type = "bar",
-      ...
-    )
-    
-    fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig, 
-                          orientation = "h",
-                          xaxis = y, 
-                          yaxis = x, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
-                          margin = list(b = 100),
-                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
-                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
-                                             xref='paper', yref='paper', font=list(size = font_size))
-    )
-  } 
+    table <- dplyr::arrange(table, dplyr::desc(table[,1]))
+    table[,1] <- factor(table[,1], levels = table[,1])
+    x_vals <- table[[2]]
+    y_vals <- table[[1]]
+    x_axis <- y
+    y_axis <- x
+  }
   
+  ylab <- y_axis$title
+  y_axis$title <- "" # Y axis title is created as a caption instead
+  
+  fig <- plotly::plot_ly(
+    x = x_vals,
+    y = y_vals,
+    marker = list(color = bar_colour),
+    type = "bar",
+    orientation = orientation,
+    ...
+  )
+  
+  fig <- plotly::config(fig, displayModeBar = F)
+  fig <- plotly::layout(fig,
+                        xaxis = x_axis, 
+                        yaxis = y_axis,
+                        margin = list(b = 100),
+                        hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
+                        annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                           showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                           xref='paper', yref='paper', font=list(size = font_size))
+  )
+  
+  fig <- plotly::layout(fig, annotations = create_y_lab(ylab, font_size))
   
   return(fig)
   
@@ -140,13 +134,14 @@ plot_freqs <- function(table, xlab, ylab, bar_colour, n, font_size = 12, orienta
 #'@param ylab Y axis title
 #'@param n sample size
 #'@param font_size minimum font size for the plot (numeric).
+#'@param neutral_mid whether the midpoint of the colour scale should be neutral ("2gradients" scale only). TRUE by default
 #'@param ... additional plotly_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font_size = 12, ...) {
+plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font_size = 12, neutral_mid = TRUE, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -182,10 +177,14 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
   )
   
   y <- list(
-    title = ylab,
+    title = "",
     tickfont = list(size = font_size),
     titlefont = list(size = font_size * 1.2)
   )
+  
+  #reorder table
+  table <- dplyr::arrange(table, dplyr::desc(table[,1]))
+  table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
   suppressMessages(
@@ -201,7 +200,7 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
     colours <- get_2colour_scale(ncolours)
   } else if (colour_scale == "2gradients") {
     mid <- ceiling(ncolours/2)
-    colours <- get_2colour_gradients(ncol(table)-1, mid = mid)
+    colours <- get_2colour_gradients(ncol(table)-1, mid = mid, neutral_mid = neutral_mid)
   }
   
   colours <- lapply(colours, function(x) grDevices::rgb(x[1], x[2], x[3], max = 255))
@@ -214,12 +213,11 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
                          color = longdata[[2]], 
                          orientation = "h", 
                          hoverinfo = "text",
-                         text = longdata[[3]],
+                         text = paste0(longdata[[2]], ", " ,longdata[[3]]),
                          marker = list(color = colours),
                          ...)
   
   fig <- plotly::config(fig, displayModeBar = F)
-  
   
   fig <- plotly::layout(fig,  
                         barmode = "stack", 
@@ -233,13 +231,15 @@ plot_stacked <- function(table, colour_scale = "2gradients", xlab, ylab, n, font
                                       font = list(size = font_size)),
                         margin = list(b = 100),
                         xaxis = x, 
-                        yaxis = y, 
+                        yaxis = y,
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
                         annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
                                            showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
                                            xref='paper', yref='paper', font=list(size = font_size)
                         )
   )
+  
+  fig <- plotly::layout(fig, annotations = create_y_lab(ylab, font_size))
   
   return(fig)
   
@@ -306,6 +306,8 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   # Apply break_q_names to a column
   if(!is.null(break_q_names_col)) {
     table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]])
+    table[[break_q_names_col]] <- factor(table[[break_q_names_col]], levels = table[[break_q_names_col]])
+    
   }
   
   x <- list(
@@ -317,10 +319,14 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   )
   
   y <- list(
-    title = ylab,
+    title = "",
     tickfont = list(size = font_size),
     titlefont = list(size = font_size * 1.2)
   )
+  
+  #Reorder table 
+  table <- dplyr::arrange(table, dplyr::desc(table[,1]))
+  table[,1] <- factor(table[,1], levels = table[,1])
   
   # Reshape data
   suppressMessages(
@@ -329,10 +335,18 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   
   # Calculate bases for bars
   bases <- apply(table[2:ncol(table)], 1, cumsum)
-  bases <- as.vector(apply(bases, 1, function(x) return(unname(unlist(x)))))
-  bases <- utils::head(bases, -nrow(table))
+  
+  # Bases are needed as a vector for plotly
+  bases <- as.vector(apply(bases, 1, function(x) x))
+  
+  # Remove the values corresponding to the last response option so the base for the final respnse option
+  # is the cumulative sum up to and including the previous response option. Add bases of 0 for the first 
+  # response option.
+  bases <- utils::head(bases, -nrow(table)) 
   bases <- c(rep(0, nrow(table)), bases)
   
+  # Subtract negative bases from the cumulative sums. This will shift the stacked bars back into the negative
+  # part of the chart. 
   if (neutral_mid) {
     negative_bases <- rowSums(table[c(2:mid)]) + table[mid + 1]/2  
   } else {
@@ -374,13 +388,6 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   fig <- plotly::layout(fig,  
                         barmode = "stack", 
                         clickmode = "none",
-                        legend = list(orientation = "h",   # show entries horizontally
-                                      xanchor = "center",  # use center of legend as anchor
-                                      yanchor = "bottom",
-                                      x = 0.5,
-                                      y = 1,
-                                      traceorder = "normal",
-                                      font = list(size = font_size)),
                         margin = list(b = 100),
                         annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
                                            showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
@@ -388,6 +395,16 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
                         xaxis = x, 
                         yaxis = y, 
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)))
+  
+  fig <- plotly::layout(fig, annotations = create_y_lab(ylab, font_size))
+  
+  fig <- plotly::layout(fig, legend = list(xanchor = "left",
+                                           yanchor = "bottom",
+                                           orientation = "h",
+                                           y = 1,
+                                           traceorder = "normal",
+                                           font = list(size = font_size))
+                        )
   
   # Disable interactive legend
   
@@ -421,8 +438,8 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
 plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v", ...) {
   
   # Set default bar colours
-  n <- length(unique(table[[2]]))
-  c <- get_2colour_scale(n)
+  n_groups <- length(unique(table[[2]]))
+  c <- get_2colour_scale(n_groups)
   colours <- unlist(lapply(c, function(x) grDevices::rgb(x[1], x[2], x[3], maxColorValue = 255))) 
   colours <- unlist(colours)
   colours <- rep(colours, c(unlist(table(table[[2]]))))
@@ -469,50 +486,75 @@ plot_grouped <- function(table, xlab, ylab, n, font_size = 12, orientation = "v"
   )
   
   if (orientation == "v") {
-    fig <- plotly::plot_ly(
-      x = table[[1]],
-      y = table[[3]],
-      color = table[[2]],
-      marker = list(color = colours),
-      type = "bar",
-      ...
-    )
-    
-    fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig,  
-                          xaxis = x, 
-                          yaxis = y, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
-                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
-                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
-                                             xref='paper', yref='paper', font=list(size = font_size))
-    )
-    
+    table <- dplyr::arrange(table, table[,1])
+    table[,1] <- factor(table[,1], levels = table[,1])
+    x_vals <- table[[1]]
+    y_vals <- table[[3]]
+    x_axis <- x
+    y_axis <- y
   } else if (orientation == "h") {
-    fig <- plotly::plot_ly(
-      x = table[[3]],
-      y = table[[1]],
-      color = table[[2]],
-      marker = list(color = colours),
-      type = "bar",
-      ...
-    )
-    
-    fig <- plotly::config(fig, displayModeBar = F)
-    fig <- plotly::layout(fig,  
-                          orientation = "h",
-                          xaxis = y, 
-                          yaxis = x, 
-                          hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
-                          legend = list(traceorder = "reversed"),
-                          margin = list(b = 100),
-                          annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
-                                             showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
-                                             xref='paper', yref='paper', font=list(size = font_size))
-    )
-  } 
+    table <- dplyr::arrange(table, dplyr::desc(table[,1]))
+    table[,1] <- factor(table[,1], levels = table[,1])
+    x_vals <- table[[3]]
+    y_vals <- table[[1]]
+    x_axis <- y
+    y_axis <- x
+  }
   
+  ylab <- y_axis$title
+  y_axis$title <- ""
+  
+  fig <- plotly::plot_ly(
+    x = x_vals,
+    y = y_vals,
+    color = table[[2]],
+    marker = list(color = colours),
+    type = "bar",
+    ...
+  )
+    
+  fig <- plotly::config(fig, displayModeBar = F)
+  fig <- plotly::layout(fig,  
+                        xaxis = x_axis, 
+                        yaxis = y_axis, 
+                        margin = list(b = 100),
+                        legend = list(traceorder = "reversed"),
+                        hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
+                        annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
+                                           showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
+                                           xref='paper', yref='paper', font=list(size = font_size))
+  )
+  
+  fig <- plotly::layout(fig, annotations = create_y_lab(ylab, font_size))
   
   return(fig)
   
+}
+
+
+#'@title Create custom Y axis label
+#'
+#'@description Create a custom y axis label (plotly annotation). This label is placed just above the y axis
+#' and is horizontal, to replace the vertically flipped label produced by default. 
+#'
+#'@param ylab Y axis label
+#'@param font_size font size used in the chart. This function will return a slightly larger font.
+#'
+#'@return list of parameters for plotly annotation
+#'
+#'@export
+
+create_y_lab <- function(ylab, font_size) {
+  annotation <- list(text = ylab, # Custom Y axis label 
+                     y = 1,
+                     x = "min",
+                     showarrow = FALSE, 
+                     yshift = 30,
+                     xref = "paper",
+                     yref = "paper",
+                     font = list(size = font_size * 1.2)
+  )
+
+  return(annotation)
+
 }

@@ -31,8 +31,6 @@
 <script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
-<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -299,6 +297,12 @@ $(document).ready(function () {
                   <li>
                     <a href="page2.html">Department profiles  </a>
                   </li>
+                  <li>
+                    <a href="page3.html">Grade Profiles  </a>
+                  </li>
+                  <li>
+                    <a href="page4.html">Profession Profiles  </a>
+                  </li>
                 </ul>
             </div><!--/.nav-collapse -->
           </div><!--/.container -->
@@ -337,185 +341,103 @@ $(document).ready(function () {
 <a role="button" class="toggle-button" id="show-chart-dep-freqs" href="#show-chart-dep-freqs" onclick="show_chart('dep-freqs')"> Show chart </a>
 <a role="button" class="toggle-button" id="show-table-dep-freqs" href="#show-table-dep-freqs" onclick="show_table('dep-freqs')"> Show table </a>
 <style> #show-chart-dep-freqs {display: none;} #dep-freqs-table {display: none;} </style>
-<div id="dep-freqs-chart">
-<div id="htmlwidget-c2a16b10315735fb8822" style="width:672px;height:1000px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c2a16b10315735fb8822">{"x":{"visdat":{"1cf0242c37a2":["function () ","plotlyVisDat"]},"cur_data":"1cf0242c37a2","attrs":{"1cf0242c37a2":{"x":[104,26,39,213,24,36,35,27,54,46,24,44,52,24,27,35,23,56,38],"y":["Welsh Government","Scottish Government (excl. agencies)","Public Health England","Office for National Statistics","Northern Ireland Statistics and Research<br>Agency","Ministry of Justice (excl. agencies)","Ministry of Housing, Communities and<br>Local Government (excl. agencies)","Ministry of Defence","Home Office (excl. agencies)","HM Revenue and Customs","Department of Health and Social Care<br>(excl. agencies)","Department for Work and Pensions","Department for Transport (excl.<br>agencies)","Department for International Trade","Department for Environment, Food and<br>Rural Affairs (excl. agencies)","Department for Education","Department for Business, Energy and<br>Industrial Strategy (excl. agencies)","Defence Science and Technology<br>Laboratory","Cabinet Office (excl. agencies)"],"marker":{"color":"#004556"},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"height":1000,"margin":{"b":100,"l":60,"t":25,"r":10},"orientation":"h","xaxis":{"domain":[0,1],"automargin":true,"title":"Sample size","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"Department","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Welsh Government","Scottish Government (excl. agencies)","Public Health England","Office for National Statistics","Northern Ireland Statistics and Research<br>Agency","Ministry of Justice (excl. agencies)","Ministry of Housing, Communities and<br>Local Government (excl. agencies)","Ministry of Defence","Home Office (excl. agencies)","HM Revenue and Customs","Department of Health and Social Care<br>(excl. agencies)","Department for Work and Pensions","Department for Transport (excl.<br>agencies)","Department for International Trade","Department for Environment, Food and<br>Rural Affairs (excl. agencies)","Department for Education","Department for Business, Energy and<br>Industrial Strategy (excl. agencies)","Defence Science and Technology<br>Laboratory","Cabinet Office (excl. agencies)"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"annotations":[{"x":1,"y":0,"text":"Sample size = 1060","showarrow":false,"xanchor":"right","yanchor":"auto","xshift":0,"yshift":-100,"xref":"paper","yref":"paper","font":{"size":14}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"x":[104,26,39,213,24,36,35,27,54,46,24,44,52,24,27,35,23,56,38],"y":["Welsh Government","Scottish Government (excl. agencies)","Public Health England","Office for National Statistics","Northern Ireland Statistics and Research<br>Agency","Ministry of Justice (excl. agencies)","Ministry of Housing, Communities and<br>Local Government (excl. agencies)","Ministry of Defence","Home Office (excl. agencies)","HM Revenue and Customs","Department of Health and Social Care<br>(excl. agencies)","Department for Work and Pensions","Department for Transport (excl.<br>agencies)","Department for International Trade","Department for Environment, Food and<br>Rural Affairs (excl. agencies)","Department for Education","Department for Business, Energy and<br>Industrial Strategy (excl. agencies)","Defence Science and Technology<br>Laboratory","Cabinet Office (excl. agencies)"],"marker":{"color":"#004556","line":{"color":"rgba(31,119,180,1)"}},"type":"bar","orientation":"h","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="dep-freqs-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">
+<div id="htmlwidget-713cd5834044f364ef13" style="width:700px;height:1000px;" class="plotly html-widget"></div>
 </div>
 <div id="dep-freqs-table">
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Department
-</th>
-<th style="text-align:right;">
-Sample size
-</th>
-</tr>
-</thead>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Department </th>
+   <th style="text-align:right;"> Sample size </th>
+  </tr>
+ </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Welsh Government
-</td>
-<td style="text-align:right;">
-104
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Scottish Government (excl. agencies)
-</td>
-<td style="text-align:right;">
-26
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Public Health England
-</td>
-<td style="text-align:right;">
-39
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Office for National Statistics
-</td>
-<td style="text-align:right;">
-213
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Northern Ireland Statistics and Research&lt;br&gt;Agency
-</td>
-<td style="text-align:right;">
-24
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ministry of Justice (excl. agencies)
-</td>
-<td style="text-align:right;">
-36
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ministry of Housing, Communities and&lt;br&gt;Local Government (excl. agencies)
-</td>
-<td style="text-align:right;">
-35
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ministry of Defence
-</td>
-<td style="text-align:right;">
-27
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Home Office (excl. agencies)
-</td>
-<td style="text-align:right;">
-54
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-HM Revenue and Customs
-</td>
-<td style="text-align:right;">
-46
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department of Health and Social Care&lt;br&gt;(excl. agencies)
-</td>
-<td style="text-align:right;">
-24
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department for Work and Pensions
-</td>
-<td style="text-align:right;">
-44
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department for Transport (excl.&lt;br&gt;agencies)
-</td>
-<td style="text-align:right;">
-52
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department for International Trade
-</td>
-<td style="text-align:right;">
-24
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department for Environment, Food and&lt;br&gt;Rural Affairs (excl. agencies)
-</td>
-<td style="text-align:right;">
-27
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department for Education
-</td>
-<td style="text-align:right;">
-35
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Department for Business, Energy and&lt;br&gt;Industrial Strategy (excl. agencies)
-</td>
-<td style="text-align:right;">
-23
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Defence Science and Technology&lt;br&gt;Laboratory
-</td>
-<td style="text-align:right;">
-56
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cabinet Office (excl. agencies)
-</td>
-<td style="text-align:right;">
-38
-</td>
-</tr>
+  <tr>
+   <td style="text-align:left;"> Welsh Government </td>
+   <td style="text-align:right;"> 104 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Scottish Government (excl. agencies) </td>
+   <td style="text-align:right;"> 26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Public Health England </td>
+   <td style="text-align:right;"> 39 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Office for National Statistics </td>
+   <td style="text-align:right;"> 213 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Northern Ireland Statistics and Research&lt;br&gt;Agency </td>
+   <td style="text-align:right;"> 24 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Ministry of Justice (excl. agencies) </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Ministry of Housing, Communities and&lt;br&gt;Local Government (excl. agencies) </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Ministry of Defence </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Home Office (excl. agencies) </td>
+   <td style="text-align:right;"> 54 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> HM Revenue and Customs </td>
+   <td style="text-align:right;"> 46 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department of Health and Social Care&lt;br&gt;(excl. agencies) </td>
+   <td style="text-align:right;"> 24 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department for Work and Pensions </td>
+   <td style="text-align:right;"> 44 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department for Transport (excl.&lt;br&gt;agencies) </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department for International Trade </td>
+   <td style="text-align:right;"> 24 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department for Environment, Food and&lt;br&gt;Rural Affairs (excl. agencies) </td>
+   <td style="text-align:right;"> 27 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department for Education </td>
+   <td style="text-align:right;"> 35 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Department for Business, Energy and&lt;br&gt;Industrial Strategy (excl. agencies) </td>
+   <td style="text-align:right;"> 23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Defence Science and Technology&lt;br&gt;Laboratory </td>
+   <td style="text-align:right;"> 56 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Cabinet Office (excl. agencies) </td>
+   <td style="text-align:right;"> 38 </td>
+  </tr>
 </tbody>
 <tfoot>
 <tr>
-<td style="padding: 0; border:0;" colspan="100%">
-<sup>a</sup> Sample size = 1060
-</td>
+<td style = 'padding: 0; border:0;' colspan='100%'><sup>a</sup> Sample size = 1060</td>
 </tr>
 </tfoot>
 </table>
 </div>
+<script type="application/json" data-for="htmlwidget-713cd5834044f364ef13">{"x":{"visdat":{"3284169b67dd":["function () ","plotlyVisDat"]},"cur_data":"3284169b67dd","attrs":{"3284169b67dd":{"x":[38,56,23,35,27,24,52,44,24,46,54,27,35,36,24,213,39,26,104],"y":["Cabinet Office (excl. agencies)","Defence Science and Technology<br>Laboratory","Department for Business, Energy and<br>Industrial Strategy (excl. agencies)","Department for Education","Department for Environment, Food and<br>Rural Affairs (excl. agencies)","Department for International Trade","Department for Transport (excl.<br>agencies)","Department for Work and Pensions","Department of Health and Social Care<br>(excl. agencies)","HM Revenue and Customs","Home Office (excl. agencies)","Ministry of Defence","Ministry of Housing, Communities and<br>Local Government (excl. agencies)","Ministry of Justice (excl. agencies)","Northern Ireland Statistics and Research<br>Agency","Office for National Statistics","Public Health England","Scottish Government (excl. agencies)","Welsh Government"],"marker":{"color":"#004556"},"orientation":"h","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":700,"height":1000,"margin":{"b":100,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Sample size","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Cabinet Office (excl. agencies)","Defence Science and Technology<br>Laboratory","Department for Business, Energy and<br>Industrial Strategy (excl. agencies)","Department for Education","Department for Environment, Food and<br>Rural Affairs (excl. agencies)","Department for International Trade","Department for Transport (excl.<br>agencies)","Department for Work and Pensions","Department of Health and Social Care<br>(excl. agencies)","HM Revenue and Customs","Home Office (excl. agencies)","Ministry of Defence","Ministry of Housing, Communities and<br>Local Government (excl. agencies)","Ministry of Justice (excl. agencies)","Northern Ireland Statistics and Research<br>Agency","Office for National Statistics","Public Health England","Scottish Government (excl. agencies)","Welsh Government"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"annotations":[{"x":1,"y":0,"text":"Sample size = 1060","showarrow":false,"xanchor":"right","yanchor":"auto","xshift":0,"yshift":-100,"xref":"paper","yref":"paper","font":{"size":14}},{"text":"","y":1,"x":"min","showarrow":false,"yshift":30,"xref":"paper","yref":"paper","font":{"size":16.8}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false,"displayModeBar":false},"data":[{"x":[38,56,23,35,27,24,52,44,24,46,54,27,35,36,24,213,39,26,104],"y":["Cabinet Office (excl. agencies)","Defence Science and Technology<br>Laboratory","Department for Business, Energy and<br>Industrial Strategy (excl. agencies)","Department for Education","Department for Environment, Food and<br>Rural Affairs (excl. agencies)","Department for International Trade","Department for Transport (excl.<br>agencies)","Department for Work and Pensions","Department of Health and Social Care<br>(excl. agencies)","HM Revenue and Customs","Home Office (excl. agencies)","Ministry of Defence","Ministry of Housing, Communities and<br>Local Government (excl. agencies)","Ministry of Justice (excl. agencies)","Northern Ireland Statistics and Research<br>Agency","Office for National Statistics","Public Health England","Scottish Government (excl. agencies)","Welsh Government"],"marker":{"color":"#004556","line":{"color":"rgba(31,119,180,1)"}},"orientation":"h","type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <ol><li><a href="Cabinet-Office.html">Cabinet Office (excl. agencies)</a></li>
 
 <li><a href="Defence-Science-and-Technology-Laboratory.html">Defence Science and Technology Laboratory</a></li>

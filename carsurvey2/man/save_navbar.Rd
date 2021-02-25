@@ -7,9 +7,9 @@
 save_navbar(code, path)
 }
 \arguments{
-\item{code}{todo}
+\item{code}{html code (string)}
 
-\item{path}{todo}
+\item{path}{path for saving the navigation bar (excluding file name)}
 }
 \description{
 Saves the site navbar.

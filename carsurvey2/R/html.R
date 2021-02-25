@@ -1,14 +1,6 @@
-##     ## ######## ##     ## ##       
-##     ##    ##    ###   ### ##       
-##     ##    ##    #### #### ##       
-#########    ##    ## ### ## ##       
-##     ##    ##    ##     ## ##       
-##     ##    ##    ##     ## ##       
-##     ##    ##    ##     ## ######## 
+# A set of functions that create raw html/JS
 
-# A set of functions that deal with raw html/js
-
-#' @title html_build_navbar
+#' @title Build navigation bar
 #'
 #'@description  build rmarkdown site navbar
 #'
@@ -20,7 +12,7 @@
 #'
 #'@export
 
-html_build_navbar <- function(navbar_info) {
+build_navbar <- function(navbar_info) {
   
   if (!is.list(navbar_info)) {
     stop("Unexpected input - navbar_info should be a list")
@@ -80,7 +72,58 @@ html_build_navbar <- function(navbar_info) {
 }
 
 
-#' @title html_setup_table_toggle
+#'@title Wrap outputs
+#'
+#'@description Wrap corresponding chart and table outputs and add toggle functionality 
+#'
+#'@param name output name - string
+#'@param chart plotly widget
+#'@param table html table (string) - knitr::kable is recommended 
+#'
+#'@return html widget containing the chart, table and toggling functionality
+#'
+#'@export
+
+wrap_outputs <- function(name, chart, table) {
+  
+  # Validate name 
+  if (typeof(name) != "character" | length(name) != 1) {
+    stop("Unexpected input - name should be a single character string")
+  } else if (!grepl("^[A-Za-z]+$", substring(name, 1, 1))) { # If the first character of output_name is not a letter
+    stop("Invalid html ID - output_name should begin with a letter")
+  } else if (!grepl("^[a-zA-Z0-9_.-]*$", name)) { # If output_name contains invalid characters for html id
+    stop("invalid html ID - output_name should not include special characters other than underscores, hyphens or stops")
+  }
+  
+  # Validate chart and table
+  if (!any(class(chart) == "htmlwidget")) {
+    stop("Unexpected input - chart is not an html widget")
+  }
+  
+  if (typeof(table) != "character" | length(table) != 1) {
+    stop("Unexpected input - table is not a character object")
+  }
+  
+  
+  # Remove knitr tags from table html if needed
+  table <- htmltools::HTML(gsub("```\\{=html\\}|```\n", "", table))
+  
+  js <- htmltools::HTML(setup_table_toggle())
+  
+  buttons <- htmltools::HTML(insert_table_toggle(name))
+  
+  chart_div <- htmltools::HTML(paste0('<div id="', name, '-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">'))
+  table_div <- htmltools::HTML(paste0('<div id="', name, '-table">'))
+  close_div <- htmltools::HTML("</div>")
+  
+  widget <- htmlwidgets::prependContent(chart, js, buttons, chart_div)
+  widget <- htmlwidgets::appendContent(widget, close_div, table_div, table, close_div)
+  
+  return(widget)
+  
+}
+
+#' @title Set up table toggle
 #'
 #' @description  Set up JavaScript functions for show table/chart buttons 
 #'
@@ -90,8 +133,9 @@ html_build_navbar <- function(navbar_info) {
 #'@return JavaScript code (raw html)
 #'
 #'@export
+#'
 
-html_setup_table_toggle <- function() {
+setup_table_toggle <- function() {
   
   script <- 
     '
@@ -112,12 +156,12 @@ html_setup_table_toggle <- function() {
   </script>
 '
   
-  knitr::raw_html(script)
+  return(script)
   
 }
  
 
-#'@title html_insert_table_toggle
+#'@title Insert table toggle buttons
 #'
 #'@description Add table toggle buttons to rmarkdowndown site 
 #'
@@ -129,7 +173,7 @@ html_setup_table_toggle <- function() {
 #'
 #'@export
 
-html_insert_table_toggle <- function(output_name) {
+insert_table_toggle <- function(output_name) {
   
   if (length(output_name) > 1) {
     stop("Unexpected input - output name should be a single character string.")
@@ -168,12 +212,12 @@ html_insert_table_toggle <- function(output_name) {
     ' </style>'
   )
   
-  knitr::raw_html(
-    paste(
-      toggle_chart_button,
-      toggle_table_button,
-      style,
-      sep = "\n"
-    )
+  html <- paste(
+    toggle_chart_button,
+    toggle_table_button,
+    style,
+    sep = "\n"
   )
+  
+  return(html)
 }

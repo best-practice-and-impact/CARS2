@@ -1,32 +1,20 @@
-########  ######## ##    ## ########  ######## ########  
-##     ## ##       ###   ## ##     ## ##       ##     ## 
-##     ## ##       ####  ## ##     ## ##       ##     ## 
-########  ######   ## ## ## ##     ## ######   ########  
-##   ##   ##       ##  #### ##     ## ##       ##   ##   
-##    ##  ##       ##   ### ##     ## ##       ##    ##  
-##     ## ######## ##    ## ########  ######## ##     ## 
-
 # High Level functions that are called to build the site. Prefixed render_
 
-#' @title render_main_site
+#' @title Render main site
 #'
 #' @description Processes the Smart survey data to generate a series of tables. 
 #' Then removes the old site and uses the generated tables to render a new site.
 #' Uses the markdown files located in the internal var markdown_file_path.
 #'
-#' @param smart_survey_data This is generated using the carsurvey2::data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
+#' @param markdown_file_path the path containing the rmarkdown site documents
 #'
 #' @export 
 
 
-render_main_site <- function(smart_survey_data) {
-  
-  markdown_file_path = "rmarkdown/main"
-  
-  # smart_survey_data This data object is bound to the function render_main_site
-  # rmarkdown::render_site access this function enviroment to load the data 
-  # It looks for an r object called smart_survey_data
-  # DO NOT change the name of the dataframe! Keep it smart_survey_data
+render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
+
+  knitr::opts_chunk$set(warning = FALSE)
   
   # Remove old site and knit
   knitr::opts_chunk$set(message = FALSE, warning = FALSE)
@@ -35,7 +23,7 @@ render_main_site <- function(smart_survey_data) {
   
 }
 
-#' @title render_navbar
+#' @title Render navigation bar
 #'
 #' @description Creates the site navbar.
 #' 
@@ -49,7 +37,7 @@ render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
   
   # Create navigation bar
   navbar_info <- carsurvey2::read_site_yml(yml_path)
-  navbar_page <- carsurvey2::html_build_navbar(navbar_info)
+  navbar_page <- carsurvey2::build_navbar(navbar_info)
   
   return(navbar_page)
 }
@@ -58,8 +46,8 @@ render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
 #'
 #' @description Saves the site navbar.
 #' 
-#' @param code todo
-#' @param path todo
+#' @param code html code (string)
+#' @param path path for saving the navigation bar (excluding file name)
 #' 
 #' @export
 
@@ -68,53 +56,144 @@ save_navbar <- function(code, path) {
   write(code, filename)
 }
 
-
-
-#' @title render_department_pages
+#' @title Render filtered pages
 #' 
-#' @description Creates pages for each department.
+#' @description Creates pages by filter (e.g. by department/profession/grade).
 #' 
-#' @details For each department filters the smart_survey_data to only that department
-#' and then renders the common department template generating a unique page for each 
-#' department. The template is located at the internal var template_path.  
-#'
-#' @param smart_survey_data This is generated using the carsurvey2::data_ functions.
+#' @param data This is generated using the carsurvey2::data_ functions.
+#' @param filter_variable The variable that the data is filtered on. This is given as a string such as "dept". 
+#' The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.
+#' @param page_title This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
+#' where filter is one element of the list as described above in filter_variable (values over 20) and the page title is this argument.
 #' @param output_folder Folder the site is built and saved to
 #' @param template_path The path to the template that gets render for each department
 #' @export
 
-render_department_pages <- function(smart_survey_data,
-                                    output_folder = "../../docs",
-                                    template_path = "rmarkdown/deps/template.rmd") {
+
+render_filtered_pages <- function(data,
+                               filter_variable,
+                               page_title = "",
+                               output_folder = "../../docs",
+                               template_path = "rmarkdown/summary_template/template.rmd") {
   
-  message("Writing files to ", output_folder)
-  # Get list of departments with sample >= 20
-  deps <- data.frame(table(smart_survey_data$dept))
-  dep_list <- deps[deps[2] >= 20, ]
-  departments = as.character(dep_list$Var1)
+  if(!sum(colnames(data) == filter_variable) == 1) stop("filter column: ", filter_variable,
+                                                                     " doesn't exist in the data provided. \nCheck that filter is equal to a valid column name")
   
-  for (dep in departments) {
-    message("Writing page for ", carsurvey2::format_file_path(dep))
-    file_path <- carsurvey2::format_file_path(dep)
+  # get grade with sample > 20
+  filter_table <- data.frame(
+    table(data[filter_variable])
+  )
+  filter_over_20 <- filter_table[filter_table[2] >= 20, ]
+  filter_list = as.character(filter_over_20$Var1)
+  
+  for (filter in filter_list) {
+    
+    file_path <- carsurvey2::format_filter_path(filter)
+    message("Writing page for ", file_path)
     
     # filter data to just the department
-    filtered_data <- smart_survey_data[smart_survey_data$dept == dep, ]
+    filtered_data <- data[data[filter_variable] == filter, ]
+    if(!nrow(filtered_data) == filter_over_20$Freq[filter_over_20$Var1 == filter]) stop("Filtered data row number is not equal to number of : ", file_path)
     
-    # Create a unique variable for each department
-    variable_name <- paste0(file_path, "_filtered_data")
+    title <- paste0("DRAFT: ", page_title , " profile: ", filter)
     
-    # Create a variable in the global enviroment 
-    # This is accessed by the rmarkdown::render()
-    assign(variable_name, filtered_data)
-
+    filtered_tables <- carsurvey2::generate_tables(filtered_data)
+    
+    samples <- list(
+      all = nrow(filtered_data),
+      coders = sum(filtered_data$code_freq != "Never"),
+      heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
+      code_outside_current_role = sum(filtered_data$code_experience == "Yes"),
+      any_code_experience = sum(filtered_data$code_experience == "Yes" | filtered_data$code_freq != "Never")
+    )
+    
+    knitr::opts_chunk$set(warning = FALSE)
+    
     rmarkdown::render(template_path, 
                       output_file = paste0(output_folder, "/", file_path),
-                      quiet = TRUE)
-    
-    # This is the opposite of assign
-    # This delete the variable cleaning the global enviroment 
-    rm(list = variable_name)
-    
-  } # end for-loop
+                      quiet = TRUE,
+                      params = list(
+                        title = title, 
+                        tables = filtered_tables,
+                        samples = samples
+                      ))
+  } 
+}
+
+#' @title Render profession pages
+#' 
+#' @description Creates pages by multi-column filter (profession)
+#' 
+#' @param data This is generated using the carsurvey2::data_ functions.
+#' @param page_title This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
+#' where filter is one element of the list as described above in filter_variable (values over 20) and the page title is this argument.
+#' @param output_folder Folder the site is built and saved to
+#' @param template_path The path to the template that gets render for each department
+#' @export
+
+
+render_prof_pages <- function(data,
+                              page_title = "",
+                              output_folder = "../../docs",
+                              template_path = "rmarkdown/summary_template/template.rmd") {
   
+  if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
+  
+  profs <- dplyr::select(data, "nonCS":"non_prof")
+  prof_freqs <- carsurvey2::calc_multi_col_freqs(profs, c("Yes", "No"))
+  prof_freqs <- prof_freqs[c(1,2)]
+  
+  prof_freqs <- prof_freqs[prof_freqs[2] >= 20, ]
+  prof_freqs[1] <- as.character(prof_freqs[[1]])
+  colnames(prof_freqs) <- c("Profession", "Sample size")
+  
+  recode_vals <- c(
+    nonCS = "Non Civil Service",
+    GSG = "Government Statistician Group",
+    GES = "Government Economic Service",
+    GSR = "Government Social Research",
+    GORS = "Government Operational Research Service",
+    sci_eng = "Government Science and Engineering",
+    DDAT = "Digital, Data and Technology Profession",
+    datasci_GSG = "Data Scientist (GSG/GORS)",
+    datasci_non = "Data Scientist (Non-GSG/GORS)",
+    non_prof = "Civil Service, no profession membership"
+  )
+  
+  filter_list <- prof_freqs$Profession
+  filter_names <- dplyr::recode(prof_freqs$Profession, !!!recode_vals)
+  
+  for (i in c(1:length(filter_list))) {
+    
+    filter_col <- filter_list[i]
+    name <- filter_names[i]
+    
+    file_path <- carsurvey2::format_filter_path(name)
+    message("Writing page for ", file_path)
+    
+    filtered_data <- data[data[filter_col] == "Yes", ]
+    
+    title <- paste0("DRAFT: ", page_title , " profile: ", name)
+    
+    filtered_tables <- carsurvey2::generate_tables(filtered_data)
+    
+    samples <- list(
+      all = nrow(filtered_data),
+      coders = sum(filtered_data$code_freq != "Never"),
+      heard_of_rap = sum(filtered_data$RAP_heard_of == "Yes"),
+      code_outside_current_role = sum(filtered_data$code_experience == "Yes"),
+      any_code_experience = sum(filtered_data$code_experience == "Yes" | filtered_data$code_freq != "Never")
+    )
+    
+    knitr::opts_chunk$set(warning = FALSE)
+    
+    rmarkdown::render(template_path, 
+                      output_file = paste0(output_folder, "/", file_path),
+                      quiet = TRUE,
+                      params = list(
+                        title = title, 
+                        tables = filtered_tables,
+                        samples = samples
+                      ))
+  } 
 }

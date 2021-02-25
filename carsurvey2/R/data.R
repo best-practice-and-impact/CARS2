@@ -1,3 +1,32 @@
+#'@title Load and preprocess data
+#'
+#'@description download API data, clean and dervice new variables.
+#'
+#'@return the exported data as a dataframe
+#'
+#'@export
+
+preprocess <- function() {
+  
+  API_data <- ingest()
+  
+  if(API_data$status_code != 200) stop("Unsuccessful API request. Status code: ", API_data$status_code, "\n Process Killed.")
+  
+  carsurvey_data <- convert_raw(API_data) 
+  carsurvey_data <- tidy_ingest(carsurvey_data) 
+  carsurvey_data <- enforce_streaming(carsurvey_data) 
+  carsurvey_data <- rename_cols(carsurvey_data) 
+  carsurvey_data <- recode_grade(carsurvey_data) 
+  carsurvey_data <- derive_rap_scores(carsurvey_data) 
+  carsurvey_data <- derive_code_status(carsurvey_data)
+  
+  return(carsurvey_data)
+}
+
+
+
+
+
 #'@title Ingest smartsurvey data
 #'
 #'@description Download smartsurvey export via the API. Download the exported data from smartsurvey using the API. Use convert_raw() to convert the API response to a data.frame.

@@ -16,6 +16,14 @@ render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
 
   knitr::opts_chunk$set(warning = FALSE)
   
+  samples <- list(
+    all = nrow(data),
+    coders = sum(data$code_freq != "Never"),
+    heard_of_rap = sum(data$RAP_heard_of == "Yes"),
+    code_outside_current_role = sum(data$code_experience == "Yes"),
+    any_code_experience = sum(data$code_experience == "Yes" | data$code_freq != "Never")
+  )
+  
   # Remove old site and knit
   knitr::opts_chunk$set(message = FALSE, warning = FALSE)
   rmarkdown::clean_site(markdown_file_path)
@@ -36,8 +44,8 @@ render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
 render_navbar <- function(yml_path = "rmarkdown/main/_site.yml") {
   
   # Create navigation bar
-  navbar_info <- carsurvey2::read_site_yml(yml_path)
-  navbar_page <- carsurvey2::build_navbar(navbar_info)
+  navbar_info <- read_site_yml(yml_path)
+  navbar_page <- build_navbar(navbar_info)
   
   return(navbar_page)
 }
@@ -88,7 +96,7 @@ render_filtered_pages <- function(data,
   
   for (filter in filter_list) {
     
-    file_path <- carsurvey2::format_filter_path(filter)
+    file_path <- format_filter_path(filter)
     message("Writing page for ", file_path)
     
     # filter data to just the department
@@ -97,7 +105,7 @@ render_filtered_pages <- function(data,
     
     title <- paste0("DRAFT: ", page_title , " profile: ", filter)
     
-    filtered_tables <- carsurvey2::generate_tables(filtered_data)
+    filtered_tables <- generate_tables(filtered_data)
     
     samples <- list(
       all = nrow(filtered_data),
@@ -140,7 +148,7 @@ render_prof_pages <- function(data,
   if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
   
   profs <- dplyr::select(data, "nonCS":"non_prof")
-  prof_freqs <- carsurvey2::calc_multi_col_freqs(profs, c("Yes", "No"))
+  prof_freqs <- calc_multi_col_freqs(profs, c("Yes", "No"))
   prof_freqs <- prof_freqs[c(1,2)]
   
   prof_freqs <- prof_freqs[prof_freqs[2] >= 20, ]
@@ -168,14 +176,14 @@ render_prof_pages <- function(data,
     filter_col <- filter_list[i]
     name <- filter_names[i]
     
-    file_path <- carsurvey2::format_filter_path(name)
+    file_path <- format_filter_path(name)
     message("Writing page for ", file_path)
     
     filtered_data <- data[data[filter_col] == "Yes", ]
     
-    title <- paste0("DRAFT: ", page_title , " profile: ", name)
+    title <- paste0(page_title , " profile: ", name)
     
-    filtered_tables <- carsurvey2::generate_tables(filtered_data)
+    filtered_tables <- generate_tables(filtered_data)
     
     samples <- list(
       all = nrow(filtered_data),

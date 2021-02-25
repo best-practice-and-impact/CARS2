@@ -9,10 +9,10 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Summary statistics"
-      href: page1.html
+      href: summary.html
     - text: "Department profiles"
-      href: page2.html
+      href: departments.html
     - text: "Grade Profiles"
-      href: page3.html
+      href: grades.html
     - text: "Profession Profiles"
-      href: page4.html
+      href: professions.html

@@ -71,7 +71,7 @@ save_navbar <- function(code, path) {
 #' @param data This is generated using the carsurvey2::data_ functions.
 #' @param filter_variable The variable that the data is filtered on. This is given as a string such as "dept". 
 #' The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.
-#' @param page_title This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
+#' @param page_title This is ONLY PART of the title. page_title , " profile: ", filter -- 
 #' where filter is one element of the list as described above in filter_variable (values over 20) and the page title is this argument.
 #' @param output_folder Folder the site is built and saved to
 #' @param template_path The path to the template that gets render for each department
@@ -103,7 +103,7 @@ render_filtered_pages <- function(data,
     filtered_data <- data[data[filter_variable] == filter, ]
     if(!nrow(filtered_data) == filter_over_20$Freq[filter_over_20$Var1 == filter]) stop("Filtered data row number is not equal to number of : ", file_path)
     
-    title <- paste0("DRAFT: ", page_title , " profile: ", filter)
+    title <- paste0(page_title , " profile: ", filter)
     
     filtered_tables <- generate_tables(filtered_data)
     

@@ -17,7 +17,18 @@ library(magrittr)
 
 if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
 
-grade_freqs <- data.frame(table(data$grade))
+order <- c(
+  "Executive Officer (or equivalent)",
+  "Higher Executive Officer (or equivalent)",
+  "Senior Executive Officer (or equivalent)",
+  "Grade 7 (or equivalent)",
+  "Grade 6 (or equivalent)",
+  "Fast Stream",
+  "Other - NHS",
+  "Other"
+)
+grade_freqs <- factor(data$grade, levels = order)
+grade_freqs <- data.frame(table(grade_freqs))
 grade_freqs <- grade_freqs[grade_freqs[2] >= 20, ]
 grade_freqs[1] <- as.character(grade_freqs[[1]])
 colnames(grade_freqs) <- c("Department", "Sample size")
@@ -29,7 +40,6 @@ colnames(grade_freqs) <- c("Department", "Sample size")
 freqs_plot <- grade_freqs
 freqs_plot[1] <- stringr::str_wrap(freqs_plot[[1]], width = 40)
 freqs_plot[1] <- gsub("\\n", "<br>", freqs_plot[[1]])
-freqs_plot <- freqs_plot[rev(order(freqs_plot[1])), ]
 freqs_plot[1] <- factor(freqs_plot[[1]], levels = freqs_plot[[1]])
 plot <- carsurvey2::plot_freqs(freqs_plot, "", "Sample size", n = samples$all, font_size = 14, orientation = "h", width = 700, height = 400)
 
@@ -41,17 +51,6 @@ carsurvey2::wrap_outputs("dep-freqs", plot, table)
 ```
 
 ``` {r}
-
-order <- c(
-  "Executive Officer (or equivalent)",
-  "Higher Executive Officer (or equivalent)",
-  "Senior Executive Officer (or equivalent)",
-  "Grade 7 (or equivalent)",
-  "Grade 6 (or equivalent)",
-  "Fast Stream",
-  "Other - NHS",
-  "Other"
-)
 
 grades <- data.frame(table(data$grade))
 grades_list <- grades[grades[2] >= 20, ]

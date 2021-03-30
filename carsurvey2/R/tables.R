@@ -397,8 +397,7 @@ calc_freq_operations <- function(data){
   operations[[1]] <- dplyr::recode(operations[[1]], !!!code_prac_questions) 
   
   colnames(operations) <- c("Data operation", "I do this without coding", "I do some or all of this by coding")
-  
-  operations <- dplyr::arrange(operations, "Data operation")
+  operations <- operations[order(operations[1]),]
   
   return(operations)
 }

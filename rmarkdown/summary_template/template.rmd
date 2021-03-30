@@ -103,10 +103,7 @@ We asked respondents what data operations they do in their work, and whether the
 
 plot <- carsurvey2::plot_stacked(tables$freq_ops, xlab = "Count", ylab = "Data operation", n = samples$all, neutral_mid = FALSE, font_size = 14, width = 600)
 
-freq_ops <- tables$freq_ops
-freq_ops <- freq_ops[order(freq_ops[1]),]
-
-table <- kableExtra::kable_styling(knitr::kable(freq_ops, row.names = FALSE)) %>% 
+table <- kableExtra::kable_styling(knitr::kable(tables$freq_ops, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
 carsurvey2::wrap_outputs("operations", plot, table)

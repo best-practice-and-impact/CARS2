@@ -21,8 +21,8 @@ Access_to_languages_dummy  <- carsurvey2::calc_freqs_access_lang(dummy_data,lang
 
 test_that("Function checks frequency of programming languages", {
   expect_identical(c(as.character(Access_to_languages_dummy[1,1]),as.numeric(Access_to_languages_dummy[1,2:4])), c("C++ / C#",1,1,0))
-  expect_identical(c(as.character(Access_to_languages_dummy[2,1]),as.numeric(Access_to_languages_dummy[2,2:4])), c("SQL",1,0,1))
-  expect_identical(c(as.character(Access_to_languages_dummy[3,1]),as.numeric(Access_to_languages_dummy[3,2:4])), c("other",2,0,1))
+  expect_identical(c(as.character(Access_to_languages_dummy[2,1]),as.numeric(Access_to_languages_dummy[2,2:4])), c("other",2,0,1))
+  expect_identical(c(as.character(Access_to_languages_dummy[3,1]),as.numeric(Access_to_languages_dummy[3,2:4])), c("SQL",1,0,1))
 })
 
 test_that("Function checks column headings" , { 

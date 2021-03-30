@@ -20,9 +20,9 @@ dummy_data <- data.frame(status_VBA = c("Access and knowledge", "Access only", "
 coding_tool_access_knowledge_dummy  <- carsurvey2::calc_freqs_coding_tools(dummy_data,langs)
 
 test_that("Frequencies match the expected values", {
-  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[1, 1]), as.numeric(coding_tool_access_knowledge_dummy[1, 2:4])), c("VBA", 2, 2, 0))
+  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[1, 1]), as.numeric(coding_tool_access_knowledge_dummy[1, 2:4])), c("other", 2, 1, 1))
   expect_identical(c(as.character(coding_tool_access_knowledge_dummy[2, 1]), as.numeric(coding_tool_access_knowledge_dummy[2, 2:4])), c("SPSS", 1, 1, 0))
-  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[3, 1]), as.numeric(coding_tool_access_knowledge_dummy[3, 2:4])), c("other", 2, 1, 1))
+  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[3, 1]), as.numeric(coding_tool_access_knowledge_dummy[3, 2:4])), c("VBA", 2, 2, 0))
 })
 
 test_that("Column headings are correct" , { 

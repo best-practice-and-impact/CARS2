@@ -166,7 +166,7 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
   }
   
   # Validate colour_scale
-  if (length(colour_scale) > 1 | !colour_scale %in% c("gradient", "scale", "2gradients")) {
+  if (length(colour_scale) > 1 | !colour_scale %in% c("gradient", "scale", "2gradients", "3scale")) {
     stop("Unexpected input - colour_scale should be set to 'gradient', 'scale' or '2gradients'.")
   }
   
@@ -201,6 +201,8 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
   } else if (colour_scale == "2gradients") {
     mid <- ceiling(ncolours/2)
     colours <- get_2colour_gradients(ncol(table)-1, mid = mid, neutral_mid = neutral_mid)
+  } else if (colour_scale == "3scale") {
+    colours <- get_3colour_scale(ncolours)
   }
   
   colours <- lapply(colours, function(x) grDevices::rgb(x[1], x[2], x[3], max = 255))

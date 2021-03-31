@@ -18,14 +18,12 @@ dummy_data <-  data.frame(knowledge_R = c("Yes", "Don't Know", 1, "Other"),
 access_to_languages_dummy  <- carsurvey2::calc_freqs_knowledge(dummy_data, langs)
 rownames(access_to_languages_dummy) <- NULL
 
-expected_values <- data.frame("Programming language" = c("Java / Scala","R"),
+expected_values <- data.frame("Programming language" = factor(c("Java / Scala","R"), levels = c("Java / Scala","R")),
                               "Yes" = as.integer(c(1, 1)),
                               "Don't know" = as.integer(c(0, 1)),
                               "No" = as.integer(c(1, 0)))
 colnames(expected_values) <- c("Programming language", "Yes", "Don't know", "No")
 
-expected_values[1] <- factor(expected_values[[1]], levels = expected_values[[1]])
-
 test_that("Output matches expected values", {
-  expect_equal(access_to_languages_dummy, expected_values)
+  expect_equal(expect_identical, expected_values)
 })

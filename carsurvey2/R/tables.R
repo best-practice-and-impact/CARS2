@@ -56,7 +56,8 @@ calc_freqs_knowledge <- function(data, langs) {
   colnames(knowledge) <- c("Programming language", "Yes", "Don't know", "No")
   knowledge[[1]] <- dplyr::recode(stringr::str_split(knowledge[[1]], "_", simplify = TRUE)[,2 ],
                                   !!!langs) # Rename questions
-  knowledge <- dplyr::arrange(knowledge, "Programming language")
+  knowledge <- knowledge[order(knowledge[1]),]
+  knowledge[1] <- factor(knowledge[[1]], levels = knowledge[[1]])
   return(knowledge)
   
 }
@@ -81,7 +82,9 @@ calc_freqs_access_lang <- function(data, langs) {
   colnames(access) <- c("Programming language", "Yes", "Don't know", "No")
   access[[1]] <- dplyr::recode(stringr::str_split(access[[1]], "_", simplify = TRUE)[,2],
                                !!!langs) # Rename questions
-  access <- dplyr::arrange(access, "Programming language")
+  access <- access[order(access[1]),]
+  access[1] <- factor(access[[1]], levels = access[[1]])
+  
   return(access)
   
 }
@@ -105,7 +108,8 @@ calc_freqs_coding_tools <- function(data, langs) {
   colnames(code_tool_status) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only") 
   code_tool_status[[1]] <- dplyr::recode(stringr::str_split(code_tool_status[[1]], "_", simplify = TRUE)[,2],
                                          !!!langs) # Rename questions
-  code_tool_status <- dplyr::arrange(code_tool_status, "Programming language")
+  code_tool_status <- code_tool_status[order(code_tool_status[1]),]
+  code_tool_status[1] <- factor(code_tool_status[[1]], levels = code_tool_status[[1]])
   return(code_tool_status)
 }
 

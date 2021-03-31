@@ -18,7 +18,7 @@ render_filtered_pages(
 \item{filter_variable}{The variable that the data is filtered on. This is given as a string such as "dept". 
 The data is filtered by getting all values in the filter_variable greater than 20 and subsetting the data.}
 
-\item{page_title}{This is ONLY PART of the title. The title is generated from "DRAFT: ", page_title , " profile: ", filter -- 
+\item{page_title}{This is ONLY PART of the title. page_title , " profile: ", filter -- 
 where filter is one element of the list as described above in filter_variable (values over 20) and the page title is this argument.}
 
 \item{output_folder}{Folder the site is built and saved to}

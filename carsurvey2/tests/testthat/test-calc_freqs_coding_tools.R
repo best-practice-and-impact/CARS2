@@ -17,22 +17,15 @@ dummy_data <- data.frame(status_VBA = c("Access and knowledge", "Access only", "
                          other = c(1, 2, 3, 4, 5))
 
 
-coding_tool_access_knowledge_dummy  <- carsurvey2::calc_freqs_coding_tools(dummy_data,langs)
+calc_freqs_coding_tools  <- carsurvey2::calc_freqs_coding_tools(dummy_data,langs)
+rownames(calc_freqs_coding_tools) <- NULL
 
-test_that("Frequencies match the expected values", {
-  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[1, 1]), as.numeric(coding_tool_access_knowledge_dummy[1, 2:4])), c("other", 2, 1, 1))
-  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[2, 1]), as.numeric(coding_tool_access_knowledge_dummy[2, 2:4])), c("SPSS", 1, 1, 0))
-  expect_identical(c(as.character(coding_tool_access_knowledge_dummy[3, 1]), as.numeric(coding_tool_access_knowledge_dummy[3, 2:4])), c("VBA", 2, 2, 0))
-})
+expected_values <- data.frame("Programming language" = factor(c("other","SPSS","VBA"), levels = c("other","SPSS","VBA")),
+                              "Access only" = as.integer(c(2, 1, 2)),
+                              "Access and knowledge" = as.integer(c(1, 1, 2)),
+                              "Knowledge only" = as.integer(c(1, 0, 0)))
+colnames(expected_values) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only")
 
-test_that("Column headings are correct" , { 
-  expect_equal(colnames(coding_tool_access_knowledge_dummy[1]), "Programming language")
-  expect_equal(colnames(coding_tool_access_knowledge_dummy[2]), "Access only")
-  expect_equal(colnames(coding_tool_access_knowledge_dummy[3]), "Access and knowledge")
-  expect_equal(colnames(coding_tool_access_knowledge_dummy[4]), "Knowledge only")
-})
-
-test_that("Data frame shape is correct", { 
-  expect_equal(nrow(coding_tool_access_knowledge_dummy), 3)
-  expect_equal(ncol(coding_tool_access_knowledge_dummy), 4)
+test_that("Output matches expected values", {
+  expect_identical(calc_freqs_coding_tools, expected_values)
 })

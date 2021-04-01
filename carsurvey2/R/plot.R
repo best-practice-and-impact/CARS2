@@ -167,7 +167,7 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
   
   # Validate colour_scale
   if (length(colour_scale) > 1 | !colour_scale %in% c("gradient", "scale", "2gradients", "3scale")) {
-    stop("Unexpected input - colour_scale should be set to 'gradient', 'scale' or '2gradients'.")
+    stop("Unexpected input - colour_scale should be set to 'gradient', 'scale', '2gradients' or '3scale'.")
   }
   
   x <- list(

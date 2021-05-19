@@ -163,8 +163,7 @@ render_prof_pages <- function(data,
     GORS = "Government Operational Research Service",
     sci_eng = "Government Science and Engineering",
     DDAT = "Digital, Data and Technology Profession",
-    datasci_GSG = "Data Scientist (GSG/GORS)",
-    datasci_non = "Data Scientist (Non-GSG/GORS)",
+    datasci = "Government Data Scientist",
     non_prof = "Civil Service, no profession membership"
   )
   

@@ -60,7 +60,7 @@ Most common programming tool was R followed by SQL.
 
 ```{r}
 
-plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14, width = 600)
+plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$knowledge, row.names = FALSE)) %>%  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
@@ -75,7 +75,7 @@ The programming tools with the greatest access were R and Python respectively.
 
 ```{r}
 
-plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "2gradients", font_size = 14, width = 600)
+plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE)) %>%
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
@@ -91,7 +91,7 @@ We used the above data to calculate the number of respondents who have access bu
 
 ```{r}
 
-plot <- carsurvey2::plot_stacked(tables$code_tool_status, colour_scale = "2gradients", xlab = "Count", ylab = "Programming tool", n = samples$all, font_size = 14, width = 600)
+plot <- carsurvey2::plot_stacked(tables$code_tool_status, colour_scale = "3scale", xlab = "Count", ylab = "Programming tool", n = samples$all, font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$code_tool_status, row.names = FALSE)) %>%
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))

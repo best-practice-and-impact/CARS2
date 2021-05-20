@@ -158,11 +158,11 @@ get_gradient <- function(n, colour = c(0, 69, 86)) {
 }
 
 
-#' @title create 3 colour palette
+#'@title create 3 colour palette
 #'
-#' @description create a list of 3 colours in RGB; orange, blue and green for plotting
+#'@description create a list of 3 colours in RGB; orange, blue and green for plotting
 #'
-#' @param n the number of colours needed
+#'@param n the number of colours needed
 #'
 #'@return RGB colours
 #'

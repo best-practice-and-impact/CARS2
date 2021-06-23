@@ -1,6 +1,4 @@
-
 # This script is designed to be used with the project root as the working directory (../)
-library(magrittr)
 
 carsurvey_data <- carsurvey2::preprocess()
 

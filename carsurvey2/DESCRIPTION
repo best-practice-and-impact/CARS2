@@ -26,7 +26,8 @@ Imports:
     stringi,
     htmlwidgets,
     htmltools,
-    lexicon
+    lexicon,
+    tibble
 Suggests: 
 	testthat (>= 2.1.0)
 Encoding: UTF-8

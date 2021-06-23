@@ -19,6 +19,7 @@ preprocess <- function() {
   carsurvey_data <- recode_grade(carsurvey_data) 
   carsurvey_data <- derive_rap_scores(carsurvey_data) 
   carsurvey_data <- derive_code_status(carsurvey_data)
+  carsurvey_data <- merge_data_scientist(carsurvey_data)
   
   return(carsurvey_data)
 }
@@ -561,5 +562,33 @@ recode_grade <- function(data, grade_col = "grade", dep_col = "dept") {
   
   return(data)
 
+}
+
+
+#'@title Merge data science professions
+#'
+#'@description Merge data science columns into one column named datasci
+#'
+#'@param data a data frame containing cleaned CARS wave 2 data
+#'
+#'@return the original data with the merged data science column
+#'
+#'@export
+
+merge_data_scientist <- function(data){
+  if (class(data) != "data.frame") {
+    stop("Unexpected input - data is not a data.frame")
+  } else if (!"datasci_GSG" %in% colnames(data)) {
+    stop("Unexpected input - data does not contain the data science GSG badged column")
+  } else if (!"datasci_non" %in% colnames(data)) {
+    stop("Unexpected input - data does not contain the data science non badged column")
+  }
+  
+  datasci <- ifelse((data$datasci_GSG =="Yes" | data$datasci_non == "Yes") |
+                         (data$datasci_GSG =="Yes" & data$datasci_non == "Yes"),
+                         "Yes","No")
+  data <- tibble::add_column(data, datasci, .after = "datasci_non")
+  data[c("datasci_non","datasci_GSG")] <- NULL
+  return(data)
 }
 

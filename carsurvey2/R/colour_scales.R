@@ -156,3 +156,27 @@ get_gradient <- function(n, colour = c(0, 69, 86)) {
     return(colours)
   }
 }
+
+
+#'@title create 3 colour palette
+#'
+#'@description create a list of 3 colours in RGB; orange, blue and green for plotting
+#'
+#'@param n the number of colours needed
+#'
+#'@return RGB colours
+#'
+#'@export
+
+get_3colour_scale <- function(n) {
+  
+  if (!is.numeric(n) | length(n) > 1) {
+    stop("n is not a numeric value")
+  } else if (n != 3) {
+    stop("Unexpected value - n should be = 3")
+  }
+  
+  colours <- list(c(255,105,0), c(0, 69, 86), c(255, 211, 0))
+
+  return(colours)
+}

@@ -26,7 +26,7 @@ render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
   
   # Remove old site and knit
   knitr::opts_chunk$set(message = FALSE, warning = FALSE)
-  rmarkdown::clean_site(markdown_file_path)
+  rmarkdown::clean_site(markdown_file_path, preview = FALSE)
   rmarkdown::render_site(markdown_file_path, quiet = TRUE)
   
 }

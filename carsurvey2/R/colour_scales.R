@@ -176,7 +176,7 @@ get_3colour_scale <- function(n) {
     stop("Unexpected value - n should be = 3")
   }
   
-  colours <- list(c(255,105,0), c(0, 69, 86), c(150,200,89))
+  colours <- list(c(255,105,0), c(0, 69, 86), c(255, 211, 0))
 
   return(colours)
 }

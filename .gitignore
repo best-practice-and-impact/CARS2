@@ -2,7 +2,7 @@
 carsurvey2.Rcheck
 .DS_Store
 *.yaml
-#docs/
+docs/
 
 # Generic
 # History files

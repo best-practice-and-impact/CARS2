@@ -143,17 +143,17 @@ setup_table_toggle <- function() {
     function show_table(output_name) {
       $("#show-table-" + output_name).hide();
       $("#show-chart-" + output_name).show();
-      $("#show-chart-" + output_name).focus();
       $("#" + output_name + "-chart").hide();
       $("#" + output_name + "-table").show();
+      $("#show-chart-" + output_name).focus();
     }
   
     function show_chart(output_name) {
       $("#show-table-" + output_name).show();
-      $("#show-table-" + output_name).focus();
       $("#show-chart-" + output_name).hide();
       $("#" + output_name + "-chart").show();
       $("#" + output_name + "-table").hide();
+      $("#show-table-" + output_name).focus();
     }
   </script>
 '
@@ -195,14 +195,14 @@ insert_table_toggle <- function(output_name) {
   toggle_chart_button <- paste0(
     '<a role="button" class="toggle-button" id="', 
     chart_button_name,
-    '" href="#', chart_button_name,
+    '" href="#', output_name,
     '" onclick="show_chart(\'', output_name,'\')"> Show chart </a>'
   )
   
   toggle_table_button <- paste0(
     '<a role="button" class="toggle-button" id="', 
     table_button_name,
-    '" href="#', table_button_name,
+    '" href="#', output_name,
     '" onclick="show_table(\'', output_name,'\')"> Show table </a>'
   )
   

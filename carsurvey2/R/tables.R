@@ -9,8 +9,6 @@
 
 ###########################
 
-
-
 #' @title Coding usage
 #' 
 #' @description Function which calculates the frequencies of time spent coding

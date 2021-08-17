@@ -143,16 +143,18 @@ setup_table_toggle <- function() {
     function show_table(output_name) {
       $("#show-table-" + output_name).hide();
       $("#show-chart-" + output_name).show();
+      $("#show-chart-" + output_name).focus();
       $("#" + output_name + "-chart").hide();
       $("#" + output_name + "-table").show();
     }
   
-  function show_chart(output_name) {
-    $("#show-table-" + output_name).show();
-    $("#show-chart-" + output_name).hide();
-    $("#" + output_name + "-chart").show();
-    $("#" + output_name + "-table").hide();
-  }
+    function show_chart(output_name) {
+      $("#show-table-" + output_name).show();
+      $("#show-table-" + output_name).focus();
+      $("#show-chart-" + output_name).hide();
+      $("#" + output_name + "-chart").show();
+      $("#" + output_name + "-table").hide();
+    }
   </script>
 '
   

@@ -116,19 +116,19 @@ body {
 
 @media (max-width: 767px) {
   h2 {
-    margin-top: 6em !important;
+    margin-top: 1em !important;
   }
 }
 
 @media (max-width: 767px) {
   h3 {
-    margin-top: 7em !important;
+    margin-top: 1em !important;
   }
 }
 
 @media (max-width: 767px) {
   h4 {
-    margin-top: 9em !important;
+    margin-top: 2em !important;
   }
 }
 

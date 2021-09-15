@@ -103,14 +103,26 @@ body {
 }
 
 @media (max-width:1199px) and (min-width:767px){
-  body, h1, h2, h3, h4 {
+  body {
     padding-top: 90px !important;
   }
 }
 
 @media (max-width: 767px) {
-  body, h1, h2, h3, h4 {
+  body {
     padding-top: 45px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  h1, h2 {
+    padding-top: 6em !important;
+  }
+}
+
+@media (max-width: 767px) {
+  h1, h2 {
+    padding-top: 6em !important;
   }
 }
 

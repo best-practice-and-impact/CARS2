@@ -98,18 +98,6 @@ body {
   padding-top: 45px !important;
 }
 
-@media (max-width:1199px) and (min-width:767px){
-  body {
-    padding-top: 90px !important;
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-    padding-top: 45px !important;
-  }
-}
-
 .plotly.html-widget {
   max-width: 100%;
 }

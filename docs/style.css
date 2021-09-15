@@ -121,8 +121,14 @@ body {
 }
 
 @media (max-width: 767px) {
-  h3, h4 {
+  h3 {
     padding-top: 7em !important;
+  }
+}
+
+@media (max-width: 767px) {
+  h4 {
+    padding-top: 9em !important;
   }
 }
 

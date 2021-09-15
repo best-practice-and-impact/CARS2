@@ -116,13 +116,13 @@ body {
 
 @media (max-width: 767px) {
   h2 {
-    padding-top: 4em !important;
+    padding-top: 5em !important;
   }
 }
 
 @media (max-width: 767px) {
   h3, h4 {
-    padding-top: 6em !important;
+    padding-top: 8em !important;
   }
 }
 

@@ -98,10 +98,6 @@ body {
   padding-top: 45px !important;
 }
 
-.plotly.html-widget {
-  max-width: 100%;
-}
-
 @media (max-width:1199px) and (min-width:767px){
   body {
     padding-top: 90px !important;
@@ -114,27 +110,31 @@ body {
   }
 }
 
-@media (max-width: 767px) {
-  h2 {
-    margin-top: 0px !important;
-  }
-}
-
-@media (max-width: 767px) {
-  h3 {
-    margin-top: 0px !important;
-  }
-}
-
-@media (max-width: 767px) {
-  h4 {
-    margin-top: 0px !important;
-  }
+.plotly.html-widget {
+  max-width: 100%;
 }
 
 @media (max-width: 600px) {
   .plotly.html-widget {
     overflow-x: scroll;
     overflow-y: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  h2 {
+    padding-top: 0px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  h3 {
+    padding-top: 0px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  h4 {
+    padding-top: 0px !important;
   }
 }

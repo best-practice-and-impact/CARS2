@@ -129,13 +129,13 @@ body {
 
 @media (max-width: 767px) {
   h3 {
-    padding-top: 12em !important;
+    padding-top: 7em !important;
   }
 }
 
 @media (max-width: 767px) {
   h4 {
-    padding-top: 13em !important;
+    padding-top: 9em !important;
   }
 }
 

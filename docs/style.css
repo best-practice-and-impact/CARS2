@@ -123,19 +123,19 @@ body {
 
 @media (max-width: 767px) {
   h2 {
-    padding-top: 6em !important;
+    padding-top: 3em !important;
   }
 }
 
 @media (max-width: 767px) {
   h3 {
-    padding-top: 8em !important;
+    padding-top: 3em !important;
   }
 }
 
 @media (max-width: 767px) {
   h4 {
-    padding-top: 10em !important;
+    padding-top: 5em !important;
   }
 }
 

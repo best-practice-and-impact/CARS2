@@ -1,14 +1,9 @@
 h1, h2 {
-  padding-top: 3em !important;
   font-weight: 550;
 }
 
 h3, h4 {
   font-weight: 550;
-}
-
-.title {
-  padding-top: 0 !important;
 }
 
 body {
@@ -119,5 +114,6 @@ body {
     overflow-y: hidden;
   }
 }
+
 
 

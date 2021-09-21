@@ -121,21 +121,10 @@ body {
   }
 }
 
-@media screen and (max-width: 640px) {
-  h2 {
-    padding-top: 4em !important;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  h3 {
-    padding-top: 5em !important;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  h4 {
-    padding-top: 7em !important;
+@media only screen and (max-width: 600px) {
+  html {
+  max-width: 600px;
+  position: relative;
   }
 }
 

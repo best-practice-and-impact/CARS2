@@ -123,19 +123,19 @@ body {
 
 @media screen and (max-width: 640px) {
   h2 {
-    padding-top: 3em !important;
-  }
-}
-
-@media screen and (max-width: 640px) {
-  h3 {
     padding-top: 4em !important;
   }
 }
 
 @media screen and (max-width: 640px) {
+  h3 {
+    padding-top: 5em !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
   h4 {
-    padding-top: 6em !important;
+    padding-top: 7em !important;
   }
 }
 

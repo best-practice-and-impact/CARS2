@@ -1,11 +1,21 @@
 h1, h2 {
-  padding-top: 3em !important;
   font-weight: 550;
 }
 
 h3, h4 {
-  padding-top: 4em !important;
   font-weight: 550;
+}
+
+@media (min-width:1200px) {
+  h2 {
+    padding-top: 3em !important;
+  }
+}
+
+@media (min-width:1200px) {
+  h3, h4 {
+    padding-top: 4em !important;
+  }
 }
 
 .title {
@@ -94,22 +104,6 @@ ol > li > a:focus {
   color: black !important;
 }
 
-body {
-  padding-top: 45px !important;
-}
-
-@media (max-width:1199px) and (min-width:767px){
-  body {
-    padding-top: 90px !important;
-  }
-}
-
-@media (max-width: 767px) {
-  body {
-    padding-top: 45px !important;
-  }
-}
-
 .plotly.html-widget {
   max-width: 100%;
 }
@@ -118,5 +112,29 @@ body {
   .plotly.html-widget {
     overflow-x: scroll;
     overflow-y: hidden;
+  }
+}
+
+@media (max-width:1199px) and (min-width:768px){
+  h2 {
+    padding-top: 5em !important;
+  }
+}
+
+@media (max-width:1199px) and (min-width:768px){
+  h3, h4 {
+    padding-top: 6em !important;
+  }
+}
+
+@media (max-width:767px) {
+  h2 {
+    padding-top: 3em !important;
+  }
+}
+
+@media (max-width:767pxpx) {
+  h3, h4 {
+    padding-top: 5em !important;
   }
 }

@@ -129,12 +129,12 @@ ol > li > a:focus {
 
 @media (max-width:767px) {
   h2 {
-    padding-top: 3em !important;
+    padding-top: 5em !important;
   }
 }
 
 @media (max-width:767pxpx) {
   h3, h4 {
-    padding-top: 5em !important;
+    padding-top: 7em !important;
   }
 }

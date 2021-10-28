@@ -209,13 +209,14 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
   colours <- lapply(colours, function(x) rep(x, nrow(table)))
   colours <- unlist(colours)
   
+  hovertext <- paste0(longdata[[2]], ": ", longdata[[3]], " <extra></extra>")
+  
   fig <- plotly::plot_ly(y = longdata[[1]], 
                          x=longdata[[3]], 
                          type="bar", 
                          color = longdata[[2]], 
                          orientation = "h", 
-                         hoverinfo = "text",
-                         text = paste0(longdata[[2]], ", " ,longdata[[3]]),
+                         hovertemplate = hovertext,
                          marker = list(color = colours),
                          ...)
   
@@ -265,7 +266,7 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, break_q_names_col =NULL, ...) {
+plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, break_q_names_col = NULL, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -317,7 +318,7 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
     tickfont = list(size = font_size),
     titlefont = list(size = font_size * 1.2),
     range = list(-1, 1), 
-    tickformat = "%", title = "Percent"
+    tickformat = ".0%", title = "Percent"
   )
   
   y <- list(
@@ -326,7 +327,7 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
     titlefont = list(size = font_size * 1.2)
   )
   
-  #Reorder table 
+  # Reorder table 
   table <- dplyr::arrange(table, dplyr::desc(table[,1]))
   table[,1] <- factor(table[,1], levels = table[,1])
   
@@ -369,19 +370,15 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   colours <- lapply(colours, function(x) rep(x, nrow(table)))
   colours <- unlist(colours)
   
-  hovertext <- paste0(
-    paste0(longdata[[2]], "<br>"), 
-    paste0(round(abs(longdata[[3]]) * 100, 1), "%")
-  )
-  
+  hovertext <- paste0(longdata[[2]], ": ", round(abs(longdata[[3]]) * 100, 1), "%", " <extra></extra>")
+
   fig <- plotly::plot_ly(y = longdata[[1]], 
                          x=longdata[[3]], 
                          type="bar", 
                          color = longdata[[2]], 
                          orientation = "h", 
                          base = bases,
-                         hoverinfo = "text",
-                         text = hovertext,
+                         hovertemplate = hovertext,
                          marker = list(color = colours),
                          ...)
   

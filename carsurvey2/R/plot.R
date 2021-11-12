@@ -259,13 +259,14 @@ plot_stacked <- function(table, xlab, ylab, n, colour_scale = "2gradients", font
 #'@param font_size minimum font size for the plot (numeric).
 #'@param neutral_mid whether the middle of the scale should be a neutral category (logical). TRUE by default
 #'@param break_q_names_col applies break_q_names to the column. Not applied by default
+#'@param max_lines changes maximum lines text can go over
 #'@param ... additional plot_ly arguments
 #'
 #'@return bar chart
 #'
 #'@export
 
-plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, break_q_names_col =NULL, ...) {
+plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid = TRUE, break_q_names_col =NULL, max_lines = 2, ...) {
   
   # Validate table
   if (!is.data.frame(table)) {
@@ -307,7 +308,7 @@ plot_likert <- function(table, mid, xlab, ylab, n, font_size = 12, neutral_mid =
   
   # Apply break_q_names to a column
   if(!is.null(break_q_names_col)) {
-    table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]])
+    table[[break_q_names_col]] <- break_q_names(table[[break_q_names_col]], max_lines)
     table[[break_q_names_col]] <- factor(table[[break_q_names_col]], levels = table[[break_q_names_col]])
     
   }

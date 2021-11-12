@@ -13,6 +13,7 @@ plot_likert(
   font_size = 12,
   neutral_mid = TRUE,
   break_q_names_col = NULL,
+  max_lines = 2,
   ...
 )
 }
@@ -32,6 +33,8 @@ plot_likert(
 \item{neutral_mid}{whether the middle of the scale should be a neutral category (logical). TRUE by default}
 
 \item{break_q_names_col}{applies break_q_names to the column. Not applied by default}
+
+\item{max_lines}{changes maximum lines text can go over}
 
 \item{...}{additional plot_ly arguments}
 }

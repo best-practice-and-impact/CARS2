@@ -10,6 +10,7 @@ plot_likert(
   xlab,
   ylab,
   n,
+  max_lines = 2,
   font_size = 12,
   neutral_mid = TRUE,
   break_q_names_col = NULL,
@@ -26,6 +27,8 @@ plot_likert(
 \item{ylab}{Y axis title}
 
 \item{n}{sample size}
+
+\item{max_lines}{changes maximum lines text can go over}
 
 \item{font_size}{minimum font size for the plot (numeric).}
 
